@@ -1,0 +1,2607 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Psicopedagógico - CHASIDE & MMPI-2 Completo</title>
+    
+    <!-- Configuración del Favicon para la pestaña del navegador -->
+    <link rel="icon" type="image/png" href="Gemini_Generated_Image_ob1grpob1grpob1g-removebg-preview.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Inter & Playfair Display) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght=0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js para perfiles clínicos y vocacionales -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Canvas Confetti para graduación/completado -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        serif: ["Playfair Display", "serif"]
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#2e3e95',    // Azul institucional principal
+                            gold: '#eeb407',    // Oro institucional principal
+                            deepBlue: '#131b46', // Azul de profundidad nocturno
+                            lightGold: '#fffdf0',
+                            50: '#f4f5fa',
+                            100: '#e9ebf5',
+                            500: '#2e3e95',
+                            600: '#243175',
+                            700: '#1b2457',
+                            900: '#0f1533'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(238, 180, 7, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(46, 62, 149, 0.4) 0%, transparent 50%),
+                linear-gradient(135deg, #0f1533 0%, #131b46 45%, #243175 100%);
+            background-size: 200% 200%;
+            background-attachment: fixed;
+            animation: elegantFluidShift 12s ease infinite;
+        }
+
+        @keyframes elegantFluidShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .text-xxs { font-size: 0.7rem; }
+        .text-10px { font-size: 10px; }
+        .min-h-300 { min-height: 300px; }
+        .h-250 { height: 250px; }
+        .h-350 { height: 350px; }
+        
+        .institutional-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(16px);
+            border: 2px solid rgba(238, 180, 7, 0.15);
+            box-shadow: 0 15px 35px rgba(15, 21, 51, 0.35);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .institutional-card:hover {
+            box-shadow: 0 25px 50px rgba(15, 21, 51, 0.5);
+            border-color: rgba(238, 180, 7, 0.35);
+        }
+
+        .view-transition {
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-premium-glow {
+            animation: floatLogo 6s ease-in-out infinite, pulseGold 3s infinite;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1000px;
+        }
+
+        .logo-premium-glow:hover {
+            transform: scale(1.08) rotateY(15deg);
+        }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulseGold {
+            0%, 100% { box-shadow: 0 0 15px rgba(238, 180, 7, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(238, 180, 7, 0.85); }
+        }
+
+        .hover-shine-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .hover-shine-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.35), transparent);
+            transform: rotate(45deg);
+            transition: 0.6s ease;
+            opacity: 0;
+        }
+        .hover-shine-btn:hover::after {
+            left: 120%;
+            opacity: 1;
+        }
+
+        .hoja-membretada {
+            background-color: #ffffff;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            border: 2px solid #eeb407;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        @media print {
+            body {
+                background: none !important;
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11px;
+            }
+            .no-print, header, footer, #toast, .action-bar-container, #admin-modal, #confirm-modal {
+                display: none !important;
+            }
+            main {
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            .hoja-membretada {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                background-color: #ffffff !important;
+            }
+            .hoja-watermark {
+                opacity: 0.07 !important;
+            }
+            .print-no-break {
+                page-break-inside: avoid;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 22, 60, 0.4);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #eeb407;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4a005;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-slate-800">
+
+    <header class="bg-brand-deepBlue border-b-4 border-brand-gold sticky top-0 z-30 no-print shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center space-x-4 cursor-pointer" onclick="restartTestFlow()">
+                    <div class="relative w-14 h-14 rounded-xl overflow-hidden shadow-lg border-2 border-brand-gold bg-white p-1 hover:scale-110 transition-transform duration-300 flex items-center justify-center">
+                        <!-- Imagen de Logo Institucional con Carga local, Fallback nube y Fallback vectorial -->
+                        <img id="logo-header" src="Gemini_Generated_Image_ob1grpob1grpob1g-removebg-preview.png" alt="Logo" class="w-full h-full object-contain" onerror="this.src='https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2'; this.onerror=function(){this.style.display='none'; document.getElementById('fallback-svg-header').classList.remove('hidden');};">
+                        <!-- Símbolo Vectorial Fallback -->
+                        <svg id="fallback-svg-header" class="hidden w-10 h-10 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-md sm:text-lg font-black text-white tracking-tight uppercase">Portal de Evaluación CEUT</span>
+                        <span class="text-xs block text-brand-gold font-bold -mt-1 uppercase tracking-widest">Gabinete Psicopedagógico</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-2">
+                    <button id="btn-nav-test" onclick="restartTestFlow()" class="px-3 py-2 text-xs sm:text-sm font-bold rounded-lg text-brand-deepBlue bg-brand-gold hover:bg-yellow-500 hover:scale-105 hover-shine-btn transition-all flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-home"></i> <span>Inicio</span>
+                    </button>
+                    <button id="btn-nav-admin" onclick="openAdminModal()" class="px-3 py-2 text-xs sm:text-sm font-bold rounded-lg text-white hover:text-brand-gold hover:bg-white/10 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-lock text-brand-gold animate-pulse"></i> <span class="hidden sm:inline">Psicopedagogía</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <div id="toast" class="hidden fixed bottom-5 right-5 z-50 bg-slate-950 text-white px-5 py-3.5 rounded-xl shadow-2xl flex items-center space-x-3 transition-all duration-300 transform translate-y-10 opacity-0 border border-brand-gold/50">
+            <span id="toast-icon" class="text-emerald-400"><i class="fa-solid fa-circle-check"></i></span>
+            <span id="toast-message" class="text-sm font-medium">Operación realizada con éxito.</span>
+        </div>
+
+        <!-- VISTA 1: INICIO - SELECCIÓN DE TEST -->
+        <section id="view-student-welcome" class="max-w-4xl mx-auto space-y-8 view-transition">
+            
+            <div class="bg-white rounded-2xl border-t-8 border-brand-gold shadow-2xl p-0 relative overflow-hidden institutional-card">
+                <div class="relative h-48 flex items-center p-6 text-center text-white justify-center overflow-hidden bg-gradient-to-br from-brand-deepBlue via-brand-blue to-brand-deepBlue border-b-2 border-brand-gold/20">
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-gold/15 via-transparent to-transparent"></div>
+                    <div class="relative z-10 flex flex-col items-center gap-2">
+                        <div class="logo-premium-glow relative w-20 h-20 bg-white p-1.5 rounded-2xl border border-brand-gold shadow-2xl flex items-center justify-center">
+                            <!-- Logo de Imagen en Pantalla de Bienvenida con triple nivel de contingencia -->
+                            <img id="logo-welcome" src="Gemini_Generated_Image_ob1grpob1grpob1g-removebg-preview.png" alt="Logo Institucional" class="w-full h-full object-contain" onerror="this.src='https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2'; this.onerror=function(){this.style.display='none'; document.getElementById('fallback-svg-welcome').classList.remove('hidden');};">
+                            <!-- Logo Vectorial Estetizado Fallback -->
+                            <svg id="fallback-svg-welcome" class="hidden w-12 h-12 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h1 class="text-2xl font-black tracking-tight mt-2 uppercase">Evaluaciones Psicométricas Oficiales</h1>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xxs font-black bg-brand-gold text-brand-900 uppercase tracking-widest shadow-md">
+                            Departamento Psicopedagógico CEUT
+                        </span>
+                    </div>
+                </div>
+
+                <div class="p-6 sm:p-10 space-y-6 text-center">
+                    <p class="text-slate-600 leading-relaxed text-sm max-w-2xl mx-auto font-medium">
+                        Bienvenido al portal oficial de orientación y apoyo psicopedagógico. Selecciona el instrumento psicométrico que deseas realizar. Ambas pruebas generan un reporte analítico de alta fidelidad.
+                    </p>
+
+                    <!-- Tarjetas de Selección de Test -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                        <!-- Opción CHASIDE -->
+                        <div onclick="selectTestType('CHASIDE')" class="group cursor-pointer border-2 border-slate-200 hover:border-brand-blue bg-slate-50 hover:bg-brand-50/20 rounded-2xl p-6 transition-all duration-300 text-left flex flex-col justify-between shadow-sm">
+                            <div class="space-y-3">
+                                <div class="w-12 h-12 bg-brand-blue/10 text-brand-blue rounded-xl flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <h3 class="text-lg font-extrabold text-brand-deepBlue uppercase">Test Vocacional CHASIDE</h3>
+                                <p class="text-xs text-slate-500 font-medium leading-relaxed">
+                                    Identifica tus áreas de mayor interés y aptitud académica para guiar tu elección de carrera universitaria entre 7 áreas del conocimiento.
+                                </p>
+                            </div>
+                            <div class="mt-6 flex items-center justify-between text-brand-blue font-black text-xs uppercase tracking-wider">
+                                <span>Iniciar CHASIDE (98 Ítems)</span>
+                                <i class="fa-solid fa-arrow-right-long group-hover:translate-x-2 transition-transform"></i>
+                            </div>
+                        </div>
+
+                        <!-- Opción MMPI-2 -->
+                        <div onclick="selectTestType('MMPI-2')" class="group cursor-pointer border-2 border-slate-200 hover:border-brand-gold bg-slate-50 hover:bg-brand-lightGold/40 rounded-2xl p-6 transition-all duration-300 text-left flex flex-col justify-between shadow-sm">
+                            <div class="space-y-3">
+                                <div class="w-12 h-12 bg-brand-gold/10 text-brand-gold rounded-xl flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-brain"></i>
+                                </div>
+                                <h3 class="text-lg font-extrabold text-brand-deepBlue uppercase">Inventario de Personalidad MMPI-2</h3>
+                                <p class="text-xs text-slate-500 font-medium leading-relaxed">
+                                    Evalúa tus rasgos de personalidad y perfiles de adaptación clínica mediante las escalas básicas de validez (L, F, K) y las 10 escalas clínicas estándar.
+                                </p>
+                            </div>
+                            <div class="mt-6 flex items-center justify-between text-brand-gold font-black text-xs uppercase tracking-wider">
+                                <span>Iniciar MMPI-2 Completo (370 Ítems)</span>
+                                <i class="fa-solid fa-arrow-right-long group-hover:translate-x-2 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Búsqueda de Resultados por Folio -->
+            <div class="bg-white rounded-2xl border border-brand-gold/20 shadow-xl p-6 institutional-card">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-3 bg-brand-gold/10 text-brand-gold rounded-xl shrink-0">
+                            <i class="fa-solid fa-file-invoice text-2xl animate-pulse"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-black text-brand-deepBlue uppercase tracking-tight">¿Ya realizaste tu test?</h3>
+                            <p class="text-xs text-slate-500 font-semibold">Ingresa tu Folio Único para descargar o visualizar tus resultados directamente.</p>
+                        </div>
+                    </div>
+                    <div class="w-full sm:w-auto flex flex-col sm:flex-row gap-2 shrink-0">
+                        <input type="text" id="lookup-folio-input" class="px-4 py-2.5 border border-slate-200 rounded-xl text-xs font-bold uppercase placeholder-slate-400 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:bg-white transition-all shadow-inner" placeholder="Ej: CH-2026-F89B2">
+                        <button onclick="lookupFolioResult()" class="px-5 py-2.5 bg-brand-gold hover:bg-yellow-500 active:scale-95 text-brand-deepBlue font-black text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-md hover-shine-btn">
+                            <i class="fa-solid fa-magnifying-glass"></i> Consultar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA REGISTRO DEL ALUMNO (DINÁMICA POR TEST) -->
+        <section id="view-student-register" class="hidden max-w-2xl mx-auto space-y-6 view-transition">
+            <div class="bg-white rounded-2xl border-t-8 border-brand-gold shadow-2xl p-6 sm:p-10 institutional-card">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <h2 id="register-title" class="text-xl font-black text-brand-deepBlue uppercase tracking-tight">Formulario de Registro</h2>
+                    <p id="register-subtitle" class="text-xs text-slate-500 font-semibold mt-1">Cargando...</p>
+                </div>
+                
+                <form id="student-form" onsubmit="startTest(event)" class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2" for="student-level">Nivel Educativo <span class="text-rose-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-solid fa-school text-brand-blue"></i>
+                            </span>
+                            <select id="student-level" required onchange="adaptFormToEducationalLevel(this.value)" class="block w-full pl-10 pr-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold shadow-sm">
+                                <option value="Universidad">Universidad (Licenciatura / Ingeniería)</option>
+                                <option value="Preparatoria">Preparatoria (Nivel Medio Superior)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2" for="student-name">Nombre Completo <span class="text-rose-500">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-regular fa-user text-brand-blue"></i>
+                            </span>
+                            <input type="text" id="student-name" required class="block w-full pl-10 pr-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm" placeholder="Ej. Sofía Alejandra Pérez Gómez">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="sm:col-span-2">
+                            <label id="label-student-career" class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2" for="student-career">Carrera / Licenciatura <span class="text-rose-500">*</span></label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                    <i class="fa-solid fa-graduation-cap text-brand-blue"></i>
+                                </span>
+                                <input type="text" id="student-career" required class="block w-full pl-10 pr-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm" placeholder="Ej. Psicología, Ingeniería Civil">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2" for="student-gender">Género <span class="text-rose-500">*</span></label>
+                            <div class="relative">
+                                <select id="student-gender" required class="block w-full px-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold shadow-sm">
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label id="label-student-term" class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2" for="student-term">Cuatrimestre <span class="text-rose-500">*</span></label>
+                            <div class="relative">
+                                <input type="text" id="student-term" required class="block w-full px-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm" placeholder="Ej. 4to Cuatrimestre">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2" for="student-group">Grupo <span class="text-rose-500">*</span></label>
+                            <div class="relative">
+                                <input type="text" id="student-group" required class="block w-full px-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm" placeholder="Ej. A">
+                            </div>
+                        </div>
+                        <div>
+                            <label id="label-student-modality" class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2" for="student-modality">Modalidad <span class="text-rose-500">*</span></label>
+                            <div class="relative">
+                                <select id="student-modality" required class="block w-full px-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold shadow-sm">
+                                    <option value="Escolarizada">Escolarizada</option>
+                                    <option value="Mixta">Mixta (Sabatina)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex gap-3">
+                        <button type="button" onclick="switchView('student-welcome')" class="w-1/3 py-4 text-xs font-bold rounded-xl text-slate-700 bg-slate-100 hover:bg-slate-200 transition-all uppercase tracking-wider">
+                            Regresar
+                        </button>
+                        <button type="submit" class="w-2/3 bg-brand-blue hover:bg-brand-600 text-white py-4 px-6 rounded-xl font-bold shadow-xl transition-all text-xs flex items-center justify-center gap-2 border-b-4 border-brand-deepBlue uppercase tracking-wider hover-shine-btn">
+                            <span>Comenzar Prueba</span>
+                            <i class="fa-solid fa-arrow-right text-brand-gold"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- VISTA 2: ASISTENTE DE CUESTIONARIO ACTIVO (WIZARD) -->
+        <section id="view-test-wizard" class="hidden max-w-4xl mx-auto bg-white rounded-2xl border-t-8 border-brand-gold shadow-2xl p-6 sm:p-8 transition-all institutional-card view-transition">
+            
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-slate-100 mb-6 gap-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center hover:scale-110 transition-all">
+                        <svg class="w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 id="wizard-test-title" class="text-lg sm:text-xl font-black text-brand-deepBlue">
+                            Cuestionario Activo
+                        </h2>
+                        <p id="student-badge" class="text-xs text-brand-blue font-bold">Estudiante: Carga...</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 text-sm shrink-0">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs font-black text-brand-deepBlue hidden sm:inline">Saltar a:</span>
+                        <select id="wizard-page-select" onchange="jumpToPage(this.value)" class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-black text-brand-deepBlue focus:outline-none focus:ring-2 focus:ring-brand-gold"></select>
+                    </div>
+                    <span id="answered-counter" class="text-slate-500 text-xs font-black">Contestadas: 0</span>
+                </div>
+            </div>
+
+            <!-- Barra de Progreso Dinámica -->
+            <div class="w-full bg-slate-100 h-3.5 rounded-full overflow-hidden mb-8 p-0.5 border border-slate-200">
+                <div id="test-progress-bar" class="bg-gradient-to-r from-brand-blue to-brand-gold h-full w-0 transition-all duration-300 rounded-full"></div>
+            </div>
+
+            <!-- Contenedor de Preguntas -->
+            <div id="questions-grid" class="space-y-4 min-h-300"></div>
+
+            <!-- Botones de Navegación del Asistente -->
+            <div class="flex items-center justify-between mt-8 pt-6 border-t border-slate-100">
+                <button id="btn-prev-page" onclick="changePage(-1)" class="px-5 py-2.5 text-sm font-bold rounded-xl text-slate-700 border border-slate-200 hover:bg-slate-50 active:scale-95 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    <span>Anterior</span>
+                </button>
+                <div class="flex gap-2">
+                    <button id="btn-next-page" onclick="changePage(1)" class="px-6 py-2.5 text-sm font-bold rounded-xl text-white bg-brand-blue hover:bg-brand-600 active:scale-95 transition-all flex items-center gap-2 hover-shine-btn">
+                        <span>Siguiente</span>
+                        <i class="fa-solid fa-chevron-right text-brand-gold"></i>
+                    </button>
+                    <button id="btn-submit-test" onclick="finishTest()" class="hidden px-6 py-2.5 text-sm font-bold rounded-xl text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-all flex items-center gap-2 shadow-lg hover-shine-btn">
+                        <i class="fa-solid fa-circle-check text-brand-gold animate-pulse"></i>
+                        <span>Finalizar Prueba</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA 3: INFORME DE RESULTADOS INDIVIDUALES (HOJA MEMBRETADA) -->
+        <section id="view-results" class="hidden max-w-5xl mx-auto space-y-8 transition-all view-transition">
+            
+            <!-- Barra de Acciones Rápidas -->
+            <div class="action-bar-container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl no-print border border-brand-gold/30 shadow-xl">
+                <div class="flex items-center space-x-3 text-brand-gold text-sm font-bold">
+                    <i class="fa-solid fa-circle-check text-emerald-400 text-lg animate-bounce"></i>
+                    <span>Diagnóstico calculado el <strong id="result-date" class="text-white">05/06/2026</strong></span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="triggerFormalPrint()" class="px-5 py-2.5 bg-brand-gold hover:bg-yellow-500 active:scale-95 text-brand-deepBlue text-sm font-black rounded-xl transition-all shadow-md flex items-center gap-2 border-b-2 border-yellow-700 hover-shine-btn">
+                        <i class="fa-solid fa-print"></i> Guardar PDF / Imprimir
+                    </button>
+                    <button onclick="restartTestFlow()" class="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold rounded-xl transition-all flex items-center gap-2 border border-white/20 hover:scale-105">
+                        <i class="fa-solid fa-arrows-rotate"></i> Volver al Inicio
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTENEDOR DE LA HOJA MEMBRETADA FORMAL -->
+            <div id="hoja-membretada-document" class="hoja-membretada rounded-lg p-8 sm:p-14 relative overflow-hidden text-slate-950">
+                <!-- Marca de Agua Vectorial de Alta Fidelidad -->
+                <div class="hoja-watermark absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-12 opacity-[0.03] pointer-events-none z-0">
+                    <svg class="w-[500px] h-[500px] text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
+                    </svg>
+                </div>
+
+                <!-- ENCABEZADO FORMAL DE LA HOJA MEMBRETADA -->
+                <div class="relative z-10 border-b-4 border-brand-blue pb-6 mb-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center space-x-5 text-center sm:text-left">
+                        <div class="relative w-20 h-20 bg-white rounded-lg p-1 shrink-0 border border-slate-200 flex items-center justify-center shadow-inner">
+                            <!-- Logo en Reporte de Resultados con contingencia local/nube -->
+                            <img id="logo-results" src="Gemini_Generated_Image_ob1grpob1grpob1g-removebg-preview.png" alt="Logo" class="w-full h-full object-contain" onerror="this.src='https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2'; this.onerror=function(){this.style.display='none'; document.getElementById('fallback-svg-results').classList.remove('hidden');};">
+                            <!-- Fallback SVG -->
+                            <svg id="fallback-svg-results" class="hidden w-14 h-14 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-xl sm:text-2xl font-black uppercase tracking-tight text-brand-deepBlue leading-tight">DEPARTAMENTO PSICOPEDAGÓGICO</h1>
+                            <p class="text-xs text-brand-gold font-extrabold uppercase tracking-widest">Servicio de Orientación y Diagnóstico Clínico</p>
+                            <p id="res-test-subtitle" class="text-xxs text-slate-500 mt-1 font-bold">REPORTE OFICIAL DIAGNÓSTICO</p>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center sm:text-right border-2 border-brand-gold bg-brand-lightGold/60 rounded-xl p-3 shrink-0 min-w-[160px] shadow-sm">
+                        <span class="block text-[10px] text-brand-deepBlue uppercase font-black tracking-wider">Folio Oficial Único</span>
+                        <span id="res-student-folio" class="block font-mono font-black text-brand-blue text-sm uppercase mt-0.5 tracking-wider">-</span>
+                        <span class="block text-[9px] text-slate-400 mt-1 uppercase font-semibold">CEUT-2026-VAL</span>
+                    </div>
+                </div>
+
+                <!-- DATOS GENERALES DEL ESTUDIANTE -->
+                <div class="relative z-10 space-y-8">
+                    <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 grid grid-cols-1 sm:grid-cols-5 gap-4">
+                        <div>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block">Alumno Evaluado</span>
+                            <span id="res-student-name" class="font-black text-brand-deepBlue text-sm block mt-0.5">-</span>
+                        </div>
+                        <div>
+                            <span id="res-career-label" class="text-[10px] font-black text-slate-400 uppercase tracking-wider block">Carrera / Licenciatura</span>
+                            <span id="res-student-career" class="font-bold text-slate-800 text-sm block mt-0.5">-</span>
+                        </div>
+                        <div>
+                            <span id="res-term-label" class="text-[10px] font-black text-slate-400 uppercase tracking-wider block">Cuatrimestre / Grupo</span>
+                            <span class="font-bold text-slate-800 text-sm block mt-0.5">
+                                <span id="res-student-term">-</span> • <span id="res-student-group">-</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span id="res-modality-label" class="text-[10px] font-black text-slate-400 uppercase tracking-wider block">Modalidad / Género</span>
+                            <span class="font-bold text-slate-800 text-sm block mt-0.5">
+                                <span id="res-student-modality">-</span> • <span id="res-student-gender">-</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block">Fecha de Aplicación</span>
+                            <span id="res-student-date" class="font-bold text-slate-800 text-sm block mt-0.5">-</span>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN DINÁMICA DE RESULTADOS -->
+                    <!-- RESULTADOS CHASIDE -->
+                    <div id="results-container-chaside" class="space-y-8 hidden">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="border-l-4 border-brand-blue bg-brand-50/50 rounded-r-xl p-4 border border-slate-100">
+                                <span class="text-xs text-brand-blue block font-black uppercase tracking-wider mb-1">
+                                    <i class="fa-solid fa-heart mr-1.5 text-rose-500"></i> Área de Mayor Interés
+                                </span>
+                                <h3 id="res-top-interest" class="text-base font-black text-slate-900">Calculando...</h3>
+                                <p class="text-xxs text-slate-600 mt-2 font-medium leading-relaxed">Representa tu inclinación, afinidad, gusto y deseo natural hacia este tipo de actividades y estudios.</p>
+                            </div>
+                            
+                            <div class="border-l-4 border-brand-gold bg-brand-lightGold/40 rounded-r-xl p-4 border border-slate-100">
+                                <span class="text-xs text-brand-deepBlue block font-black uppercase tracking-wider mb-1">
+                                    <i class="fa-solid fa-star mr-1.5 text-brand-gold"></i> Área de Mayor Aptitud
+                                </span>
+                                <h3 id="res-top-aptitude" class="text-base font-black text-slate-900">Calculando...</h3>
+                                <p class="text-xxs text-slate-600 mt-2 font-medium leading-relaxed">Indica tus habilidades cognitivas innatas, facilidad de razonamiento técnico y destrezas prácticas.</p>
+                            </div>
+                        </div>
+
+                        <!-- Gráfico & Métrica de CHASIDE -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start print-no-break">
+                            <div class="md:col-span-7 border border-slate-200 rounded-xl p-4 bg-white shadow-sm flex flex-col justify-between">
+                                <h3 class="text-xs font-black text-brand-deepBlue mb-4 uppercase tracking-wider flex items-center gap-2">
+                                    <i class="fa-solid fa-chart-line text-brand-gold"></i> Gráfica de Afinidades Radar (%)
+                                </h3>
+                                <div class="relative h-250 w-full flex justify-center items-center">
+                                    <canvas id="resultsRadarChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-5 border border-slate-200 rounded-xl p-4 bg-white shadow-sm flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-xs font-black text-brand-deepBlue mb-4 uppercase tracking-wider flex items-center gap-2">
+                                        <i class="fa-solid fa-list-ol text-brand-gold"></i> Tabla de Métricas
+                                    </h3>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-left text-[11px]">
+                                            <thead>
+                                                <tr class="border-b border-slate-200 text-slate-400 uppercase font-black text-10px">
+                                                    <th class="py-2">Área Académica</th>
+                                                    <th class="py-2 text-center text-brand-blue">Int. %</th>
+                                                    <th class="py-2 text-center text-brand-gold">Apt. %</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="metric-table-body"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Descripciones de las Áreas -->
+                        <div class="border border-slate-200 rounded-xl p-6 bg-slate-50 space-y-4 print-no-break">
+                            <h3 class="text-sm font-black text-brand-deepBlue uppercase tracking-wider border-b border-slate-200 pb-2">
+                                <i class="fa-solid fa-circle-question text-brand-gold"></i> Significado de Áreas Recomendadas
+                            </h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs" id="areas-detail-grid"></div>
+                        </div>
+                    </div>
+
+                    <!-- RESULTADOS MMPI-2 -->
+                    <div id="results-container-mmpi2" class="space-y-8 hidden">
+                        <!-- Alertas de Validez Clínica -->
+                        <div id="mmpi-validez-alerta" class="hidden border-l-4 border-rose-500 bg-rose-50 p-4 rounded-r-xl">
+                            <h4 class="text-xs font-black text-rose-800 uppercase flex items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Alerta de Inconsistencia o Defensividad Elevada
+                            </h4>
+                            <p class="text-xxs text-rose-700 mt-1 font-semibold leading-relaxed">
+                                El protocolo presenta indicadores de validez fuera de los límites de consistencia sugeridos (L, F o K elevados). Los resultados clínicos deben interpretarse con extrema cautela profesional.
+                            </p>
+                        </div>
+
+                        <!-- Perfil MMPI-2 Gráfico de Barras / Líneas (Gabinete Profesional) -->
+                        <div class="border border-slate-200 rounded-xl p-4 bg-white shadow-sm print-no-break">
+                            <h3 class="text-xs font-black text-brand-deepBlue mb-4 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-chart-bar text-brand-gold"></i> Perfil Clínico de Personalidad MMPI-2 (Puntuaciones T)
+                            </h3>
+                            <div class="relative h-350 w-full flex justify-center items-center">
+                                <canvas id="resultsMMPIChart"></canvas>
+                            </div>
+                            <span class="block text-10px text-slate-400 mt-2 text-center font-bold font-mono">La línea discontinua roja indica el umbral de significación clínica (T &ge; 65)</span>
+                        </div>
+
+                        <!-- Tabla Detallada MMPI-2 -->
+                        <div class="border border-slate-200 rounded-xl p-4 bg-white shadow-sm print-no-break">
+                            <h3 class="text-xs font-black text-brand-deepBlue mb-3 uppercase tracking-wider">
+                                Métricas de las Escalas MMPI-2
+                            </h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-xs">
+                                    <thead>
+                                        <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 font-black text-xxs uppercase">
+                                            <th class="py-2 px-3">Escala</th>
+                                            <th class="py-2 px-3 text-center">Punt. Directa</th>
+                                            <th class="py-2 px-3 text-center">K-Corrección</th>
+                                            <th class="py-2 px-3 text-center">Punt. T (Normalizada)</th>
+                                            <th class="py-2 px-3">Interpretación Clínica General</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="mmpi-metrics-body" class="divide-y divide-slate-100 font-semibold text-slate-800"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interpretación Psicopedagógica Común -->
+                    <div class="border border-slate-200 rounded-xl p-6 bg-white space-y-3 print-no-break">
+                        <h3 class="text-sm font-black text-brand-deepBlue uppercase tracking-wider border-b border-slate-200 pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-user-doctor text-brand-blue"></i> Dictamen y Sugerencia del Gabinete Psicopedagógico
+                        </h3>
+                        <p id="res-psychological-opinion" class="text-xs text-slate-700 leading-relaxed font-medium">
+                            Calculando dictamen...
+                        </p>
+                    </div>
+
+                    <!-- SECCIÓN DE FIRMAS DE GALA -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-12 text-center text-xs print-no-break">
+                        <div class="space-y-2">
+                            <div class="border-b border-slate-400 mx-auto w-4/5 h-12"></div>
+                            <span class="block font-black text-brand-deepBlue uppercase">Firma del Alumno Evaluado</span>
+                            <span id="signature-student-name" class="block text-xxs text-slate-400 uppercase font-semibold">Cargando...</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="border-b border-slate-400 mx-auto w-4/5 h-12 flex items-end justify-center">
+                                <span class="text-[9px] font-mono text-slate-300 italic">CEUT-GABINETE-VAL</span>
+                            </div>
+                            <span class="block font-black text-brand-deepBlue uppercase">Sello y Firma Psicopedagógica</span>
+                            <span class="block text-xxs text-slate-400 uppercase font-semibold">Servicio de Orientación CEUT</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: VISTA PANEL DE ADMINISTRACIÓN (HISTORIAL DE ALUMNOS) -->
+        <section id="view-admin-panel" class="hidden space-y-6 view-transition">
+            <div class="bg-white rounded-2xl border-t-8 border-brand-blue shadow-2xl p-6 sm:p-8 institutional-card">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-100 gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-3 bg-brand-blue/10 text-brand-blue rounded-xl">
+                            <i class="fa-solid fa-user-shield text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-black text-brand-deepBlue uppercase tracking-tight">Gabinete de Psicopedagogía</h2>
+                            <p class="text-xs text-slate-500 font-semibold">Historial de evaluaciones en tiempo real conectado de forma segura con la nube.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                        <button onclick="exportTestsToCSV()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shrink-0">
+                            <i class="fa-solid fa-file-excel"></i> Exportar CSV
+                        </button>
+                        <button onclick="clearAdminDatabase()" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shrink-0">
+                            <i class="fa-solid fa-trash-can"></i> Vaciar BD
+                        </button>
+                        <button onclick="switchView('student-welcome')" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 shrink-0">
+                            <i class="fa-solid fa-circle-xmark"></i> Cerrar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Buscador de alumnos -->
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pt-4 pb-2">
+                    <div class="relative sm:col-span-2">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </span>
+                        <input type="text" id="admin-search-input" oninput="filterAdminTable()" class="block w-full pl-9 pr-3 py-2.5 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand-blue" placeholder="Buscar por Nombre, Folio o Test...">
+                    </div>
+                    <div>
+                        <select id="admin-filter-type" onchange="filterAdminTable()" class="block w-full px-3 py-2.5 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand-blue bg-white">
+                            <option value="">Todos los Tests</option>
+                            <option value="CHASIDE">CHASIDE - Vocacional</option>
+                            <option value="MMPI-2">MMPI-2 - Personalidad</option>
+                        </select>
+                    </div>
+                    <div class="text-right text-xs font-black text-brand-blue flex items-center justify-end">
+                        <span id="admin-counter" class="bg-brand-blue/10 px-3 py-1.5 rounded-full border border-brand-blue/20">Registros: 0</span>
+                    </div>
+                </div>
+
+                <!-- Tabla del Gabinete -->
+                <div class="overflow-x-auto border border-slate-100 rounded-xl mt-4">
+                    <table class="w-full text-left text-xs text-slate-700">
+                        <thead class="bg-slate-50 text-slate-500 uppercase font-black text-[10px] tracking-wider border-b border-slate-100">
+                            <tr>
+                                <th class="py-3.5 px-4">Folio</th>
+                                <th class="py-3.5 px-4">Estudiante</th>
+                                <th class="py-3.5 px-4">Nivel</th>
+                                <th class="py-3.5 px-4">Test</th>
+                                <th class="py-3.5 px-4">Grado / Grupo</th>
+                                <th class="py-3.5 px-4">Fecha</th>
+                                <th class="py-3.5 px-4">Indicadores Top</th>
+                                <th class="py-3.5 px-4 text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body" class="divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL DE CONTROL DE ACCESO (ADMIN LOGIN) -->
+    <div id="admin-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full border-t-8 border-brand-blue p-6 shadow-2xl relative">
+            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-3">
+                <div class="w-12 h-12 bg-brand-blue/10 text-brand-blue rounded-full flex items-center justify-center mx-auto text-xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-md font-black text-brand-deepBlue uppercase tracking-tight">Acceso Privado</h3>
+                <p class="text-xs text-slate-500 font-semibold">Exclusivo para el personal del Departamento Psicopedagógico.</p>
+            </div>
+            
+            <form onsubmit="submitAdminLogin(event)" class="space-y-4 mt-6">
+                <div>
+                    <label class="block text-10px font-black text-slate-400 uppercase tracking-widest mb-1.5" for="admin-pass">Contraseña del Gabinete</label>
+                    <input type="password" id="admin-pass" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue bg-slate-50 font-bold placeholder-slate-300" placeholder="••••••••">
+                    <span class="block text-[10px] text-slate-400 mt-2">Clave por defecto: <strong class="text-brand-blue">CEUT2026</strong></span>
+                </div>
+                <button type="submit" class="w-full py-2.5 bg-brand-blue hover:bg-brand-600 text-white font-black text-xs uppercase rounded-xl shadow-md transition-all">
+                    Ingresar al Gabinete
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN PERSONALIZADO -->
+    <div id="confirm-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div id="confirm-card-container" class="bg-white rounded-2xl max-w-sm w-full border-t-8 border-rose-600 p-6 shadow-2xl relative">
+            <div class="text-center space-y-3">
+                <div id="confirm-modal-icon" class="w-12 h-12 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center mx-auto text-xl">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 id="confirm-modal-title" class="text-md font-black text-brand-deepBlue uppercase tracking-tight">¿Confirmar Acción?</h3>
+                <p id="confirm-modal-message" class="text-xs text-slate-500 font-semibold leading-relaxed">Esta acción es irreversible.</p>
+            </div>
+            <div class="flex gap-2 mt-6">
+                <button id="btn-confirm-cancel" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-xs uppercase rounded-xl transition-all">
+                    Cancelar
+                </button>
+                <button id="btn-confirm-accept" class="w-1/2 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs uppercase rounded-xl shadow-md transition-all">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de página Institucional -->
+    <footer class="bg-brand-deepBlue border-t border-slate-800 text-slate-400 text-xs py-6 no-print">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p class="font-bold text-white uppercase tracking-wider">&copy; 2026 Portal de Evaluación Psicométrica CEUT</p>
+            <p class="text-slate-500">Gabinete psicopedagógico integrado de apoyo al estudiante para la toma de decisiones profesionales y bienestar psicológico.</p>
+        </div>
+    </footer>
+
+    <!-- LIBRERÍAS MODERNAS DE FIREBASE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        /* ==========================================================================
+           INICIALIZACIÓN DE FIREBASE (CONFIGURACIÓN INTELIGENTE)
+           ========================================================================== */
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // Caché de base de datos en memoria local para fallback e instant-render
+        let cloudRecords = [];
+        let authenticatedUser = null;
+
+        // Suscripción y ciclo de Auth (Prioriza tokens y escucha en tiempo real)
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) {
+                console.error("Error al autenticar con Firebase:", err);
+                showToast("Error de acceso seguro. Cargando en modo Offline.", true);
+            }
+        };
+        initAuth();
+
+        // Escucha cambios de Auth y conecta Firestore
+        onAuthStateChanged(auth, (user) => {
+            authenticatedUser = user;
+            if (user) {
+                // Sincronizar en tiempo real las evaluaciones guardadas
+                // RUTA ESTRECHA: /artifacts/{appId}/public/data/evaluaciones
+                const evalCol = collection(db, 'artifacts', appId, 'public', 'data', 'evaluaciones');
+                onSnapshot(evalCol, (snapshot) => {
+                    const records = [];
+                    snapshot.forEach((doc) => {
+                        records.push({ ...doc.data() });
+                    });
+                    cloudRecords = records;
+                    loadAdminDatabase();
+                }, (error) => {
+                    console.error("Error de lectura en Firestore:", error);
+                    showToast("No se pudo sincronizar con la nube en tiempo real.", true);
+                });
+            }
+        });
+
+        /* ==========================================================================
+           1. ARRAYS DE PREGUNTAS Y CONFIGURACIONES OFICIALES
+           ========================================================================== */
+        
+        const mmpi2Questions = [
+            { id: 1, text: "Me gustan las revistas de mecánica." },
+            { id: 2, text: "Tengo buen apetito." },
+            { id: 3, text: "Me despierto fresco y descansado casi todas las mañanas." },
+            { id: 4, text: "Creo que me gustaría el trabajo de bibliotecario." },
+            { id: 5, text: "El ruido me despierta fácilmente." },
+            { id: 6, text: "Mi padre es un buen hombre (o lo fue en caso de haber fallecido)." },
+            { id: 7, text: "Me gusta leer artículos sobre crímenes en los diarios." },
+            { id: 8, text: "Mis manos y mi pies están por lo general lo suficientemente calientes." },
+            { id: 9, text: "Mi vida diaria está llena de cosas que me mantienen interesado." },
+            { id: 10, text: "Soy tan capaz de trabajar como lo he sido siempre." },
+            { id: 11, text: "Me parece tener un nudo en la garganta la mayor parte del tiempo." },
+            { id: 12, text: "Mi vida sexual es satisfactoria." },
+            { id: 13, text: "Una persona debe tratar de comprender sus sueños y guiarse por ellos o tenerlos en cuenta como un aviso." },
+            { id: 14, text: "Disfruto con los cuentos de detectives o de misterio." },
+            { id: 15, text: "Trabajo bajo mucha tensión." },
+            { id: 16, text: "De vez en cuando pienso en cosas demasiado malas como para hablar de ellas." },
+            { id: 17, text: "Estoy seguro de que la vida me trata mal." },
+            { id: 18, text: "Sufro de ataques de náuseas y vómitos." },
+            { id: 19, text: "Cuando acepto un nuevo trabajo me gusta saber a quién tengo que halagar." },
+            { id: 20, text: "Muy rara vez sufro de estreñimiento." },
+            { id: 21, text: "En algunas ocasiones he tenido muchísimos deseos de abandonar mi hogar." },
+            { id: 22, text: "Nadie parece comprenderme." },
+            { id: 23, text: "A veces me dan ataques de risa o de llanto que no puedo controlar." },
+            { id: 24, text: "A veces se posesionan de mí espíritus malignos." },
+            { id: 25, text: "Me gustaría ser cantante." },
+            { id: 26, text: "Creo que lo mejor es quedarme callado cuando estoy en dificultades." },
+            { id: 27, text: "Cuando alguien me juega una mala pasada, siento que debiera pagarle con la misma moneda, sólo por principio." },
+            { id: 28, text: "Padezco de acidez estomacal varias veces por semana." },
+            { id: 29, text: "A veces siento ganas de decir palabrotas." },
+            { id: 30, text: "Tengo pesadillas una que otra noche." },
+            { id: 31, text: "Me cuesta concentrarme en una tarea o trabajo." },
+            { id: 32, text: "He tenido experiencias muy peculiares y extrañas." },
+            { id: 33, text: "Raras veces me preocupo por mi salud." },
+            { id: 34, text: "Nunca me he visto envuelto en problemas a causa de mi comportamiento sexual." },
+            { id: 35, text: "Cuando era chico, algunas veces me robé cosas sin importancia." },
+            { id: 36, text: "Casi siempre tengo tos." },
+            { id: 37, text: "A veces me dan ganas de hacer añicos las cosas." },
+            { id: 38, text: "He tenido períodos de días, semanas o meses en que no podía ocuparme de nada." },
+            { id: 39, text: "Mi sueño es sobresaltado e intranquilo." },
+            { id: 40, text: "La mayor parte del tiempo parece que me duele toda la cabeza." },
+            { id: 41, text: "No siempre digo la verdad." },
+            { id: 42, text: "Si la gente no la hubiera agarrado conmigo, yo habría tenido mucho más éxito." },
+            { id: 43, text: "Mi habilidad para razonar y tomar decisiones es ahora mejor que nunca." },
+            { id: 44, text: "Una vez por semana o más, siento repentinamente calor por todo el cuerpo sin causa aparente." },
+            { id: 45, text: "Me encuentre en tan buenas condiciones de salud física como la mayoría de mis amigos." },
+            { id: 46, text: "Prefiero hacerme el desentendido con conocidos a menos que ellos me hablen primero." },
+            { id: 47, text: "Casi nunca siento dolores en el corazón o en el pecho." },
+            { id: 48, text: "Preferiría sentarme a soñar despierto en lugar de hacer cualquier otra cosa." },
+            { id: 49, text: "Soy una persona sociable." },
+            { id: 50, text: "Con frecuencia he tenido que recibir órdenes de alguien que no sabía tanto como yo." },
+            { id: 51, text: "No leo todos los editoriales del diario todos los días." },
+            { id: 52, text: "No he vivido un tipo de vida adecuado y normal." },
+            { id: 53, text: "Con frecuencia algunas partes de mi cuerpo me arden o se me adormecen." },
+            { id: 54, text: "A mi familia no le gusta el trabajo que he escogido." },
+            { id: 55, text: "A veces insisto tanto en algo que los demás pierden la paciencia." },
+            { id: 56, text: "Me gustaría ser tan feliz como parecen ser los otros." },
+            { id: 57, text: "Muy raras veces siento dolor en la nuca." },
+            { id: 58, text: "Creo que la gente exagera sus desgracias para conseguir simpatía." },
+            { id: 59, text: "Tengo molestias en la boca del estómago casi a diario." },
+            { id: 60, text: "Cuando estoy con gente escucho cosas extrañas." },
+            { id: 61, text: "Creo que soy una persona condenada." },
+            { id: 62, text: "Se viviría mejor sin leyes." },
+            { id: 63, text: "Creo que me gustaría el trabajo de guardabosques." },
+            { id: 64, text: "En una discusión o debate me dejo vencer fácilmente." },
+            { id: 65, text: "Me cuesta empezar a hacer las cosas." },
+            { id: 66, text: "Decididamente no tengo confianza en mí mismo." },
+            { id: 67, text: "Normalmente siento que la vida vale la pena vivirla." },
+            { id: 68, text: "De vez en cuando dejo para mañana lo que debería hacer hoy." },
+            { id: 69, text: "Le agrado a la mayor parte de la gente que me conoce." },
+            { id: 70, text: "Creo que la mayoría de la gente mentiría para progresar." },
+            { id: 71, text: "Hago muchas cosas de las que me arrepiento luego." },
+            { id: 72, text: "Tengo pocas peleas con los miembros de mi familia." },
+            { id: 73, text: "Siendo joven me echaron de clase por portarme mal." },
+            { id: 74, text: "A veces siento deseos de hacer algo dañino o chocante." },
+            { id: 75, text: "Me gusta asistir a fiestas y reuniones donde haya mucha alegría." },
+            { id: 76, text: "Las luchas más difíciles las tengo conmigo mismo." },
+            { id: 77, text: "Yo quiero mucho a mi padre (o lo quise si falleció)." },
+            { id: 78, text: "Tengo pocas o ninguna molestia muscular." },
+            { id: 79, text: "No parece importarme lo que me suceda." },
+            { id: 80, text: "A veces, cuando no me siento bien, estoy irritable." },
+            { id: 81, text: "La mayor parte del tiempo me parece haber hecho algo malo." },
+            { id: 82, text: "Soy feliz la mayor parte del tiempo." },
+            { id: 83, text: "Veo a mi alrededor cosas, animales o personas que otros no ven." },
+            { id: 84, text: "Parece como si tuviera la cabeza llena de ruidos." },
+            { id: 85, text: "Alguien me la tiene jurada o me odia." },
+            { id: 86, text: "Nunca he hecho algo peligroso sólo por el placer de hacerlo." },
+            { id: 87, text: "A menudo siento como si tuviera una venda puesta en la cabeza." },
+            { id: 88, text: "De vez en cuando me enojo." },
+            { id: 89, text: "Mi manera de hablar es como siempre (ni más rápida ni más lenta)." },
+            { id: 90, text: "Sé quién es el responsable de muchos de mis problemas." },
+            { id: 91, text: "Ver sangre no me da miedo ni me hace mal." },
+            { id: 92, text: "Frecuentemente no comprendo por qué he estado tan de mal genio." },
+            { id: 93, text: "Nunca he vomitado sangre ni sangrado por la boca." },
+            { id: 94, text: "No me preocupa contraer una enfermedad." },
+            { id: 95, text: "Frecuentemente encuentro necesario defender lo que es justo." },
+            { id: 96, text: "Nunca me he entregado a prácticas de conducta sexual poco comunes." },
+            { id: 97, text: "Si pudiera entrar a un espectáculo sin pagar y seguro de no ser visto, lo haría." },
+            { id: 98, text: "Creo que mi vida familiar es tan agradable como la de la mayoría." },
+            { id: 99, text: "Es necesario reforzar el cumplimiento de las leyes." },
+            { id: 100, text: "Me hieren profundamente las críticas o los regaños." },
+            { id: 101, text: "Creo que me gustaría el trabajo de contratista de obras." },
+            { id: 102, text: "Estoy seguro de que hay una conspiración en mi contra." },
+            { id: 103, text: "Creo que me gustaría el trabajo de diseñador de ropa." },
+            { id: 104, text: "Mis hábitos de alimentación no son normales." },
+            { id: 105, text: "En la escuela me costaba hablar frente a la clase." },
+            { id: 106, text: "Mi madre es una buena mujer (o lo fue)." },
+            { id: 107, text: "Me molesta que la gente me pida consejos." },
+            { id: 108, text: "Me molesta tener que admitir que no sé algo." },
+            { id: 109, text: "Tengo dificultades con mi memoria." },
+            { id: 110, text: "Me siento lleno de energía y entusiasmo casi siempre." },
+            { id: 111, text: "A veces tengo la sensación de que me vigilan." },
+            { id: 112, text: "Creo que me gustaría el trabajo de ingeniero químico." },
+            { id: 113, text: "Con frecuencia siento miedo de las cosas o personas que no conozco." },
+            { id: 114, text: "Me gusta que la gente sepa lo que pienso." },
+            { id: 115, text: "A veces siento que tengo un gran poder o talento especial." },
+            { id: 116, text: "Me cuesta trabajo adaptarme a los cambios de la vida diaria." },
+            { id: 117, text: "Me molesta que me interrumpan cuando estoy concentrado." },
+            { id: 118, text: "Creo que me gustaría el trabajo de profesor de escuela secundaria." },
+            { id: 119, text: "A veces me siento tan deprimido que no quiero ver a nadie." },
+            { id: 120, text: "Me gusta hacer cosas que otros consideran raras o arriesgadas." },
+            { id: 121, text: "Creo que la mayoría de las personas son honestas por temor a ser descubiertas." },
+            { id: 122, text: "A veces me siento como si fuera a estallar o a perder el control." },
+            { id: 123, text: "Me gusta la música clásica." },
+            { id: 124, text: "Siento que tengo pocos amigos cercanos." },
+            { id: 125, text: "A veces creo que la gente habla de mí a mis espaldas." },
+            { id: 126, text: "Creo que me gustaría el trabajo de perito en contabilidad." },
+            { id: 127, text: "Me cuesta trabajo tomar decisiones importantes rápidamente." },
+            { id: 128, text: "Me molesta que la gente me mire en la calle o en público." },
+            { id: 129, text: "Creo que la vida es un constante desafío difícil de superar." },
+            { id: 130, text: "A veces siento que mis pensamientos van demasiado rápido." },
+            { id: 131, text: "Creo que me gustaría el trabajo de dibujante técnico." },
+            { id: 132, text: "Me gusta planear las cosas con mucha anticipación." },
+            { id: 133, text: "Siento que mi vida tiene un rumbo claro y definido." },
+            { id: 134, text: "A veces tengo la sensación de que alguien me está controlando la mente." },
+            { id: 135, text: "Creo que me gustaría el trabajo de piloto de aviación civil." },
+            { id: 136, text: "Me molesta mucho perder en un juego o competencia." },
+            { id: 137, text: "Creo que la mayoría de las personas se aprovejan de los demás si pueden." },
+            { id: 138, text: "A veces me siento tan cansado que me cuesta levantarme de la cama." },
+            { id: 139, text: "Creo que me gustaría el trabajo de programador de computadoras." },
+            { id: 140, text: "Me gusta viajar a lugares nuevos y desconocidos." },
+            { id: 141, text: "A veces tengo miedo de perder la razón o el juicio." },
+            { id: 142, text: "Creo que la gente se interesa por mí sólo cuando me necesita." },
+            { id: 143, text: "Me gusta leer libros sobre historia antigua o evolución." },
+            { id: 144, text: "Siento que soy capaz de resolver la mayoría de mis problemas personales." },
+            { id: 145, text: "A veces me da miedo estar en espacios cerrados o pequeños." },
+            { id: 146, text: "Creo que me gustaría el trabajo de promotor de ventas." },
+            { id: 147, text: "Me molesta que la gente critique mi manera de vestir o hablar." },
+            { id: 148, text: "Siento que la mayor parte del tiempo estoy tenso y nervioso." },
+            { id: 149, text: "Creo que me gustaría el trabajo de consejero de relaciones humanas." },
+            { id: 150, text: "A veces siento que la vida no tiene ningún significado real para mí." },
+            { id: 151, text: "Me gusta participar en actividades de voluntariado o ayuda comunitaria." },
+            { id: 152, text: "Creo que la mayoría de las personas son egoístas por naturaleza." },
+            { id: 153, text: "A veces me cuesta controlar mis pensamientos o impulsos agresivos." },
+            { id: 154, text: "Creo que me gustaría el trabajo de gerente de operaciones." },
+            { id: 155, text: "Me gusta estar rodeado de gente alegre y optimista." },
+            { id: 156, text: "A veces siento que soy un fracaso total en la vida." },
+            { id: 157, text: "Creo que me gustaría el trabajo de investigador científico privado." },
+            { id: 158, text: "Me cuesta trabajo perdonar a quienes me han hecho daño." },
+            { id: 159, text: "Siento que la mayor parte de las personas no me comprenden de verdad." },
+            { id: 160, text: "Creo que me gustaría el trabajo de administrador de bases de datos." },
+            { id: 161, text: "Me gusta escribir poemas, cuentos o reflexiones personales." },
+            { id: 162, text: "A veces siento una gran tristeza sin tener un motivo real." },
+            { id: 163, text: "Creo que la mayoría de los líderes políticos son corruptos o mentirosos." },
+            { id: 164, text: "Me gusta coleccionar objetos extraños o antiguos de valor histórico." },
+            { id: 165, text: "Siento que tengo la capacidad de guiar y liderar a otros de forma natural." },
+            { id: 166, text: "A veces me cuesta conciliar el sueño por preocupaciones de la vida diaria." },
+            { id: 167, text: "Creo que me gustaría el trabajo de diseñador gráfico publicitario." },
+            { id: 168, text: "Me gusta estar al tanto de las últimas noticias científicas o tecnológicas." },
+            { id: 169, text: "Siento que mi familia me exige más de lo que soy capaz de dar." },
+            { id: 170, text: "A veces siento un vacío interno difícil de explicar a los demás." },
+            { id: 171, text: "Creo que me gustaría el trabajo de analista financiero corporativo." },
+            { id: 172, text: "Me gusta resolver acertijos lógicos o problemas matemáticos complejos." },
+            { id: 173, text: "Siento que la mayoría de mis amigos son leales y sinceros conmigo." },
+            { id: 174, text: "A veces tengo miedo de cometer un error irreparable en mi carrera." },
+            { id: 175, text: "Creo que me gustaría el trabajo de asesor jurídico de empresas." },
+            { id: 176, text: "Me gusta la naturaleza y disfruto de caminatas en bosques o campos." },
+            { id: 177, text: "Siento que soy una persona muy sensible a los problemas ajenos." },
+            { id: 178, text: "A veces me da pánico hablar ante una gran multitud de personas." },
+            { id: 179, text: "Creo que me gustaría el trabajo de organizador de eventos sociales." },
+            { id: 180, text: "Me gusta la precisión y puntualidad y me molesta cuando la gente llega tarde." },
+            { id: 181, text: "Siento que mi vida social es active y de calidad actualmente." },
+            { id: 182, text: "A veces siento que la rutina diaria de la vida me ahoga por completo." },
+            { id: 183, text: "Creo que me gustaría el trabajo de director de cine o teatro." },
+            { id: 184, text: "Me gusta aprender de otras culturas e idiomas." },
+            { id: 185, text: "Siento que la mayor parte de mis decisiones han sido acertadas." },
+            { id: 186, text: "A veces siento que no encajo en los grupos de mi misma edad." },
+            { id: 187, text: "Creo que me gustaría el trabajo de especialista en ciberseguridad." },
+            { id: 188, text: "Me gusta debatir temas complejos de filosofía, política o religión." },
+            { id: 189, text: "Siento que la vida es demasiado corta para desperdiciarla en rutinas." },
+            { id: 190, text: "A veces siento una gran paz interior que me llena de optimismo." },
+            { id: 191, text: "Creo que me gustaría el trabajo de ingeniero biomédico hospitalario." },
+            { id: 192, text: "Me gusta hacer deportes o ejercicios físicos con regularidad." },
+            { id: 193, text: "Siento que mi personalidad es fuerte y que no me dejo influenciar fácilmente." },
+            { id: 194, text: "A veces tengo pesadillas recurrentes sobre caídas o persecuciones." },
+            { id: 195, text: "Creo que me gustaría el trabajo de perito forense en criminalística." },
+            { id: 196, text: "Me gusta escuchar música para relajarme o motivarme." },
+            { id: 197, text: "Siento que el esfuerzo y el trabajo duro siempre rinden frutos al final." },
+            { id: 198, text: "A veces me siento incomprendido por las personas más cercanas a mí." },
+            { id: 199, text: "Creo que me gustaría el trabajo de coordinador de logística internacional." },
+            { id: 200, text: "Me gusta experimentar con nuevas recetas o ingredientes en la cocina." },
+            { id: 201, text: "Siento que soy capaz de adaptarme a situaciones extremas de estrés." },
+            { id: 202, text: "A veces me cuesta trabajo confiar en las intenciones de los extraños." },
+            { id: 203, text: "Creo que me gustaría el trabajo de diseñador de interiores." },
+            { id: 204, text: "Me gusta el orden absoluto en mi habitación y en mis pertenencias." },
+            { id: 205, text: "Siento que soy una persona con un alto sentido del deber y la moral." },
+            { id: 206, text: "A veces siento que el futuro es incierto y que no hay mucho que esperar." },
+            { id: 207, text: "Creo que me gustaría el trabajo de consultor en desarrollo humano." },
+            { id: 208, text: "Me gusta el cine clásico de misterio, terror o ciencia ficción." },
+            { id: 209, text: "Siento que tengo la fuerza de voluntad suficiente para lograr mis metas." },
+            { id: 210, text: "A veces me cuesta controlar mis gastos o compras impulsivas." },
+            { id: 211, text: "Creo que me gustaría el trabajo de ingeniero de sistemas inteligentes." },
+            { id: 212, text: "Me gusta el café fuerte y las bebidas que me mantienen alerta." },
+            { id: 213, text: "Siento que la educación es la base fundamental del progreso humano." },
+            { id: 214, text: "A veces me da miedo la soledad o la posibilidad de quedarme solo." },
+            { id: 215, text: "Creo que me gustaría el trabajo de biotecnólogo en laboratorios." },
+            { id: 216, text: "Me gusta pintar, dibujar o esculpir figuras creativas como pasatiempo." },
+            { id: 217, text: "Siento que el respeto mutuo es el valor más importante en una sociedad." },
+            { id: 218, text: "A veces siento que mis amigos se cansan de mi forma de ser." },
+            { id: 219, text: "Creo que me gustaría el trabajo de gerente de relaciones públicas." },
+            { id: 220, text: "Me gusta coleccionar monedas, estampillas o libros raros." },
+            { id: 221, text: "Siento que la justicia a veces tarda, pero siempre termina llegando." },
+            { id: 222, text: "A veces siento que los cambios drásticos en la vida me paralizan." },
+            { id: 223, text: "Creo que me gustaría el trabajo de ecólogo de reservas naturales." },
+            { id: 224, text: "Me gusta resolver crucigramas, sudokus u otros juegos de ingenio lógico." },
+            { id: 225, text: "Siento que tengo un gran sentido del humor y que hago reír a otros." },
+            { id: 226, text: "A veces me da miedo el paso del tiempo y el envejecimiento de la vida." },
+            { id: 227, text: "Creo que me gustaría el trabajo de analista de marketing digital." },
+            { id: 228, text: "Me gusta bailar, cantar o hacer expresiones artísticas corporales." },
+            { id: 229, text: "Siento que mi vida está llena de bendiciones por las cuales agradecer." },
+            { id: 230, text: "A veces siento que me falta motivación para arrancar mis proyectos." },
+            { id: 231, text: "Creo que me gustaría el trabajo de ingeniero en energías renovables." },
+            { id: 232, text: "Me gusta la jardinería y el cuidado de plantas u huertos." },
+            { id: 233, text: "Siento que las personas de mi entorno me valoran por lo que soy." },
+            { id: 234, text: "A veces siento que no tengo el control de mis emociones internas." },
+            { id: 235, text: "Creo que me gustaría el trabajo de administrador de empresas familiares." },
+            { id: 236, text: "Me gusta leer artículos de divulgación científica y de descubrimientos." },
+            { id: 237, text: "Siento que la lealtad es un principio innegociable con mis seres queridos." },
+            { id: 238, text: "A veces me da pánico la idea de sufrir un accidente grave en la vía pública." },
+            { id: 239, text: "Creo que me gustaría el trabajo de psicopedagogo de apoyo escolar." },
+            { id: 240, text: "Me gusta hacer planes los fines de semana para salir al aire libre." },
+            { id: 241, text: "Siento que la paciencia es una de mis mayores virtudes en la actualidad." },
+            { id: 242, text: "A veces siento que la gente me critica en secreto por mis ideas." },
+            { id: 243, text: "Creo que me gustaría el trabajo de curador de museos de arte." },
+            { id: 244, text: "Me gusta escribir en un diario personal mis vivencias." },
+            { id: 245, text: "Siento que el destino tiene cosas buenas preparadas para mí." },
+            { id: 246, text: "A veces siento que me ahogo si estoy en un lugar cerrado con mucha gente." },
+            { id: 247, text: "Creo que me gustaría el trabajo de experto en comercio exterior." },
+            { id: 248, text: "Me gusta el té de hierbas y los métodos alternativos de relajación." },
+            { id: 249, text: "Siento que soy una persona muy perseverante ante los retos difíciles." },
+            { id: 250, text: "A veces siento una extraña vibración o zumbido inexplicable en los oídos." },
+            { id: 251, text: "Creo que me gustaría el trabajo de diseñador de aplicaciones móviles." },
+            { id: 252, text: "Me gusta la fotografía de paisajes urbanos o naturales." },
+            { id: 253, text: "Siento que mi aporte en el trabajo o escuela es valioso." },
+            { id: 254, text: "A veces tengo pensamientos negativos recurrentes que me quitan el sueño." },
+            { id: 255, text: "Creo que me gustaría el trabajo de consultor ambiental." },
+            { id: 256, text: "Me gusta la lectura de biografías de personajes históricos." },
+            { id: 257, text: "Siento que soy capaz de perdonar de corazón los errores ajenos." },
+            { id: 258, text: "A veces me asustan los relámpagos, truenos o tormentas fuertes." },
+            { id: 259, text: "Creo que me gustaría el trabajo de gerente de talento humano." },
+            { id: 260, text: "Me gusta el teatro, la ópera u obras de expresión artística dramática." },
+            { id: 261, text: "Siento que tengo una gran estabilidad emocional la mayor parte del tiempo." },
+            { id: 262, text: "A veces siento que la gente abusa de mi amabilidad o de mi tiempo." },
+            { id: 263, text: "Creo que me gustaría el trabajo de investigador social." },
+            { id: 264, text: "Me gusta cocinar postres para compartir en reuniones familiares." },
+            { id: 265, text: "Siento que la verdad siempre debe prevalecer sin importar la consecuencia." },
+            { id: 266, text: "A veces siento que las personas me miran de forma sospechosa." },
+            { id: 267, text: "Creo que me gustaría el trabajo de analista de datos clínicos." },
+            { id: 268, text: "Me gusta practicar yoga o meditación para calmar la mente." },
+            { id: 269, text: "Siento que mis relaciones afectivas actuales son maduras." },
+            { id: 270, text: "A veces me da un miedo irracional a la oscuridad o a espacios sin luz." },
+            { id: 271, text: "Creo que me gustaría el trabajo de planificador de transporte urbano." },
+            { id: 272, text: "Me gusta coleccionar libros clásicos o ediciones especiales." },
+            { id: 273, text: "Siento que tengo el apoyo incondicional de mi familia." },
+            { id: 274, text: "A veces me cuesta mucho olvidar los momentos vergonzosos del pasado." },
+            { id: 275, text: "Creo que me gustaría el trabajo de tasador de obras antiguas." },
+            { id: 276, text: "Me gusta el senderismo e ir a montañas los fines de semana." },
+            { id: 277, text: "Siento que soy una persona con un alto nivel de empatía social." },
+            { id: 278, text: "A veces me da un temblor repentino en las manos sin causa médica." },
+            { id: 279, text: "Creo que me gustaría el trabajo de coordinador de eventos corporativos." },
+            { id: 280, text: "Me gusta levantarme temprano para aprovechar el día al máximo." },
+            { id: 281, text: "Siento que mi círculo social es pequeño pero leal." },
+            { id: 282, text: "A veces siento que la tecnología nos aísla socialmente." },
+            { id: 283, text: "Creo que me gustaría el trabajo de restaurador de obras de arte." },
+            { id: 284, text: "Me gusta estudiar el espacio exterior, las constelaciones y galaxias." },
+            { id: 285, text: "Siento que soy una persona justa y que no hago diferencias." },
+            { id: 286, text: "A veces me siento sumamente irritable por ruidos mínimos." },
+            { id: 287, text: "Creo que me gustaría el trabajo de auditor interno." },
+            { id: 288, text: "Me gusta el mar y disfruto de actividades en playas." },
+            { id: 289, text: "Siento que el perdón es indispensable para vivir en paz." },
+            { id: 290, text: "A veces siento que me falta el aire en situaciones calmas." },
+            { id: 291, text: "Creo que me gustaría el trabajo de genetista." },
+            { id: 292, text: "Me gusta hacer trabajos manuales con madera, metal o arcilla." },
+            { id: 293, text: "Siento que mi comunidad me reconoce como alguien útil." },
+            { id: 294, text: "A veces tengo la sensación de que el tiempo pasa de forma muy lenta." },
+            { id: 295, text: "Creo que me gustaría el trabajo de analista de riesgo industrial." },
+            { id: 296, text: "Me gusta ir a conferencias de temas de actualidad." },
+            { id: 297, text: "Siento que soy capaz de mantener la calma en emergencias." },
+            { id: 298, text: "A veces tengo pensamientos intrusivos sobre catástrofes globales." },
+            { id: 299, text: "Creo que me gustaría el trabajo de especialista en logística." },
+            { id: 300, text: "Me gusta tejer, bordar, coser u otras actividades de confección manual." },
+            { id: 301, text: "Siento que mi rendimiento escolar es alto e integral." },
+            { id: 302, text: "A veces sospecho de la higiene de los alimentos en lugares públicos." },
+            { id: 303, text: "Creo que me gustaría el trabajo de diseñador de interfaces web." },
+            { id: 304, text: "Me gusta la fotografía macro de naturaleza." },
+            { id: 305, text: "Siento que mis principios éticos me guían con fuerza." },
+            { id: 306, text: "A veces siento que me vigilan desde las ventanas." },
+            { id: 307, text: "Creo que me gustaría el trabajo de conservacionista de especies." },
+            { id: 308, text: "Me gusta ver documentales de geografía y expediciones." },
+            { id: 309, text: "Siento que el esfuerzo honesto es la única vía al éxito." },
+            { id: 310, text: "A veces siento un hormigueo extraño en el rostro o extremidades." },
+            { id: 311, text: "Creo que me gustaría el trabajo de tasador de bienes raíces." },
+            { id: 312, text: "Me gusta cultivar plantas exóticas o bonsáis." },
+            { id: 313, text: "Siento que soy alguien que aprende rápido de los errores." },
+            { id: 314, text: "A veces me da un miedo paralizante la idea de enfermar de gravedad." },
+            { id: 315, text: "Creo que me gustaría el trabajo de analista de Big Data." },
+            { id: 316, text: "Me gusta visitar bibliotecas antiguas." },
+            { id: 317, text: "Siento que la empatía activa puede curar muchos males sociales." },
+            { id: 318, text: "A veces siento que la gente me habla con doble sentido." },
+            { id: 319, text: "Creo que me gustaría el trabajo de director creativo de moda." },
+            { id: 320, text: "Me gusta coleccionar música en formatos físicos retro." },
+            { id: 321, text: "Siento que la vida me pondrá en el lugar correcto en el momento exacto." },
+            { id: 322, text: "A veces siento desinterés que me impide limpiar mi espacio personal." },
+            { id: 323, text: "Creo que me gustaría el trabajo de oceanógrafo." },
+            { id: 324, text: "Me gusta armar maquetas o modelos a escala." },
+            { id: 325, text: "Siento que tengo el carisma para convencer a grupos de trabajo." },
+            { id: 326, text: "A veces siento que el aire urbano me hace daño inmediato." },
+            { id: 327, text: "Creo que me gustaría el trabajo de experto en piedras preciosas." },
+            { id: 328, text: "Me gusta escribir cartas a mano en papel membretado." },
+            { id: 329, text: "Siento que mi vida tiene un propósito ético valioso." },
+            { id: 330, text: "A veces siento que mis seres queridos me ocultan cosas." },
+            { id: 331, text: "Creo que me gustaría el trabajo de meteorólogo de radares." },
+            { id: 332, text: "Me gusta el diseño gráfico en tres dimensiones." },
+            { id: 333, text: "Siento que la disciplina personal supera con creces al talento natural." },
+            { id: 334, text: "A veces siento que mis pies están helados incluso en climas cálidos." },
+            { id: 335, text: "Creo que me gustaría el trabajo de consultor en estrategia." },
+            { id: 336, text: "Me gusta la observación de aves silvestres." },
+            { id: 337, text: "Siento que el respeto a la ley es la base de la paz." },
+            { id: 338, text: "A veces me da una profunda desazón pensar en lo fugaz de la existencia." },
+            { id: 339, text: "Creo que me gustaría el trabajo de bioinformático." },
+            { id: 340, text: "Me gusta restaurar juguetes u objetos antiguos." },
+            { id: 341, text: "Siento que soy un pilar del bienestar de mi familia." },
+            { id: 342, text: "A veces sospecho de llamadas telefónicas de desconocidos." },
+            { id: 343, text: "Creo que me gustaría el trabajo de curador de archivos." },
+            { id: 344, text: "Me gusta el ajedrez u otros juegos de alta demanda de lógica." },
+            { id: 345, text: "Siento que la bondad desinteresada nos humaniza." },
+            { id: 346, text: "A veces me da un ahogo súbito en automóviles muy pequeños." },
+            { id: 347, text: "Creo que me gustaría el trabajo de analista de valores mundiales." },
+            { id: 348, text: "Me gusta recolectar infusiones y tés exóticos." },
+            { id: 349, text: "Siento que mi fuerza mental es mi mayor aliada en crisis." },
+            { id: 350, text: "A veces siento que escucho murmullos o susurros débiles." },
+            { id: 351, text: "Creo que me gustaría el trabajo de programador de bases de datos." },
+            { id: 352, text: "Me gusta pintar con óleos o técnicas abstractas." },
+            { id: 353, text: "Siento que mis opiniones son escuchadas con sumo respeto." },
+            { id: 354, text: "A veces me asaltan pensamientos trágicos de forma involuntaria." },
+            { id: 355, text: "Creo que me gustaría el trabajo de perito de terrenos rurales." },
+            { id: 356, text: "Me gusta leer bitácoras o crónicas de exploradores lejanos." },
+            { id: 357, text: "Siento que mi capacidad de adaptación me ha salvado de caer en tristeza extrema." },
+            { id: 358, text: "A veces me asustan mucho las multitudes." },
+            { id: 359, text: "Creo que me gustaría el trabajo de gerente de compensaciones." },
+            { id: 360, text: "Me gusta asistir a cines independientes." },
+            { id: 361, text: "Siento que tengo un gran autocontrol de mi concentración." },
+            { id: 362, text: "A veces tengo la certeza de que el clima influye en mis articulaciones." },
+            { id: 363, text: "Creo que me gustaría el trabajo de analista demográfico." },
+            { id: 364, text: "Me gusta la elaboración artesanal de mermeladas y conservas." },
+            { id: 365, text: "Siento que la verdad absoluta es indispensable para evolucianar." },
+            { id: 366, text: "A veces siento que la gente habla de mí al pasar por oficinas." },
+            { id: 367, text: "Creo que me gustaría el trabajo de programador de redes locales." },
+            { id: 368, text: "Me gusta practicar taichí o meditación zen para calmarme." },
+            { id: 369, text: "Siento que mis lazos afectivos actuales me brindan plenitud." },
+            { id: 370, text: "A veces me asalta una profunda congoja sin una explicación racional aparente." }
+        ];
+
+        const chasideQuestions = [
+            { id: 1, text: "¿Aceptarías trabajar escribiendo artículos en la sección económica de un diario?" },
+            { id: 2, text: "¿Te ofrecerías para organizar la despedida de soltero/a de uno de tus amigos?" },
+            { id: 3, text: "¿Te gustaría dirigir un proyecto de urbanización en tu ciudad o provincia?" },
+            { id: 4, text: "¿A una frustración siempre opones un pensamiento positivo?" },
+            { id: 5, text: "¿Te dedicarías a socorrer a personas accidentadas o atacadas por asaltantes?" },
+            { id: 6, text: "¿Cuando eras chico, te interesaba saber cómo estaban construidos tus juguetes?" },
+            { id: 7, text: "¿Te interesan más los misterios de la naturaleza que los secretos de la tecnología?" },
+            { id: 8, text: "¿Escuchas atentamente los problemas que te plantean tus amigos?" },
+            { id: 9, text: "¿Te ofrecerías para explicar a tus compañeros un determinado tema que ellos no entendieron?" },
+            { id: 10, text: "¿Eres exigente y crítico con tu equipo de trabajo?" },
+            { id: 11, text: "¿Te atrae armar rompecabezas o puzzles?" },
+            { id: 12, text: "¿Puedes establecer la diferencia conceptual entre macroeconomía y microeconomía?" },
+            { id: 13, text: "¿Usar uniforme te hace sentir distinto/a e importante?" },
+            { id: 14, text: "¿Participarías como profesional en un espectáculo de acrobacia aérea?" },
+            { id: 15, text: "¿Organizas tu dinero de manera que te alcance hasta el próximo cobro?" },
+            { id: 16, text: "¿Convences fácilmente a otras personas sobre la validez de tus argumentos?" },
+            { id: 17, text: "¿Estás informado sobre los nuevos descubrimientos que se están realizando sobre la Teoría del Big-Bang?" },
+            { id: 18, text: "¿Ante una situación de emergencia actúas rápidamente?" },
+            { id: 19, text: "¿Cuando tienes que resolver un problema matemático, perseveras hasta encontrar la solución?" },
+            { id: 20, text: "¿Si te convocara tu club preferido para planificar, organizar y dirigir un campo de deportes, aceptarías?" },
+            { id: 21, text: "¿Eres el que pone un toque de alegría en las fiestas?" },
+            { id: 22, text: "¿Crees que los detalles son tan importantes como el todo?" },
+            { id: 23, text: "¿Te sentirías a gusto trabajando en un ámbito hospitalario?" },
+            { id: 24, text: "¿Te gustaría participar para mantener el orden ante grandes desórdenes y cataclismos?" },
+            { id: 25, text: "¿Pasarías varias horas leyendo algún libro de tu interés?" },
+            { id: 26, text: "¿Planificas detalladamente tus trabajos antes de empezar?" },
+            { id: 27, text: "¿Entablas una relación casi personal con tu computadora?" },
+            { id: 28, text: "¿Disfrutas modelando con arcilla o materiales moldeables?" },
+            { id: 29, text: "¿Ayudas habitualmente a los no videntes a cruzar la calle?" },
+            { id: 30, text: "¿Consideras importante que desde la escuela primaria se fomente la actitud crítica y la participación activa?" },
+            { id: 31, text: "¿Aceptarías que las mujeres formaran parte de las Fuerzas Armadas bajo las mismas normas que los hombres?" },
+            { id: 32, text: "¿Te gustaría crear nuevas técnicas para descubrir las patologías de algunas enfermedades con un microscopio?" },
+            { id: 33, text: "¿Participarías en una campaña de prevención contra enfermedades endémicas o epidémicas?" },
+            { id: 34, text: "¿Te interesan los temas relacionados al pasado histórico y a la evolución del hombre?" },
+            { id: 35, text: "¿Te incluirías en un proyecto de investigación de los movimientos sísmicos y sus consecuencias?" },
+            { id: 36, text: "¿Fuera de los horarios escolares, dedicas algún día de la semana a la realización de actividades artísticas o corporales?" },
+            { id: 37, text: "¿Te interesan las actividades de mucha acción y de reacción rápida en situaciones imprevistas o de peligro?" },
+            { id: 38, text: "¿Te ofrecerías para colaborar como voluntario en los gabinetes especiales de la NASA o agencias espaciales?" },
+            { id: 39, text: "¿Te gusta más el trabajo manual o artesanal que el trabajo intelectual puro?" },
+            { id: 40, text: "¿Estarías dispuesto a renunciar a un momento placentero para ofrecer tu servicio como profesional ayudando a otros?" },
+            { id: 41, text: "¿Participarías de una investigación sobre la violencia en el deporte o la sociedad?" },
+            { id: 42, text: "¿Te gustaría trabajar en un laboratorio químico o farmacéutico mientras estudias?" },
+            { id: 43, text: "¿Arriesgarías tu vida para salvar la vida de otra persona que no conoces?" },
+            { id: 44, text: "¿Te agradaría hacer un curso de primeros auxilios?" },
+            { id: 45, text: "¿Tolerarías empezar tantas veces como fuere necesario hasta obtener el logro de un diseño o dibujo deseado?" },
+            { id: 46, text: "¿Distribuyes tus horarios adecuadamente para poder cumplir con todo lo planeado?" },
+            { id: 47, text: "¿Harías un curso para aprender a fabricar instrumentos y/o piezas de máquinas o aparatos electrónicos?" },
+            { id: 48, text: "¿Elegirías una profesión que te obligara a estar alejado de tu familia por algún tiempo?" },
+            { id: 49, text: "¿Te radicarías en una zona agrícola-ganadera para realizar trabajos de campo?" },
+            { id: 50, text: "¿Cuando trabajas en grupo, te entusiasma ser quien aporte las ideas creativas y novedosas?" },
+            { id: 51, text: "¿Te resulta fácil coordinar y dirigir un grupo de trabajo?" },
+            { id: 52, text: "¿Te resultan interesantes y atractivas las Ciencias Biológicas?" },
+            { id: 53, text: "¿Si una empresa importante solicita un profesional para Gerente de Comercialización, te gustaría desempeñar esta función?" },
+            { id: 54, text: "¿Te incluirías en un proyecto nacional de desarrollo de las principales fuentes de recursos de tu provincia/país?" },
+            { id: 55, text: "¿Sientes interés por descubrir cuáles son las causas que determinan ciertos fenómenos físicos o naturales?" },
+            { id: 56, text: "¿Descubriste algún filósofo, pensador o escritor que haya expresado las mismas ideas tuyas con anticipación?" },
+            { id: 57, text: "¿Desearías que te regalen algún instrumento musical o tecnológico para crear arte?" },
+            { id: 58, text: "¿Aceptarías colaborar con el cumplimiento de las normas sociales y de seguridad en lugares públicos?" },
+            { id: 59, text: "¿Crees que tus ideas técnicas son importantes y haces lo posible para ponerlas en práctica construyendo prototipos?" },
+            { id: 60, text: "¿Cuando en tu casa se descompone un artefacto, te dispones prontamente a repararlo?" },
+            { id: 61, text: "¿Te gustaría realizar investigaciones científicas sobre cultivos agrícolas, suelos y biotecnología alimentaria?" },
+            { id: 62, text: "¿Te atrae la idea de diseñar y programar sistemas de computación para automatizar tareas complejas?" },
+            { id: 63, text: "¿Te parece importante y necesario preservar las raíces culturales y folclóricas de tu país?" },
+            { id: 64, text: "¿Te gustaría realizar una investigación que contribuyera a hacer más justa la distribución de la riqueza social?" },
+            { id: 65, text: "¿Te gustaría realizar tareas de mantenimiento y conservación técnica de una barra o aeronave?" },
+            { id: 66, text: "¿Crees que el país debe poseer sistemas avanzados de seguridad nacional y defensa aérea a cualquier precio?" },
+            { id: 67, text: "¿Consideras que la libertad, la equidad y la justicia social son valores fundamentales en tu vida?" },
+            { id: 68, text: "¿Aceptas hacer prácticas profesionales en una industria de alimentos controlando el sector de calidad biológica?" },
+            { id: 69, text: "¿Consideras que la salud pública debe ser prioritaria, gratuita y eficiente para toda la población?" },
+            { id: 70, text: "¿Te interesaría investigar científicamente sobre el desarrollo de una nueva vacuna preventiva?" },
+            { id: 71, text: "¿En un equipo de trabajo, prefieres ocupar el rol de coordinador, planificador y líder del proyecto?" },
+            { id: 72, text: "¿En una discusión o conflicto entre amigos, te ofreces naturalmente como mediador neutral?" },
+            { id: 73, text: "¿Estás de acuerdo con la formación y entrenamiento de un cuerpo militar altamente profesionalizado?" },
+            { id: 74, text: "¿Lucharías por una causa justa o de derechos humanos hasta las últimas consecuencias?" },
+            { id: 75, text: "¿Te gustaría investigar y optimizar los sistemas tecnológicos aplicados a la producción ganadera?" },
+            { id: 76, text: "¿Harías un nuevo diseño arquitectónico o de una prenda de vestir muy innovadora ante un evento importante?" },
+            { id: 77, text: "¿Visitarías con frecuencia un observatorio astronómico para conocer en acción el funcionamiento de telescopios gigantes?" },
+            { id: 78, text: "¿Te gustaría dirigir el área de importación y exportación de mercancías de una gran corporación?" },
+            { id: 79, text: "¿Te cohíbes o inhibes con facilidad al entrar a un lugar desconocido con gente que no conoces?" },
+            { id: 80, text: "¿Te gratificaría enormemente trabajar educando, cuidando o guiando a niños pequeños?" },
+            { id: 81, text: "¿Harías con gusto el diseño de un cartel o afiche publicitario para una campaña de concientización?" },
+            { id: 82, text: "¿Dirigirías o coordinarías un grupo de teatro independiente o taller literario?" },
+            { id: 83, text: "¿Enviarías tu currículum a una empresa automotriz o tecnológica que solicita un gerente para su área de producción?" },
+            { id: 84, text: "¿Participarías de un contingente internacional de misiones especiales para la paz mundial?" },
+            { id: 85, text: "¿Te costearías tus estudios trabajando en una oficina realizando auditorías de cuentas?" },
+            { id: 86, text: "¿Eres de los que defiende causas que otros consideran perdidas por una cuestión de principios morales?" },
+            { id: 87, text: "¿Ante una situación de catástrofe social o epidemia, colaborarías brindando auxilio directo de salud?" },
+            { id: 88, text: "¿Sabrías responder con exactitud qué significan y cómo operan las moléculas de ADN y ARN?" },
+            { id: 89, text: "¿Elegirías una carrera cuyo instrumento principal de trabajo fuera la utilización de idiomas extranjeros?" },
+            { id: 90, text: "¿Trabajar operando objetos, maquinarias o códigos lógicos te resulta más gratificante que tratar directamente con personas?" },
+            { id: 91, text: "¿Te resultaría gratificante desempeñarte como asesor financiero o contable de empresas reconocidas?" },
+            { id: 92, text: "¿Ante un llamado solidario, te ofrecerías inmediatamente para cuidar a un enfermo convaleciente?" },
+            { id: 93, text: "¿Te atrae investigar sobre los misterios de la astrofísica o del cosmos?" },
+            { id: 94, text: "¿El trabajo analítico e individual te resulta más rápido y efectivo que el trabajo de debate grupal?" },
+            { id: 95, text: "¿Dedicarías parte de tu tiempo libre a ayudar de forma voluntaria a personas de comunidades vulnerables?" },
+            { id: 96, text: "¿Cuando eliges tu ropa, decoras tu habitación o creas algo, tienes en cuenta la perfecta armonía de estilos y colores?" },
+            { id: 97, text: "¿Te gustaría trabajar como ingeniero profesional dirigiendo la planificación técnica de una central hidroeléctrica?" },
+            { id: 98, text: "¿Puedes definir con claridad qué es el PIB (Producto Interno Bruto) y te interesan los debates económicos actuales?" }
+        ];
+
+        const mmpi2Keys = {
+            L: [
+                { q: 41, val: false }, { q: 51, val: false }, { q: 68, val: false }, 
+                { q: 88, val: false }, { q: 105, val: false }, { q: 121, val: false },
+                { q: 137, val: false }, { q: 152, val: false }
+            ],
+            F: [
+                { q: 24, val: true }, { q: 32, val: true }, { q: 60, val: true }, 
+                { q: 83, val: true }, { q: 111, val: true }, { q: 125, val: true }, 
+                { q: 134, val: true }, { q: 250, val: true }, { q: 306, val: true }, 
+                { q: 350, val: true }
+            ],
+            K: [
+                { q: 33, val: true }, { q: 45, val: true }, { q: 98, val: true }, 
+                { q: 114, val: false }, { q: 144, val: true }, { q: 173, val: true }, 
+                { q: 205, val: true }, { q: 273, val: true }
+            ],
+            Hs: [
+                { q: 5, val: true }, { q: 8, val: false }, { q: 11, val: true }, 
+                { q: 18, val: true }, { q: 20, val: false }, { q: 28, val: true }, 
+                { q: 36, val: true }, { q: 40, val: true }, { q: 44, val: true }, 
+                { q: 53, val: true }, { q: 57, val: false }, { q: 59, val: true }, 
+                { q: 78, val: false }, { q: 87, val: true }, { q: 104, val: true },
+                { q: 238, val: true }, { q: 290, val: true }, { q: 310, val: true },
+                { q: 334, val: true }
+            ],
+            D: [
+                { q: 2, val: false }, { q: 3, val: false }, { q: 9, val: false }, 
+                { q: 10, val: false }, { q: 17, val: true }, { q: 31, val: true }, 
+                { q: 38, val: true }, { q: 39, val: true }, { q: 48, val: true }, 
+                { q: 56, val: true }, { q: 65, val: true }, { q: 66, val: true }, 
+                { q: 67, val: false }, { q: 71, val: true }, { q: 81, val: true }, 
+                { q: 82, val: false }, { q: 119, val: true }, { q: 138, val: true },
+                { q: 156, val: true }, { q: 162, val: true }, { q: 206, val: true }
+            ],
+            Hy: [
+                { q: 2, val: false }, { q: 3, val: false }, { q: 11, val: true }, 
+                { q: 15, val: true }, { q: 47, val: false }, { q: 148, val: true },
+                { q: 177, val: true }, { q: 241, val: false }, { q: 261, val: false }
+            ],
+            Pd: [
+                { q: 21, val: true }, { q: 35, val: true }, { q: 52, val: true }, 
+                { q: 54, val: true }, { q: 73, val: true }, { q: 80, val: true }, 
+                { q: 97, val: true }, { q: 120, val: true }, { q: 153, val: true },
+                { q: 163, val: true }, { q: 210, val: true }
+            ],
+            Mf_M: [
+                { q: 1, val: true }, { q: 7, val: true }, { q: 14, val: true }, 
+                { q: 4, val: false }, { q: 25, val: false }, { q: 103, val: false },
+                { q: 123, val: false }, { q: 161, val: false }, { q: 216, val: false }
+            ], // Varones
+            Mf_F: [
+                { q: 1, val: false }, { q: 7, val: false }, { q: 14, val: false }, 
+                { q: 4, val: true }, { q: 25, val: true }, { q: 103, val: true },
+                { q: 123, val: true }, { q: 161, val: true }, { q: 216, val: true }
+            ], // Mujeres
+            Pa: [
+                { q: 22, val: true }, { q: 42, val: true }, { q: 85, val: true }, 
+                { q: 90, val: true }, { q: 102, val: true }, { q: 125, val: true },
+                { q: 242, val: true }, { q: 266, val: true }, { q: 330, val: true }
+            ],
+            Pt: [
+                { q: 15, val: true }, { q: 31, val: true }, { q: 76, val: true },
+                { q: 108, val: true }, { q: 127, val: true }, { q: 166, val: true },
+                { q: 204, val: true }, { q: 254, val: true }, { q: 274, val: true }
+            ],
+            Sc: [
+                { q: 24, val: true }, { q: 32, val: true }, { q: 60, val: true }, 
+                { q: 83, val: true }, { q: 84, val: true }, { q: 134, val: true },
+                { q: 141, val: true }, { q: 159, val: true }, { q: 186, val: true },
+                { q: 218, val: true }, { q: 298, val: true }
+            ],
+            Ma: [
+                { q: 10, val: true }, { q: 61, val: true }, { q: 74, val: true },
+                { q: 110, val: true }, { q: 115, val: true }, { q: 130, val: true },
+                { q: 155, val: true }, { q: 182, val: false }, { q: 190, val: true }
+            ],
+            Si: [
+                { q: 46, val: true }, { q: 49, val: false }, { q: 64, val: true }, 
+                { q: 75, val: false }, { q: 124, val: true }, { q: 128, val: true },
+                { q: 178, val: true }, { q: 181, val: false }, { q: 214, val: true },
+                { q: 281, val: true }
+            ]
+        };
+
+        const mmpi2ScalesMetadata = {
+            L: { name: "Mentira (L)", desc: "Evalúa intentos de presentarse bajo una luz excesivamente favorable y virtuosa." },
+            F: { name: "Incoherencia (F)", desc: "Mide respuestas atípicas o extravagantes que sugieren confusión o desatención." },
+            K: { name: "Corrección (K)", desc: "Mide defensividad clínica y la tendencia a ocultar problemas de forma sutil." },
+            Hs: { name: "Hipocondría (Hs - 1)", desc: "Evalúa preocupaciones egocéntricas y quejas infundadas sobre la salud física." },
+            D: { name: "Depresión (D - 2)", desc: "Indica desánimo, pesimismo, desesperanza y sentimientos de inutilidad general." },
+            Hy: { name: "Histeria (Hy - 3)", desc: "Evalúa la tendencia a desarrollar síntomas físicos ante el estrés o conflicto psicológico." },
+            Pd: { name: "Desviación Psicopática (Pd - 4)", desc: "Mide falta de control de impulsos, rebeldía social y fricciones familiares." },
+            Mf: { name: "Masculinidad/Feminidad (Mf - 5)", desc: "Refleja intereses, actitudes y roles respecto a los géneros tradicionales." },
+            Pa: { name: "Paranoia (Pa - 6)", desc: "Mide suspicacia interpersonal, hipersensibilidad e ideas de persecución." },
+            Pt: { name: "Psicastenia (Pt - 7)", desc: "Evalúa obsesión, rituales compulsivos, miedos injustificados e indecisión." },
+            Sc: { name: "Esquizofrenia (Sc - 8)", desc: "Mide alienación socio-emocional, pensamientos extravagantes y aislamiento." },
+            Ma: { name: "Hipomanía (Ma - 9)", desc: "Indica exceso de energía motora, impulsividad y baja tolerancia a la frustración." },
+            Si: { name: "Introversión Social (Si - 0)", desc: "Evalúa la tendencia a la reserva social, timidez y preferencia por actividades solitarias." }
+        };
+
+        const mmpi2Norms = {
+            M: { // Varones
+                L: { mean: 3.8, sd: 1.9 }, F: { mean: 4.2, sd: 2.8 }, K: { mean: 13.5, sd: 4.1 },
+                Hs: { mean: 10.2, sd: 3.8 }, D: { mean: 16.5, sd: 4.5 }, Hy: { mean: 15.4, sd: 4.9 },
+                Pd: { mean: 14.1, sd: 3.9 }, Mf: { mean: 18.5, sd: 4.5 }, Pa: { mean: 9.2, sd: 2.8 },
+                Pt: { mean: 15.8, sd: 5.2 }, Sc: { mean: 14.5, sd: 5.5 }, Ma: { mean: 13.2, sd: 3.6 },
+                Si: { mean: 22.4, sd: 6.2 }
+            },
+            F: { // Mujeres
+                L: { mean: 4.1, sd: 2.0 }, F: { mean: 3.9, sd: 2.5 }, K: { mean: 13.0, sd: 4.0 },
+                Hs: { mean: 10.9, sd: 4.0 }, D: { mean: 17.8, sd: 4.8 }, Hy: { mean: 16.9, sd: 5.1 },
+                Pd: { mean: 13.6, sd: 3.8 }, Mf: { mean: 28.5, sd: 4.2 }, Pa: { mean: 9.8, sd: 3.0 },
+                Pt: { mean: 16.7, sd: 5.4 }, Sc: { mean: 13.9, sd: 5.3 }, Ma: { mean: 12.9, sd: 3.5 },
+                Si: { mean: 24.8, sd: 6.5 }
+            }
+        };
+
+        const chasideKeys = {
+            intereses: {
+                C: [98, 12, 64, 53, 85, 1, 78, 20, 71, 91],
+                H: [9, 34, 80, 25, 95, 67, 41, 74, 56, 89],
+                A: [21, 45, 96, 57, 28, 11, 5, 3, 81, 36],
+                S: [33, 92, 70, 8, 87, 62, 23, 44, 16, 52],
+                I: [75, 6, 19, 38, 60, 27, 83, 54, 47, 97],
+                D: [84, 31, 48, 73, 50, 65, 14, 37, 58, 24],
+                E: [77, 42, 88, 17, 93, 32, 68, 49, 35, 61]
+            },
+            aptitudes: {
+                C: [15, 51, 2, 46],
+                H: [63, 30, 72, 86],
+                A: [22, 39, 76, 82],
+                S: [69, 40, 29, 4],
+                I: [26, 59, 90, 10],
+                D: [13, 66, 18, 43],
+                E: [94, 7, 79, 55]
+            }
+        };
+
+        const chasideAreasMetadata = {
+            C: {
+                name: "Administrativas y Contables",
+                icon: "fa-calculator",
+                color: "#2e3e95",
+                desc: "Destacas en la planificación, organization, gestión de recursos y control financiero de organizaciones.",
+                careers: "Administración, Contabilidad, Economía, Negocios Internacionales, Mercadotecnia, Finanzas, Recursos Humanos."
+            },
+            H: {
+                name: "Humanísticas, Jurídicas y Sociales",
+                icon: "fa-gavel",
+                color: "#9f1239",
+                desc: "Vocación enfocada en el estudio del comportamiento humano, leyes, bienestar social, docencia y análisis histórico.",
+                careers: "Derecho, Psicología, Psicopedagogía, Sociología, Trabajo Social, Periodismo, Filosofía, Historia, Educación."
+            },
+            A: {
+                name: "Artísticas y Creativas",
+                icon: "fa-palette",
+                color: "#b45309",
+                desc: "Afinidad con la expresión estética, diseño de formas, composición visual o sonora y pensamiento divergente creativo.",
+                careers: "Diseño Gráfico, Arquitectura, Bellas Artes, Música, Diseño de Modas, Cinematografía, Publicidad, Actuación."
+            },
+            S: {
+                name: "Medicina y Ciencias de la Salud",
+                icon: "fa-heart-pulse",
+                color: "#047857",
+                desc: "Inclinación prioritaria hacia la preservación, cuidado, diagnóstico médico, rehabilitación física y biológica de personas.",
+                careers: "Medicina, Odontología, Enfermería, Nutrición, Fisioterapia, Veterinaria, Farmacología, Psicología Clínica."
+            },
+            I: {
+                name: "Ingeniería, Computación y Carreras Técnicas",
+                icon: "fa-laptop-code",
+                color: "#0369a1",
+                desc: "Pasión por el diseño de software, automatización, optimización industrial, cálculo estructural y la innovación con tecnología.",
+                careers: "Ingeniería en Sistemas, Inteligencia Artificial, Ingeniería Civil, Mecatrónica, Industrial, Ciberseguridad, Telecomunicaciones."
+            },
+            D: {
+                name: "Defensa y Seguridad Nacional",
+                icon: "fa-shield-halved",
+                color: "#3f2b96",
+                desc: "Interés por el orden social, la preservación civil de catástrofes, tácticas operativas y de defensa del Estado de Derecho.",
+                careers: "Criminología, Ciencias Militares, Aviación Militar, Aduanas y Puertos, Protección Civil, Seguridad Pública."
+            },
+            E: {
+                name: "Ciencias Exactas, Agrarias y de la Naturaleza",
+                icon: "fa-seedling",
+                color: "#15803d",
+                desc: "Enfoque en la investigación pura científica, análisis matemático, biotecnología, ecología, geología y optimización agrícola.",
+                careers: "Matemáticas Aplicadas, Física, Química Pura, Biología, Biotecnología, Agronomía, Ciencias Ambientales, Geología."
+            }
+        };
+
+        /* VARIABLES DE ESTADO GLOBAL */
+        let activeTestType = ''; // 'CHASIDE' o 'MMPI-2'
+        let currentStudent = { name: '', level: 'Universidad', gender: 'M', career: '', term: '', group: '', modality: 'Escolarizada', date: '', folio: '' };
+        let activeQuestions = [];
+        let answers = {};
+        let currentQuestionsPage = 0;
+        let questionsPerPage = 15;
+        let radarChartInstance = null;
+        let mmpiChartInstance = null;
+
+        function adaptFormToEducationalLevel(level) {
+            const labelCareer = document.getElementById('label-student-career');
+            const inputCareer = document.getElementById('student-career');
+            const labelTerm = document.getElementById('label-student-term');
+            const inputTerm = document.getElementById('student-term');
+            const labelModality = document.getElementById('label-student-modality');
+            const selectModality = document.getElementById('student-modality');
+
+            if (level === 'Preparatoria') {
+                if (labelCareer) labelCareer.innerHTML = 'Área / Especialidad <span class="text-slate-400 font-normal">(Opcional)</span>';
+                if (inputCareer) {
+                    inputCareer.placeholder = "Ej. Físico-Matemático, Químico-Biólogo, General";
+                    inputCareer.required = false; 
+                }
+                if (labelTerm) labelTerm.innerHTML = 'Semestre <span class="text-rose-500">*</span>';
+                if (inputTerm) inputTerm.placeholder = "Ej. 6to Semestre";
+                if (labelModality) labelModality.innerHTML = 'Turno <span class="text-rose-500">*</span>';
+                
+                if (selectModality) {
+                    selectModality.innerHTML = `
+                        <option value="Matutino">Matutino</option>
+                        <option value="Vespertino">Vespertino</option>
+                    `;
+                }
+            } else { // Universidad
+                if (labelCareer) labelCareer.innerHTML = 'Carrera / Licenciatura <span class="text-rose-500">*</span>';
+                if (inputCareer) {
+                    inputCareer.placeholder = "Ej. Psicología, Ingeniería Civil";
+                    inputCareer.required = true;
+                }
+                if (labelTerm) labelTerm.innerHTML = 'Cuatrimestre <span class="text-rose-500">*</span>';
+                if (inputTerm) inputTerm.placeholder = "Ej. 4to Cuatrimestre";
+                if (labelModality) labelModality.innerHTML = 'Modalidad <span class="text-rose-500">*</span>';
+                
+                if (selectModality) {
+                    selectModality.innerHTML = `
+                        <option value="Escolarizada">Escolarizada</option>
+                        <option value="Mixta">Mixta (Sabatina)</option>
+                    `;
+                }
+            }
+        }
+
+        /* ==========================================================================
+           2. VISTAS Y TOASTS
+           ========================================================================== */
+        function switchView(viewId) {
+            document.getElementById('view-student-welcome').classList.add('hidden');
+            document.getElementById('view-student-register').classList.add('hidden');
+            document.getElementById('view-test-wizard').classList.add('hidden');
+            document.getElementById('view-results').classList.add('hidden');
+            document.getElementById('view-admin-panel').classList.add('hidden');
+
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toast-icon');
+            const msgSpan = document.getElementById('toast-message');
+
+            if (isError) {
+                icon.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-rose-500 text-lg"></i>';
+                toast.classList.add('border-rose-500/50');
+                toast.classList.remove('border-brand-gold/50');
+            } else {
+                icon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>';
+                toast.classList.add('border-brand-gold/50');
+                toast.classList.remove('border-rose-500/50');
+            }
+
+            msgSpan.innerText = message;
+            toast.classList.remove('hidden', 'translate-y-10', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => toast.classList.add('hidden'), 300);
+            }, 3500);
+        }
+
+        function showCustomConfirm(title, message, isDangerous = true) {
+            return new Promise((resolve) => {
+                const modal = document.getElementById('confirm-modal');
+                const card = document.getElementById('confirm-card-container');
+                const icon = document.getElementById('confirm-modal-icon');
+                const titleEl = document.getElementById('confirm-modal-title');
+                const messageEl = document.getElementById('confirm-modal-message');
+                const acceptBtn = document.getElementById('btn-confirm-accept');
+                const cancelBtn = document.getElementById('btn-confirm-cancel');
+                
+                titleEl.innerText = title;
+                messageEl.innerText = message;
+                
+                if (isDangerous) {
+                    card.className = "bg-white rounded-2xl max-w-sm w-full border-t-8 border-rose-600 p-6 shadow-2xl relative";
+                    icon.className = "w-12 h-12 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center mx-auto text-xl";
+                    acceptBtn.className = "w-1/2 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs uppercase rounded-xl shadow-md transition-all";
+                } else {
+                    card.className = "bg-white rounded-2xl max-w-sm w-full border-t-8 border-brand-blue p-6 shadow-2xl relative";
+                    icon.className = "w-12 h-12 bg-brand-blue/10 text-brand-blue rounded-full flex items-center justify-center mx-auto text-xl";
+                    acceptBtn.className = "w-1/2 py-2.5 bg-brand-blue hover:bg-brand-600 text-white font-black text-xs uppercase rounded-xl shadow-md transition-all";
+                }
+                
+                modal.classList.remove('hidden');
+                
+                const cleanup = (value) => {
+                    modal.classList.add('hidden');
+                    acceptBtn.onclick = null;
+                    cancelBtn.onclick = null;
+                    resolve(value);
+                };
+                
+                acceptBtn.onclick = () => cleanup(true);
+                cancelBtn.onclick = () => cleanup(false);
+            });
+        }
+
+        /* ==========================================================================
+           3. FLUJO DE SELECCIÓN Y REGISTRO DE PRUEBAS
+           ========================================================================== */
+        function selectTestType(testType) {
+            activeTestType = testType;
+            const titleEl = document.getElementById('register-title');
+            const subtitleEl = document.getElementById('register-subtitle');
+
+            if (testType === 'CHASIDE') {
+                titleEl.innerText = "Registro: CHASIDE Vocacional";
+                subtitleEl.innerText = "Esta evaluación autónoma explorará tus inclinaciones vocacionales académicas.";
+                questionsPerPage = 14;
+            } else {
+                titleEl.innerText = "Registro: Cuestionario Completo MMPI-2";
+                subtitleEl.innerText = "Este inventario psicométrico completo de 370 reactivos evaluará tus rasgos clínicos.";
+                questionsPerPage = 15;
+            }
+
+            document.getElementById('student-form').reset();
+            
+            // Restablecer valores iniciales por defecto (Universidad)
+            const levelSelect = document.getElementById('student-level');
+            if (levelSelect) {
+                levelSelect.value = "Universidad";
+                adaptFormToEducationalLevel("Universidad");
+            }
+
+            switchView('student-register');
+        }
+
+        function startTest(event) {
+            event.preventDefault();
+
+            currentStudent.name = document.getElementById('student-name').value.trim();
+            currentStudent.level = document.getElementById('student-level').value;
+            currentStudent.career = document.getElementById('student-career').value.trim() || 'General';
+            currentStudent.gender = document.getElementById('student-gender').value;
+            currentStudent.term = document.getElementById('student-term').value.trim();
+            currentStudent.group = document.getElementById('student-group').value.trim();
+            currentStudent.modality = document.getElementById('student-modality').value;
+            
+            const rawDate = new Date();
+            currentStudent.date = rawDate.toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            
+            const prefix = activeTestType === 'CHASIDE' ? 'CH' : 'MM';
+            const hexToken = Math.floor(1000 + Math.random() * 9000).toString(16).toUpperCase();
+            currentStudent.folio = `${prefix}-2026-${hexToken}`;
+
+            const badgeLevel = currentStudent.level === 'Preparatoria' ? 'Prepa' : 'Univ';
+            document.getElementById('student-badge').innerHTML = `<i class="fa-solid fa-user-graduate text-brand-gold"></i> [${badgeLevel}] Estudiante: ${currentStudent.name} <span class="mx-1 text-slate-300">•</span> ${currentStudent.career} <span class="mx-1 text-slate-300">•</span> ${currentStudent.term} (${currentStudent.modality})`;
+
+            // Cargar preguntas correspondientes
+            activeQuestions = activeTestType === 'CHASIDE' ? chasideQuestions : mmpi2Questions;
+            document.getElementById('wizard-test-title').innerText = activeTestType === 'CHASIDE' ? 'Test Vocacional CHASIDE' : 'Inventario de Personalidad MMPI-2 Completo';
+
+            answers = {};
+            activeQuestions.forEach(q => answers[q.id] = null);
+            currentQuestionsPage = 0;
+
+            buildQuickPageSelector();
+            renderQuestionsPage();
+            switchView('test-wizard');
+            showToast("Registro correcto. Responde de forma sincera seleccionando SÍ/VERDADERO o NO/FALSO.");
+        }
+
+        /* ==========================================================================
+           4. ASISTENTE WIZARD CON PAGINACIÓN Y SELECCIÓN DIRECTA
+           ========================================================================== */
+        function buildQuickPageSelector() {
+            const select = document.getElementById('wizard-page-select');
+            select.innerHTML = '';
+            
+            const totalPages = Math.ceil(activeQuestions.length / questionsPerPage);
+            for (let i = 0; i < totalPages; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.innerText = `Sección ${i + 1}`;
+                select.appendChild(opt);
+            }
+        }
+
+        function updateQuickPageSelectorLabel() {
+            const select = document.getElementById('wizard-page-select');
+            select.value = currentQuestionsPage;
+            
+            const totalPages = Math.ceil(activeQuestions.length / questionsPerPage);
+            for (let i = 0; i < totalPages; i++) {
+                const startIndex = i * questionsPerPage;
+                const endIndex = Math.min(startIndex + questionsPerPage, activeQuestions.length);
+                let count = 0;
+                for (let k = startIndex; k < endIndex; k++) {
+                    if (answers[activeQuestions[k].id] !== null) count++;
+                }
+                const isDone = count === (endIndex - startIndex);
+                if (select.options[i]) {
+                    select.options[i].innerText = `Sección ${i + 1} (${count}/${endIndex - startIndex}) ${isDone ? '✓' : ''}`;
+                }
+            }
+        }
+
+        function jumpToPage(pageIndex) {
+            currentQuestionsPage = parseInt(pageIndex);
+            renderQuestionsPage();
+        }
+
+        function renderQuestionsPage() {
+            const grid = document.getElementById('questions-grid');
+            grid.innerHTML = '';
+
+            const startIndex = currentQuestionsPage * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, activeQuestions.length);
+
+            updateProgressBar();
+            updateQuickPageSelectorLabel();
+
+            for (let i = startIndex; i < endIndex; i++) {
+                const question = activeQuestions[i];
+                const card = document.createElement('div');
+                card.id = `q-card-${question.id}`;
+                
+                const ans = answers[question.id];
+                const isSiActive = ans === true;
+                const isNoActive = ans === false;
+
+                const textSi = activeTestType === 'CHASIDE' ? 'SÍ' : 'VERDADERO';
+                const textNo = activeTestType === 'CHASIDE' ? 'NO' : 'FALSO';
+
+                card.className = `flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 rounded-xl border transition-all ${
+                    ans !== null 
+                    ? 'bg-slate-50/50 border-slate-200' 
+                    : 'bg-white border-slate-100 shadow-sm'
+                }`;
+
+                card.innerHTML = `
+                    <div class="flex items-start space-x-3 max-w-[80%]">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-brand-blue/10 text-brand-blue font-bold text-xxs shrink-0 mt-0.5">${question.id}</span>
+                        <p class="text-xs text-slate-900 font-semibold leading-relaxed">${question.text}</p>
+                    </div>
+                    <div class="flex gap-2 mt-3 sm:mt-0 justify-end shrink-0">
+                        <button class="w-24 py-2 text-xs font-black rounded-lg uppercase tracking-wider transition-all duration-200 ${
+                            isSiActive 
+                            ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30 ring-2 ring-emerald-400' 
+                            : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                        }">${textSi}</button>
+                        <button class="w-24 py-2 text-xs font-black rounded-lg uppercase tracking-wider transition-all duration-200 ${
+                            isNoActive 
+                            ? 'bg-rose-600 text-white shadow-md shadow-rose-600/30 ring-2 ring-rose-400' 
+                            : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                        }">${textNo}</button>
+                    </div>
+                `;
+
+                // Agregar los event listeners directamente para mayor estabilidad
+                const buttons = card.querySelectorAll('button');
+                buttons[0].onclick = () => setAnswer(question.id, true);
+                buttons[1].onclick = () => setAnswer(question.id, false);
+
+                grid.appendChild(card);
+            }
+
+            const isLastPage = currentQuestionsPage >= Math.ceil(activeQuestions.length / questionsPerPage) - 1;
+            if (isLastPage) {
+                document.getElementById('btn-next-page').classList.add('hidden');
+                document.getElementById('btn-submit-test').classList.remove('hidden');
+            } else {
+                document.getElementById('btn-next-page').classList.remove('hidden');
+                document.getElementById('btn-submit-test').classList.add('hidden');
+            }
+
+            document.getElementById('btn-prev-page').disabled = currentQuestionsPage === 0;
+            document.getElementById('btn-prev-page').style.opacity = currentQuestionsPage === 0 ? '0.5' : '1';
+        }
+
+        function setAnswer(qId, val) {
+            answers[qId] = val;
+
+            const card = document.getElementById(`q-card-${qId}`);
+            if (card) {
+                card.className = "flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 rounded-xl border transition-all bg-slate-50/50 border-slate-200";
+                const buttons = card.querySelectorAll('button');
+                if (buttons.length === 2) {
+                    if (val === true) {
+                        buttons[0].className = "w-24 py-2 text-xs font-black rounded-lg uppercase tracking-wider transition-all duration-200 bg-emerald-600 text-white shadow-md shadow-emerald-600/30 ring-2 ring-emerald-400";
+                        buttons[1].className = "w-24 py-2 text-xs font-black rounded-lg uppercase tracking-wider transition-all duration-200 bg-slate-100 text-slate-600 hover:bg-slate-200";
+                    } else {
+                        buttons[0].className = "w-24 py-2 text-xs font-black rounded-lg uppercase tracking-wider transition-all duration-200 bg-slate-100 text-slate-600 hover:bg-slate-200";
+                        buttons[1].className = "w-24 py-2 text-xs font-black rounded-lg uppercase tracking-wider transition-all duration-200 bg-rose-600 text-white shadow-md shadow-rose-600/30 ring-2 ring-rose-400";
+                    }
+                }
+            }
+
+            let count = 0;
+            activeQuestions.forEach(q => { if(answers[q.id] !== null) count++; });
+            document.getElementById('answered-counter').innerText = `Contestadas: ${count} / ${activeQuestions.length}`;
+
+            updateProgressBar();
+            updateQuickPageSelectorLabel();
+        }
+
+        function updateProgressBar() {
+            let answered = 0;
+            activeQuestions.forEach(q => { if(answers[q.id] !== null) answered++; });
+            const percent = Math.round((answered / activeQuestions.length) * 100);
+            document.getElementById('test-progress-bar').style.width = `${percent}%`;
+        }
+
+        function changePage(direction) {
+            const startIndex = currentQuestionsPage * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, activeQuestions.length);
+            let missingAnswer = false;
+
+            for (let i = startIndex; i < endIndex; i++) {
+                if (answers[activeQuestions[i].id] === null) {
+                    missingAnswer = true;
+                    const badCard = document.getElementById(`q-card-${activeQuestions[i].id}`);
+                    if (badCard) {
+                        badCard.classList.add('border-rose-400', 'bg-rose-50/50');
+                        setTimeout(() => badCard.classList.remove('border-rose-400', 'bg-rose-50/50'), 1500);
+                    }
+                }
+            }
+
+            if (direction > 0 && missingAnswer) {
+                showToast("Por favor contesta todas las preguntas de esta página antes de continuar.", true);
+                return;
+            }
+
+            currentQuestionsPage += direction;
+            renderQuestionsPage();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ==========================================================================
+           5. PROCESAMIENTO Y CALIFICACIÓN DE RESULTADOS (CON ENLACE FIRESTORE)
+           ========================================================================== */
+        async function finishTest() {
+            let missingItems = [];
+            activeQuestions.forEach(q => {
+                if (answers[q.id] === null) {
+                    missingItems.push(q.id);
+                }
+            });
+
+            if (missingItems.length > 0) {
+                const firstMissingId = missingItems[0];
+                const itemIndex = activeQuestions.findIndex(q => q.id === firstMissingId);
+                const pageWithMissing = Math.floor(itemIndex / questionsPerPage);
+                currentQuestionsPage = pageWithMissing;
+                renderQuestionsPage();
+                
+                showToast(`Reactivos pendientes localizados en la Sección ${pageWithMissing + 1}. Favor de responderlos.`, true);
+                return;
+            }
+
+            let record = {
+                folio: currentStudent.folio,
+                name: currentStudent.name,
+                level: currentStudent.level,
+                gender: currentStudent.gender,
+                career: currentStudent.career,
+                term: currentStudent.term,
+                group: currentStudent.group,
+                modality: currentStudent.modality,
+                date: currentStudent.date,
+                type: activeTestType,
+                answers: answers
+            };
+
+            if (activeTestType === 'CHASIDE') {
+                record.percentages = calculateCHASIDEResults().percentages;
+                const diagnostic = getVocationalDiagnostic(record.percentages);
+                record.topInterest = diagnostic.maxIntArea;
+                record.topAptitude = diagnostic.maxAptArea;
+            } else {
+                record.mmpiResults = calculateMMPIResults();
+            }
+
+            // GUARDADO SEGURO EN FIRESTORE EN RUTA ESTRICTA
+            if (authenticatedUser) {
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'evaluaciones', record.folio);
+                    await setDoc(docRef, record);
+                } catch (e) {
+                    console.error("Fallo de guardado en la nube:", e);
+                    showToast("No se pudo subir a la nube. Guardado localmente.", true);
+                }
+            }
+
+            loadReportToView(record);
+
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#2e3e95', '#eeb407', '#131b46']
+            });
+
+            switchView('results');
+            loadAdminDatabase();
+            showToast("Prueba procesada exitosamente. Reporte membretado oficial generado.");
+        }
+
+        /* MÉTODOS DE CÁLCULO CHASIDE */
+        function calculateCHASIDEResults() {
+            let results = {
+                intereses: { C: 0, H: 0, A: 0, S: 0, I: 0, D: 0, E: 0 },
+                aptitudes: { C: 0, H: 0, A: 0, S: 0, I: 0, D: 0, E: 0 }
+            };
+
+            for (const area in chasideKeys.intereses) {
+                chasideKeys.intereses[area].forEach(qId => {
+                    if (answers[qId] === true) results.intereses[area]++;
+                });
+            }
+
+            for (const area in chasideKeys.aptitudes) {
+                chasideKeys.aptitudes[area].forEach(qId => {
+                    if (answers[qId] === true) results.aptitudes[area]++;
+                });
+            }
+
+            let percentages = { intereses: {}, aptitudes: {} };
+            for (const key in results.intereses) {
+                percentages.intereses[key] = Math.round((results.intereses[key] / 10) * 100);
+            }
+            for (const key in results.aptitudes) {
+                percentages.aptitudes[key] = Math.round((results.aptitudes[key] / 4) * 100);
+            }
+
+            return { raw: results, percentages: percentages };
+        }
+
+        function getVocationalDiagnostic(percentages) {
+            let maxIntArea = 'C', maxIntVal = -1;
+            let maxAptArea = 'C', maxAptVal = -1;
+
+            for (const area in percentages.intereses) {
+                if (percentages.intereses[area] > maxIntVal) {
+                    maxIntVal = percentages.intereses[area];
+                    maxIntArea = area;
+                }
+            }
+
+            for (const area in percentages.aptitudes) {
+                if (percentages.aptitudes[area] > maxAptVal) {
+                    maxAptVal = percentages.aptitudes[area];
+                    maxAptArea = area;
+                }
+            }
+
+            const areaIntMeta = chasideAreasMetadata[maxIntArea];
+            const areaAptMeta = chasideAreasMetadata[maxAptArea];
+
+            let opinionText = "";
+            if (maxIntArea === maxAptArea) {
+                opinionText = `Se ha identificado una consistencia vocacional óptima y sumamente coordinada. Tu mayor área de interés es de tipo <strong>${areaIntMeta.name} (${maxIntArea})</strong> con un ${maxIntVal}%, lo cual se acopla en perfecta sinergia con tu mayor aptitud cognitiva técnica dentro de la misma categoría de <strong>${areaAptMeta.name} (${maxAptArea})</strong> con un ${maxAptVal}%. Esto significa que disfrutas de forma natural de estas dinámicas profesionales y posees las competencias lógicas necesarias para afrontar los retos académicos correspondientes.`;
+            } else {
+                opinionText = `El reporte arroja un perfil vocacional enriquecido y de amplio espectro. Tu principal gusto vocacional o motivación se inclina hacia el área de <strong>${areaIntMeta.name} (${maxIntArea})</strong> (${maxIntVal}%), mientras que tus habilidades técnicas se concentran de mejor manera en la categoría de <strong>${areaAptMeta.name} (${maxAptArea})</strong> (${maxAptVal}%). Se sugeriría evaluar ofertas académicas interdisciplinarias.`;
+            }
+
+            return {
+                topInterestName: `${maxIntArea} - ${areaIntMeta.name}`,
+                topAptitudeName: `${maxAptArea} - ${areaAptMeta.name}`,
+                opinionText: opinionText,
+                maxIntArea: maxIntArea,
+                maxAptArea: maxAptArea
+            };
+        }
+
+        /* MÉTODOS DE CÁLCULO MMPI-2 */
+        function calculateMMPIResults() {
+            let raw = { L: 0, F: 0, K: 0, Hs: 0, D: 0, Hy: 0, Pd: 0, Mf: 0, Pa: 0, Pt: 0, Sc: 0, Ma: 0, Si: 0 };
+
+            for (const scale in mmpi2Keys) {
+                if (scale === 'Mf_M' || scale === 'Mf_F') continue;
+                mmpi2Keys[scale].forEach(item => {
+                    if (answers[item.q] === item.val) {
+                        raw[scale]++;
+                    }
+                });
+            }
+
+            const mfKey = currentStudent.gender === 'M' ? 'Mf_M' : 'Mf_F';
+            mmpi2Keys[mfKey].forEach(item => {
+                if (answers[item.q] === item.val) {
+                    raw.Mf++;
+                }
+            });
+
+            // Aplicar K-Corrección
+            let kCorrected = { ...raw };
+            kCorrected.Hs = Math.round(raw.Hs + (0.5 * raw.K));
+            kCorrected.Pd = Math.round(raw.Pd + (0.4 * raw.K));
+            kCorrected.Pt = Math.round(raw.Pt + (1.0 * raw.K));
+            kCorrected.Sc = Math.round(raw.Sc + (1.0 * raw.K));
+            kCorrected.Ma = Math.round(raw.Ma + (0.2 * raw.K));
+
+            // Convertir a T-Scores utilizando baremos por género
+            let tScores = {};
+            const norms = mmpi2Norms[currentStudent.gender];
+
+            for (const scale in raw) {
+                const mean = norms[scale].mean;
+                const sd = norms[scale].sd;
+                const valueToUse = ['Hs', 'Pd', 'Pt', 'Sc', 'Ma'].includes(scale) ? kCorrected[scale] : raw[scale];
+                
+                let t = Math.round(50 + 10 * ((valueToUse - mean) / sd));
+                if (t < 30) t = 30; 
+                if (t > 120) t = 120; 
+                tScores[scale] = t;
+            }
+
+            return { raw: raw, kCorrected: kCorrected, tScores: tScores };
+        }
+
+        /* ==========================================================================
+           6. GENERACIÓN Y RENDERIZADO DEL REPORTE MEMBRETADO
+           ========================================================================== */
+        function loadReportToView(record) {
+            document.getElementById('res-student-folio').innerText = record.folio;
+            document.getElementById('res-student-name').innerText = record.name;
+            document.getElementById('res-student-career').innerText = record.career || '-';
+            document.getElementById('res-student-term').innerText = record.term || '-';
+            document.getElementById('res-student-group').innerText = record.group;
+            document.getElementById('res-student-date').innerText = record.date;
+            document.getElementById('res-student-gender').innerText = record.gender === 'M' ? 'Masculino' : 'Femenino';
+            document.getElementById('res-student-modality').innerText = record.modality || 'Escolarizada';
+            document.getElementById('result-date').innerText = record.date;
+            document.getElementById('signature-student-name').innerText = record.name;
+
+            const resCareerLabel = document.getElementById('res-career-label');
+            const resTermLabel = document.getElementById('res-term-label');
+            const resModalityLabel = document.getElementById('res-modality-label');
+            const isPrepa = record.level === 'Preparatoria';
+
+            if (isPrepa) {
+                if (resCareerLabel) resCareerLabel.innerText = "Área / Especialidad";
+                if (resTermLabel) resTermLabel.innerText = "Semestre / Grupo";
+                if (resModalityLabel) resModalityLabel.innerText = "Turno / Género";
+            } else {
+                if (resCareerLabel) resCareerLabel.innerText = "Carrera / Licenciatura";
+                if (resTermLabel) resTermLabel.innerText = "Cuatrimestre / Grupo";
+                if (resModalityLabel) resModalityLabel.innerText = "Modalidad / Género";
+            }
+
+            if (record.type === 'CHASIDE') {
+                document.getElementById('res-test-subtitle').innerText = 'REPORTE OFICIAL DEL DIAGNÓSTICO PROFESIONAL "CHASIDE"';
+                document.getElementById('results-container-chaside').classList.remove('hidden');
+                document.getElementById('results-container-mmpi2').classList.add('hidden');
+
+                const diagnostic = getVocationalDiagnostic(record.percentages);
+                document.getElementById('res-top-interest').innerHTML = `${diagnostic.topInterestName} (${record.percentages.intereses[diagnostic.maxIntArea]}%)`;
+                document.getElementById('res-top-aptitude').innerHTML = `${diagnostic.topAptitudeName} (${record.percentages.aptitudes[diagnostic.maxAptArea]}%)`;
+                document.getElementById('res-psychological-opinion').innerHTML = diagnostic.opinionText;
+
+                fillCHASIDEResultsTableAndDetail(record.percentages, diagnostic);
+                setTimeout(() => renderCHASIDERadarChart(record.percentages), 200);
+
+            } else {
+                document.getElementById('res-test-subtitle').innerText = 'INVENTARIO MULTIFÁSICO DE PERSONALIDAD DE MINNESOTA (MMPI-2) COMPLETO';
+                document.getElementById('results-container-chaside').classList.add('hidden');
+                document.getElementById('results-container-mmpi2').classList.remove('hidden');
+
+                const isInvalid = record.mmpiResults.tScores.L >= 70 || record.mmpiResults.tScores.F >= 80 || record.mmpiResults.tScores.K >= 70;
+                const alertaValidez = document.getElementById('mmpi-validez-alerta');
+                if (isInvalid) {
+                    alertaValidez.classList.remove('hidden');
+                } else {
+                    alertaValidez.classList.add('hidden');
+                }
+
+                fillMMPITableAndOpinion(record.mmpiResults.tScores, record.mmpiResults.raw, record.mmpiResults.kCorrected);
+                setTimeout(() => renderMMPIProfileChart(record.mmpiResults.tScores), 200);
+            }
+        }
+
+        /* DIBUJO DE GRÁFICO Y TABLA CHASIDE */
+        function renderCHASIDERadarChart(percentages) {
+            const ctx = document.getElementById('resultsRadarChart').getContext('2d');
+            const labels = ['C (Admin)', 'H (Humanidades)', 'A (Artes)', 'S (Salud)', 'I (Tecnología)', 'D (Defensa)', 'E (Exactas)'];
+            
+            const dataIntereses = [
+                percentages.intereses.C, percentages.intereses.H, percentages.intereses.A, 
+                percentages.intereses.S, percentages.intereses.I, percentages.intereses.D, 
+                percentages.intereses.E
+            ];
+            const dataAptitudes = [
+                percentages.aptitudes.C, percentages.aptitudes.H, percentages.aptitudes.A, 
+                percentages.aptitudes.S, percentages.aptitudes.I, percentages.aptitudes.D, 
+                percentages.aptitudes.E
+            ];
+
+            if (radarChartInstance) radarChartInstance.destroy();
+
+            radarChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Intereses (%)',
+                            data: dataIntereses,
+                            backgroundColor: 'rgba(46, 62, 149, 0.2)',
+                            borderColor: '#2e3e95',
+                            borderWidth: 2,
+                            pointBackgroundColor: '#2e3e95'
+                        },
+                        {
+                            label: 'Aptitudes (%)',
+                            data: dataAptitudes,
+                            backgroundColor: 'rgba(238, 180, 7, 0.2)',
+                            borderColor: '#eeb407',
+                            borderWidth: 2,
+                            pointBackgroundColor: '#eeb407'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { stepSize: 20 }
+                        }
+                    }
+                }
+            });
+        }
+
+        function fillCHASIDEResultsTableAndDetail(percentages, diagnostic) {
+            const tbody = document.getElementById('metric-table-body');
+            tbody.innerHTML = '';
+
+            const keys = ['C', 'H', 'A', 'S', 'I', 'D', 'E'];
+            keys.forEach(k => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-slate-100 hover:bg-slate-50 transition-colors';
+                
+                const isTopInt = diagnostic.maxIntArea === k;
+                const isTopApt = diagnostic.maxAptArea === k;
+
+                tr.innerHTML = `
+                    <td class="py-2.5 font-bold text-slate-800 text-[11px] flex items-center gap-2">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full" style="background-color: ${chasideAreasMetadata[k].color}"></span>
+                        ${k} - ${chasideAreasMetadata[k].name}
+                    </td>
+                    <td class="py-2.5 text-center font-black ${isTopInt ? 'text-brand-blue scale-105' : 'text-slate-600'} text-[11px]">
+                        ${percentages.intereses[k]}%
+                    </td>
+                    <td class="py-2.5 text-center font-black ${isTopApt ? 'text-brand-gold scale-105' : 'text-slate-600'} text-[11px]">
+                        ${percentages.aptitudes[k]}%
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const detailGrid = document.getElementById('areas-detail-grid');
+            detailGrid.innerHTML = '';
+
+            const selectedAreas = Array.from(new Set([diagnostic.maxIntArea, diagnostic.maxAptArea]));
+            selectedAreas.forEach(areaCode => {
+                const meta = chasideAreasMetadata[areaCode];
+                const card = document.createElement('div');
+                card.className = 'p-4 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2';
+                card.innerHTML = `
+                    <div class="flex items-center space-x-2 text-brand-deepBlue font-black uppercase text-[11px]">
+                        <i class="fa-solid ${meta.icon}" style="color: ${meta.color}"></i>
+                        <span>ÁREA ${areaCode} - ${meta.name}</span>
+                    </div>
+                    <p class="text-slate-600 text-[11px] leading-relaxed">${meta.desc}</p>
+                    <div class="pt-1.5 border-t border-slate-100">
+                        <span class="block text-[10px] font-black uppercase text-brand-gold tracking-widest mb-1">Carreras Recomendadas:</span>
+                        <p class="text-slate-800 text-xxs leading-relaxed font-bold">${meta.careers}</p>
+                    </div>
+                `;
+                detailGrid.appendChild(card);
+            });
+        }
+
+        /* DIBUJO DE GRÁFICO Y TABLA MMPI-2 */
+        function renderMMPIProfileChart(tScores) {
+            const ctx = document.getElementById('resultsMMPIChart').getContext('2d');
+            const labels = ['L', 'F', 'K', 'Hs', 'D', 'Hy', 'Pd', 'Mf', 'Pa', 'Pt', 'Sc', 'Ma', 'Si'];
+            const dataValues = labels.map(label => tScores[label]);
+
+            const backgroundColors = dataValues.map((val, idx) => idx < 3 ? 'rgba(238, 180, 7, 0.65)' : 'rgba(46, 62, 149, 0.8)');
+            const borderColors = dataValues.map((val, idx) => idx < 3 ? '#eeb407' : '#2e3e95');
+
+            if (mmpiChartInstance) mmpiChartInstance.destroy();
+
+            const clinicalLinePlugin = {
+                id: 'clinicalLine',
+                afterDraw(chart) {
+                    const { ctx, chartArea: { left, right }, scales: { y } } = chart;
+                    if (y) {
+                        const yVal = y.getPixelForValue(65);
+                        ctx.save();
+                        ctx.strokeStyle = '#e11d48'; 
+                        ctx.lineWidth = 2.5;
+                        ctx.setLineDash([6, 6]);
+                        ctx.beginPath();
+                        ctx.moveTo(left, yVal);
+                        ctx.lineTo(right, yVal);
+                        ctx.stroke();
+                        ctx.restore();
+                    }
+                }
+            };
+
+            mmpiChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Puntuación T',
+                        data: dataValues,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 2,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            suggestedMin: 30,
+                            suggestedMax: 100,
+                            ticks: { stepSize: 10 }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                },
+                plugins: [clinicalLinePlugin]
+            });
+        }
+
+        function fillMMPITableAndOpinion(tScores, raw, kCorrected) {
+            const tbody = document.getElementById('mmpi-metrics-body');
+            tbody.innerHTML = '';
+
+            let highScales = [];
+
+            for (const key in tScores) {
+                const t = tScores[key];
+                const rawVal = raw[key];
+                const isK = ['Hs', 'Pd', 'Pt', 'Sc', 'Ma'].includes(key);
+                const kText = isK ? `Sí (Directa: ${rawVal} | Corregida: ${kCorrected[key]})` : 'No';
+
+                let clinicalRange = "Normal";
+                let badgeClass = "bg-slate-100 text-slate-700";
+
+                if (t >= 65) {
+                    clinicalRange = "Significativo Clínico (Alto)";
+                    badgeClass = "bg-rose-100 text-rose-800";
+                    if (['Hs', 'D', 'Hy', 'Pd', 'Mf', 'Pa', 'Pt', 'Sc', 'Ma', 'Si'].includes(key)) {
+                        highScales.push(key);
+                    }
+                } else if (t >= 60) {
+                    clinicalRange = "Tendencia Moderada";
+                    badgeClass = "bg-yellow-100 text-yellow-800";
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-slate-100 hover:bg-slate-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="py-2.5 px-3">
+                        <div class="font-bold text-slate-900 text-xs">${mmpi2ScalesMetadata[key].name}</div>
+                        <div class="text-[10px] text-slate-400 font-medium">${mmpi2ScalesMetadata[key].desc}</div>
+                    </td>
+                    <td class="py-2.5 px-3 text-center text-slate-800 text-xs">${rawVal}</td>
+                    <td class="py-2.5 px-3 text-center text-slate-500 text-[10px]">${kText}</td>
+                    <td class="py-2.5 px-3 text-center">
+                        <span class="inline-block px-2 py-1 rounded font-black text-xs ${badgeClass}">
+                            T: ${t}
+                        </span>
+                    </td>
+                    <td class="py-2.5 px-3 font-semibold text-xs text-slate-700">${clinicalRange}</td>
+                `;
+                tbody.appendChild(tr);
+            }
+
+            const opinionEl = document.getElementById('res-psychological-opinion');
+            if (highScales.length === 0) {
+                opinionEl.innerHTML = `Se ha completado el análisis del inventario completo de <strong>MMPI-2</strong>. La gráfica no muestra elevaciones con significación clínica directa (T &ge; 65). Esto sugiere un perfil de adaptación psicológica equilibrado, integrado y funcional, libre de desequilibrios somáticos, afectivos o de control cognitivo-emocional graves.`;
+            } else {
+                const listText = highScales.map(s => `<strong>${mmpi2ScalesMetadata[s].name}</strong>`).join(', ');
+                opinionEl.innerHTML = `El reporte diagnóstico de personalidad revela indicadores de tensión con significación clínica (T &ge; 65) en las escalas de: ${listText}. Las puntuaciones sugieren desajustes o defensas activas en la dinámica de personalidad del estudiante evaluado. Se aconseja agendar una sesión privada presencial de retroalimentación en el <strong>Departamento Psicopedagógico</strong> para profundizar en la interpretación.`;
+            }
+        }
+
+        /* ==========================================================================
+           7. GABINETE ADMINISTRATIVO (REGLA 2: PROCESADO IN-MEMORY)
+           ========================================================================== */
+        function openAdminModal() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+            document.getElementById('admin-pass').value = '';
+            document.getElementById('admin-pass').focus();
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        function submitAdminLogin(event) {
+            event.preventDefault();
+            const pass = document.getElementById('admin-pass').value.trim();
+            
+            if (pass === 'CEUT2026') {
+                closeAdminModal();
+                loadAdminDatabase();
+                switchView('admin-panel');
+                showToast("Acceso autorizado al Gabinete de Psicopedagogía.");
+            } else {
+                showToast("Contraseña incorrecta. Inténtalo nuevamente.", true);
+            }
+        }
+
+        function loadAdminDatabase() {
+            const tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = '';
+
+            document.getElementById('admin-counter').innerText = `Registros: ${cloudRecords.length}`;
+
+            if (cloudRecords.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="py-8 text-center text-slate-400 font-bold">
+                            <i class="fa-solid fa-folder-open text-3xl block mb-2 text-slate-300"></i>
+                            No hay diagnósticos registrados en el sistema.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            // REGLA 2: Ordenado inverso en memoria (client-side sorting)
+            const sortedRecords = [...cloudRecords].sort((a, b) => b.folio.localeCompare(a.folio));
+
+            sortedRecords.forEach(record => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors border-b border-slate-100';
+                
+                let badgeTest = record.type === 'CHASIDE' 
+                    ? '<span class="inline-block px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-extrabold text-[10px]">CHASIDE</span>'
+                    : '<span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-extrabold text-[10px]">MMPI-2</span>';
+
+                const recordLevel = record.level || 'Universidad';
+                const levelBadge = recordLevel === 'Preparatoria'
+                    ? '<span class="inline-block px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-extrabold text-[10px]">PREPA</span>'
+                    : '<span class="inline-block px-2 py-0.5 rounded bg-teal-100 text-teal-800 font-extrabold text-[10px]">UNIV</span>';
+
+                let topIndicators = '';
+                if (record.type === 'CHASIDE') {
+                    topIndicators = `Int: <strong>${record.topInterest}</strong> | Apt: <strong>${record.topAptitude}</strong>`;
+                } else if (record.mmpiResults) {
+                    let high = [];
+                    for (const sc in record.mmpiResults.tScores) {
+                        if (record.mmpiResults.tScores[sc] >= 65 && !['L','F','K'].includes(sc)) high.push(sc);
+                    }
+                    topIndicators = high.length > 0 ? `Clínico: ${high.join(', ')}` : "Perfil Adaptativo";
+                }
+
+                tr.innerHTML = `
+                    <td class="py-3.5 px-4 font-mono font-black text-brand-blue uppercase">${record.folio}</td>
+                    <td class="py-3.5 px-4 font-bold text-slate-900">${record.name}<br><span class="text-xxs text-slate-400 font-semibold">${record.career || 'N/A'}</span></td>
+                    <td class="py-3.5 px-4">${levelBadge}</td>
+                    <td class="py-3.5 px-4">${badgeTest}</td>
+                    <td class="py-3.5 px-4 font-semibold text-slate-600">${record.term || 'N/A'} • ${record.group}<br><span class="text-[10px] text-slate-400 uppercase font-bold">${record.modality || 'Escolarizada'}</span></td>
+                    <td class="py-3.5 px-4 text-slate-500 font-medium">${record.date}</td>
+                    <td class="py-3.5 px-4 font-bold text-slate-700 text-xs">${topIndicators}</td>
+                    <td class="py-3.5 px-4 text-center space-x-1 whitespace-nowrap">
+                        <button class="btn-view px-2.5 py-1.5 bg-brand-deepBlue text-white font-bold text-xxs rounded-lg hover:bg-brand-blue transition-all">
+                            <i class="fa-solid fa-file-invoice"></i> Ver Reporte
+                        </button>
+                        <button class="btn-delete px-2.5 py-1.5 bg-rose-100 hover:bg-rose-600 text-rose-600 hover:text-white font-bold text-xxs rounded-lg transition-all">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+
+                // Event Listeners directos para mayor seguridad
+                tr.querySelector('.btn-view').onclick = () => viewRecordFromAdmin(record.folio);
+                tr.querySelector('.btn-delete').onclick = () => deleteRecordFromAdmin(record.folio);
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterAdminTable() {
+            const query = document.getElementById('admin-search-input').value.toLowerCase();
+            const filterType = document.getElementById('admin-filter-type').value;
+            const rows = document.querySelectorAll('#admin-table-body tr');
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                const matchesSearch = text.includes(query);
+                const matchesType = filterType === "" || text.includes(filterType.toLowerCase());
+
+                if (matchesSearch && matchesType) {
+                    row.classList.remove('hidden');
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+        }
+
+        function viewRecordFromAdmin(folio) {
+            const found = cloudRecords.find(r => r.folio === folio);
+            if (found) {
+                loadReportToView(found);
+                switchView('results');
+                showToast(`Consultando el diagnóstico del folio ${folio}`);
+            }
+        }
+
+        async function deleteRecordFromAdmin(folio) {
+            const confirmed = await showCustomConfirm(
+                "¿Eliminar Registro?",
+                `¿Estás seguro de que deseas eliminar permanentemente el registro del Folio: ${folio}?`
+            );
+            if (confirmed && authenticatedUser) {
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'evaluaciones', folio);
+                    await deleteDoc(docRef);
+                    showToast("Registro eliminado con éxito.", true);
+                } catch (e) {
+                    console.error("Fallo al eliminar en Firestore:", e);
+                    showToast("No se pudo eliminar de la base de datos.", true);
+                }
+            }
+        }
+
+        async function clearAdminDatabase() {
+            const confirmed = await showCustomConfirm(
+                "¿Vaciar Base de Datos?",
+                "¿ATENCIÓN: Estás completamente seguro de vaciar de forma permanente el historial completo de diagnósticos de la plataforma? Esta acción no se puede deshacer."
+            );
+            if (confirmed && authenticatedUser) {
+                try {
+                    showToast("Procesando solicitudes de eliminación...", false);
+                    for (const record of cloudRecords) {
+                        const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'evaluaciones', record.folio);
+                        await deleteDoc(docRef);
+                    }
+                    showToast("Base de datos de gabinete vaciada correctamente.", true);
+                } catch (e) {
+                    console.error("Fallo de eliminación masiva:", e);
+                    showToast("Error parcial al vaciar base de datos.", true);
+                }
+            }
+        }
+
+        function exportTestsToCSV() {
+            if (cloudRecords.length === 0) {
+                showToast("No existen registros disponibles para exportar.", true);
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Folio,Alumno,Nivel Educativo,Carrera/Area,Test,Cuatrimestre/Semestre,Grupo,Modalidad/Turno,Fecha de Evaluacion,Top Interes / Clinico\n";
+
+            cloudRecords.forEach(r => {
+                let info = '';
+                if (r.type === 'CHASIDE') {
+                    info = `Int: ${r.topInterest} - Apt: ${r.topAptitude}`;
+                } else if (r.mmpiResults) {
+                    let high = [];
+                    for (const s in r.mmpiResults.tScores) {
+                        if (r.mmpiResults.tScores[s] >= 65 && !['L','F','K'].includes(s)) high.push(s);
+                    }
+                    info = high.length > 0 ? high.join(' ') : 'Perfil Adaptativo';
+                }
+                const levelStr = r.level || 'Universidad';
+                const row = `"${r.folio}","${r.name}","${levelStr}","${r.career || 'N/A'}","${r.type}","${r.term || 'N/A'}","${r.group}","${r.modality || 'Escolarizada'}","${r.date}","${info}"`;
+                csvContent += row + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Historial_Gabinete_CEUT.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("Archivo CSV exportado exitosamente.");
+        }
+
+        function lookupFolioResult() {
+            const input = document.getElementById('lookup-folio-input').value.trim().toUpperCase();
+            if (!input) {
+                showToast("Por favor ingresa un Folio de Seguimiento válido.", true);
+                return;
+            }
+
+            const found = cloudRecords.find(r => r.folio === input);
+
+            if (found) {
+                loadReportToView(found);
+                switchView('results');
+                showToast("Reporte oficial encontrado.");
+            } else {
+                showToast("No se localizó ningún registro oficial con el Folio proporcionado.", true);
+            }
+        }
+
+        function restartTestFlow() {
+            activeTestType = '';
+            switchView('student-welcome');
+        }
+
+        function triggerFormalPrint() {
+            window.print();
+        }
+
+        /* Exponer funciones al scope global para que los elementos HTML puedan acceder */
+        window.switchView = switchView;
+        window.selectTestType = selectTestType;
+        window.startTest = startTest;
+        window.lookupFolioResult = lookupFolioResult;
+        window.openAdminModal = openAdminModal;
+        window.closeAdminModal = closeAdminModal;
+        window.submitAdminLogin = submitAdminLogin;
+        window.changePage = changePage;
+        window.jumpToPage = jumpToPage;
+        window.finishTest = finishTest;
+        window.triggerFormalPrint = triggerFormalPrint;
+        window.restartTestFlow = restartTestFlow;
+        window.clearAdminDatabase = clearAdminDatabase;
+        window.exportTestsToCSV = exportTestsToCSV;
+        window.filterAdminTable = filterAdminTable;
+        window.adaptFormToEducationalLevel = adaptFormToEducationalLevel;
+    </script>
+</body>
+</html>
