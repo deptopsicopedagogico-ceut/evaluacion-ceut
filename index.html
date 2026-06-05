@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Psicopedagógico - CHASIDE & MMPI-2 Completo</title>
     
-    <!-- Favicon Oficial para todas las pestañas y plataformas de navegadores -->
+    <!-- Favicon Oficial -->
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2">
     <link rel="shortcut icon" type="image/png" href="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2">
     <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2">
@@ -13,7 +13,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts (Inter & Playfair Display) -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght=0,600;0,700;1,600&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons -->
@@ -22,7 +22,7 @@
     <!-- Chart.js para perfiles clínicos y vocacionales -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Canvas Confetti para graduación/completado -->
+    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <script>
@@ -35,9 +35,9 @@
                     },
                     colors: {
                         brand: {
-                            blue: '#2e3e95',    // Azul institucional principal
-                            gold: '#eeb407',    // Oro institucional principal
-                            deepBlue: '#131b46', // Azul de profundidad nocturno
+                            blue: '#2e3e95',    
+                            gold: '#eeb407',    
+                            deepBlue: '#131b46', 
                             lightGold: '#fffdf0',
                             50: '#f4f5fa',
                             100: '#e9ebf5',
@@ -206,9 +206,7 @@
             <div class="flex justify-between h-20">
                 <div class="flex items-center space-x-4 cursor-pointer" onclick="restartTestFlow()">
                     <div class="relative w-14 h-14 rounded-xl overflow-hidden shadow-lg border-2 border-brand-gold bg-white p-1 hover:scale-110 transition-transform duration-300 flex items-center justify-center">
-                        <!-- Logo Principal desde Google Drive -->
                         <img id="logo-header" src="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2" class="w-full h-full object-contain" alt="Logo CEUT" onerror="this.style.display='none'; document.getElementById('fallback-svg-header').classList.remove('hidden');">
-                        <!-- Fallback Vectorial si falla la carga de la imagen -->
                         <svg id="fallback-svg-header" class="hidden w-10 h-10 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                         </svg>
@@ -240,20 +238,17 @@
 
         <!-- VISTA 1: INICIO - SELECCIÓN DE TEST -->
         <section id="view-student-welcome" class="max-w-4xl mx-auto space-y-8 view-transition">
-            
             <div class="bg-white rounded-2xl border-t-8 border-brand-gold shadow-2xl p-0 relative overflow-hidden institutional-card">
                 <div class="relative h-48 flex items-center p-6 text-center text-white justify-center overflow-hidden bg-gradient-to-br from-brand-deepBlue via-brand-blue to-brand-deepBlue border-b-2 border-brand-gold/20">
                     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-gold/15 via-transparent to-transparent"></div>
                     <div class="relative z-10 flex flex-col items-center gap-2">
                         <div class="logo-premium-glow relative w-20 h-20 bg-white p-1.5 rounded-2xl border border-brand-gold shadow-2xl flex items-center justify-center">
-                            <!-- Logo Principal desde Google Drive -->
                             <img src="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2" class="w-full h-full object-contain" alt="Logo CEUT" onerror="this.style.display='none'; document.getElementById('fallback-svg-banner').classList.remove('hidden');">
-                            <!-- Fallback Vectorial -->
                             <svg id="fallback-svg-banner" class="hidden w-12 h-12 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                             </svg>
                         </div>
-                        <h1 class="text-2xl font-black tracking-tight mt-2 uppercase">Evaluaciones Psicométricas Oficiales</h1>
+                        <h1 class="text-2xl font-black tracking-tight mt-2 uppercase font-serif">Evaluaciones Psicométricas Oficiales</h1>
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xxs font-black bg-brand-gold text-brand-900 uppercase tracking-widest shadow-md">
                             Departamento Psicopedagógico CEUT
                         </span>
@@ -331,7 +326,6 @@
             <div class="bg-white rounded-2xl border-t-8 border-brand-gold shadow-2xl p-6 sm:p-10 institutional-card">
                 <div class="flex items-center space-x-4 border-b border-slate-100 pb-4 mb-6">
                     <div class="w-12 h-12 rounded-xl bg-slate-50 p-1 flex items-center justify-center border border-slate-100 shrink-0">
-                        <!-- Logo desde Google Drive -->
                         <img src="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2" class="w-full h-full object-contain" alt="Logo" onerror="this.style.display='none';">
                     </div>
                     <div>
@@ -356,7 +350,7 @@
                             <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
                                 <i class="fa-regular fa-user text-brand-blue"></i>
                             </span>
-                            <input type="text" id="student-name" required class="block w-full pl-10 pr-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm" placeholder="Ej. Sofía Alejandra Pérez Gómez">
+                            <input type="text" id="student-name" required class="block w-full pl-10 pr-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm uppercase" placeholder="EJ. SOFIA ALEJANDRA PEREZ GOMEZ">
                         </div>
                     </div>
 
@@ -371,7 +365,7 @@
                         <!-- Campo dinámico Carrera o Especialidad -->
                         <div>
                             <label id="lbl-student-career" class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2" for="student-career">Carrera / Licenciatura <span class="text-rose-500">*</span></label>
-                            <input type="text" id="student-career" required class="block w-full px-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm" placeholder="Ej. Psicología Industrial">
+                            <input type="text" id="student-career" required class="block w-full px-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm uppercase" placeholder="EJ. PSICOLOGIA INDUSTRIAL">
                         </div>
                     </div>
 
@@ -379,12 +373,12 @@
                         <!-- Cuatrimestre o Semestre -->
                         <div>
                             <label id="lbl-student-period" class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2" for="student-period">Cuatrimestre <span class="text-rose-500">*</span></label>
-                            <input type="text" id="student-period" required class="block w-full px-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm" placeholder="Ej. 3er Cuatrimestre">
+                            <input type="text" id="student-period" required class="block w-full px-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm uppercase" placeholder="EJ. 3ER CUATRIMESTRE">
                         </div>
                         <!-- Grupo -->
                         <div>
                             <label class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2" for="student-group">Grupo <span class="text-rose-500">*</span></label>
-                            <input type="text" id="student-group" required class="block w-full px-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm" placeholder="Ej. A">
+                            <input type="text" id="student-group" required class="block w-full px-3 py-3.5 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent transition-all text-sm font-semibold placeholder-slate-400 shadow-sm uppercase" placeholder="EJ. A">
                         </div>
                         <!-- Modalidad o Turno -->
                         <div>
@@ -413,7 +407,6 @@
             
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-slate-100 mb-6 gap-3">
                 <div class="flex items-center space-x-3 w-full sm:w-auto">
-                    <!-- Logo oficial en la cabecera del test activo -->
                     <div class="w-10 h-10 rounded-lg bg-slate-50 border border-slate-200 p-1 flex items-center justify-center hover:scale-110 transition-all shrink-0">
                         <img src="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2" class="w-full h-full object-contain" alt="Logo" onerror="this.style.display='none'; document.getElementById('fallback-svg-wizard').classList.remove('hidden');">
                         <svg id="fallback-svg-wizard" class="hidden w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -441,25 +434,115 @@
                 <div id="test-progress-bar" class="bg-gradient-to-r from-brand-blue to-brand-gold h-full w-0 transition-all duration-300 rounded-full"></div>
             </div>
 
-            <!-- Contenedor de Preguntas -->
-            <div id="questions-grid" class="space-y-4 min-h-300"></div>
-
-            <!-- Botones de Navegación del Asistente -->
-            <div class="flex items-center justify-between mt-8 pt-6 border-t border-slate-100">
-                <button id="btn-prev-page" onclick="changePage(-1)" class="px-5 py-2.5 text-sm font-bold rounded-xl text-slate-700 border border-slate-200 hover:bg-slate-50 active:scale-95 transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-chevron-left"></i>
-                    <span>Anterior</span>
-                </button>
-                <div class="flex gap-2">
-                    <button id="btn-next-page" onclick="changePage(1)" class="px-6 py-2.5 text-sm font-bold rounded-xl text-white bg-brand-blue hover:bg-brand-600 active:scale-95 transition-all flex items-center gap-2 hover-shine-btn">
-                        <span>Siguiente</span>
-                        <i class="fa-solid fa-chevron-right text-brand-gold"></i>
-                    </button>
-                    <button id="btn-submit-test" onclick="finishTest()" class="hidden px-6 py-2.5 text-sm font-bold rounded-xl text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 transition-all flex items-center gap-2 shadow-lg hover-shine-btn">
-                        <i class="fa-solid fa-circle-check text-brand-gold animate-pulse"></i>
-                        <span>Finalizar Prueba</span>
-                    </button>
+            <!-- Tarjeta de Búsqueda de Resultados por Folio -->
+            <div class="bg-white rounded-2xl border border-brand-gold/20 shadow-xl p-6 institutional-card">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-3 bg-brand-gold/10 text-brand-gold rounded-xl shrink-0">
+                            <i class="fa-solid fa-file-invoice text-2xl animate-pulse"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-black text-brand-deepBlue uppercase tracking-tight">¿Ya realizaste tu test?</h3>
+                            <p class="text-xs text-slate-500 font-semibold">Ingresa tu Folio Único para descargar o visualizar tus resultados directamente.</p>
+                        </div>
+                    </div>
+                    <div class="w-full sm:w-auto flex flex-col sm:flex-row gap-2 shrink-0">
+                        <input type="text" id="lookup-folio-input" class="px-4 py-2.5 border border-slate-200 rounded-xl text-xs font-bold uppercase placeholder-slate-400 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:bg-white transition-all shadow-inner" placeholder="EJ. CH-2026-F89B2">
+                        <button onclick="lookupFolioResult()" class="px-5 py-2.5 bg-brand-gold hover:bg-yellow-500 active:scale-95 text-brand-deepBlue font-black text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-md hover-shine-btn">
+                            <i class="fa-solid fa-magnifying-glass"></i> Consultar
+                        </button>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- VISTA ADICIONAL: SELECCIÓN DE ÁREAS DE FORMACIÓN -->
+        <section id="view-area-selection" class="hidden max-w-3xl mx-auto space-y-6 view-transition">
+            <div class="bg-white rounded-2xl border-t-8 border-brand-gold shadow-2xl p-6 sm:p-10 institutional-card">
+                <div class="flex items-center space-x-4 border-b border-slate-100 pb-4 mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-slate-50 p-1 flex items-center justify-center border border-slate-200 shrink-0">
+                        <img src="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2" class="w-full h-full object-contain" alt="Logo">
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-black text-brand-deepBlue uppercase tracking-tight">Áreas de Formación de Preferencia</h2>
+                        <p class="text-xs text-slate-500 font-semibold mt-1">Paso indispensable para finalizar tu proceso psicopedagógico.</p>
+                    </div>
+                </div>
+
+                <!-- Caja de Condiciones Institucionales -->
+                <div class="bg-amber-50 border-l-4 border-brand-gold p-4 rounded-r-xl text-slate-800 space-y-2 mb-6">
+                    <h4 class="text-xs font-black text-brand-deepBlue uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-brand-gold"></i> Condiciones de Asignación Obligatoria
+                    </h4>
+                    <p class="text-xxs font-medium leading-relaxed">
+                        Deberás elegir tres opciones de áreas de formación, ordenándolas según tu estricta preferencia personal. Las áreas se asignarán considerando los siguientes criterios:
+                    </p>
+                    <ul class="list-disc pl-5 text-[10px] font-semibold space-y-1">
+                        <li>La asignación se realizará considerando la disponibilidad de espacios en cada grupo.</li>
+                        <li>En caso de que tu primera opción elegida se encuentre saturada, se te asignará de forma automática tu segunda opción.</li>
+                        <li>Si la segunda opción también estuviera llena, se procederá a asignarte la tercera opción seleccionada.</li>
+                        <li><strong>Importante:</strong> Si alguna de las áreas de formación no reúne el número mínimo de alumnos requerido para su operación, dicha área no será aperturada.</li>
+                    </ul>
+                </div>
+
+                <form id="area-selection-form" onsubmit="submitAreaSelection(event)" class="space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Dropdown Opción 1 -->
+                        <div>
+                            <label class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2">Primera Opción <span class="text-rose-500">*</span></label>
+                            <select id="sel-area-1" required class="block w-full px-3 py-3 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold text-xs font-bold shadow-sm">
+                                <option value="">-- Seleccionar --</option>
+                                <option value="Contabilidad">Contabilidad</option>
+                                <option value="Administración">Administración</option>
+                                <option value="Comunicación">Comunicación</option>
+                                <option value="Diseño Gráfico">Diseño Gráfico</option>
+                                <option value="Turismo">Turismo</option>
+                                <option value="Intervención en Educación Obligatoria">Intervención en Educación Obligatoria</option>
+                                <option value="Higiene y Salud Comunitaria">Higiene y Salud Comunitaria</option>
+                            </select>
+                        </div>
+
+                        <!-- Dropdown Opción 2 -->
+                        <div>
+                            <label class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2">Segunda Opción <span class="text-rose-500">*</span></label>
+                            <select id="sel-area-2" required class="block w-full px-3 py-3 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold text-xs font-bold shadow-sm">
+                                <option value="">-- Seleccionar --</option>
+                                <option value="Contabilidad">Contabilidad</option>
+                                <option value="Administración">Administración</option>
+                                <option value="Comunicación">Comunicación</option>
+                                <option value="Diseño Gráfico">Diseño Gráfico</option>
+                                <option value="Turismo">Turismo</option>
+                                <option value="Intervención en Educación Obligatoria">Intervención en Educación Obligatoria</option>
+                                <option value="Higiene y Salud Comunitaria">Higiene y Salud Comunitaria</option>
+                            </select>
+                        </div>
+
+                        <!-- Dropdown Opción 3 -->
+                        <div>
+                            <label class="block text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-2">Tercera Opción <span class="text-rose-500">*</span></label>
+                            <select id="sel-area-3" required class="block w-full px-3 py-3 border border-slate-200 rounded-xl bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-gold text-xs font-bold shadow-sm">
+                                <option value="">-- Seleccionar --</option>
+                                <option value="Contabilidad">Contabilidad</option>
+                                <option value="Administración">Administración</option>
+                                <option value="Comunicación">Comunicación</option>
+                                <option value="Diseño Gráfico">Diseño Gráfico</option>
+                                <option value="Turismo">Turismo</option>
+                                <option value="Intervención en Educación Obligatoria">Intervención en Educación Obligatoria</option>
+                                <option value="Higiene y Salud Comunitaria">Higiene y Salud Comunitaria</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 flex gap-3">
+                        <button type="button" onclick="switchView('test-wizard')" class="w-1/3 py-4 text-xs font-bold rounded-xl text-slate-700 bg-slate-100 hover:bg-slate-200 transition-all uppercase tracking-wider font-sans">
+                            Volver al Test
+                        </button>
+                        <button type="submit" class="w-2/3 bg-brand-blue hover:bg-brand-600 text-white py-4 px-6 rounded-xl font-bold shadow-xl transition-all text-xs flex items-center justify-center gap-2 border-b-4 border-brand-deepBlue uppercase tracking-wider hover-shine-btn">
+                            <span>Finalizar Evaluación</span>
+                            <i class="fa-solid fa-cloud-arrow-up text-brand-gold"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </section>
 
@@ -515,7 +598,7 @@
                 </div>
 
                 <!-- DATOS GENERALES DEL ESTUDIANTE (UNIVERSIDAD / PREPARATORIA) -->
-                <div class="relative z-10 space-y-8">
+                <div class="relative z-10 space-y-6">
                     <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 grid grid-cols-1 sm:grid-cols-4 gap-4">
                         <div>
                             <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block">Alumno Evaluado</span>
@@ -537,16 +620,40 @@
                         </div>
                     </div>
 
+                    <!-- NUEVA SECCIÓN DE PRIORIDAD DE ÁREAS DE FORMACIÓN -->
+                    <div class="bg-brand-lightGold border border-brand-gold/30 rounded-xl p-5 print-no-break">
+                        <h4 class="text-xs font-black text-brand-deepBlue uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-list-ol text-brand-gold"></i> Prioridad de Áreas de Formación Seleccionadas
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="bg-white/90 p-3 rounded-lg border border-slate-200">
+                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-wider block">1ª Opción (Prioridad Alta)</span>
+                                <span id="res-area-opt1" class="text-xs font-black text-slate-900 block mt-1">-</span>
+                            </div>
+                            <div class="bg-white/90 p-3 rounded-lg border border-slate-200">
+                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-wider block">2ª Opción (Respaldo 1)</span>
+                                <span id="res-area-opt2" class="text-xs font-bold text-slate-800 block mt-1">-</span>
+                            </div>
+                            <div class="bg-white/90 p-3 rounded-lg border border-slate-200">
+                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-wider block">3ª Opción (Respaldo 2)</span>
+                                <span id="res-area-opt3" class="text-xs font-bold text-slate-800 block mt-1">-</span>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-slate-500 mt-3 italic leading-relaxed">
+                            * Nota de asignación: La distribución final se realiza considerando la disponibilidad de espacios en cada área. Si la primera opción se satura, se valida la segunda, y así sucesivamente. Áreas que no reúnan el mínimo de alumnos requerido no serán aperturadas.
+                        </p>
+                    </div>
+
                     <!-- SECCIÓN DINÁMICA DE RESULTADOS -->
                     <!-- RESULTADOS CHASIDE -->
-                    <div id="results-container-chaside" class="space-y-8 hidden animate-fade-in">
+                    <div id="results-container-chaside" class="space-y-6 hidden animate-fade-in">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div class="border-l-4 border-brand-blue bg-brand-50/50 rounded-r-xl p-4 border border-slate-100">
                                 <span class="text-xs text-brand-blue block font-black uppercase tracking-wider mb-1">
                                     <i class="fa-solid fa-heart mr-1.5 text-rose-500"></i> Área de Mayor Interés
                                 </span>
                                 <h3 id="res-top-interest" class="text-base font-black text-slate-900 font-serif">Calculando...</h3>
-                                <p class="text-xxs text-slate-600 mt-2 font-medium leading-relaxed">Representa tu inclinación, afinidad, gusto y deseo natural hacia este tipo de actividades y estudios.</p>
+                                <p class="text-xxs text-slate-600 mt-2 font-medium leading-relaxed">Representa tu inclinación, afinidad, gusto y deseo natural hacia este tipo de actividades y de estudios.</p>
                             </div>
                             
                             <div class="border-l-4 border-brand-gold bg-brand-lightGold/40 rounded-r-xl p-4 border border-slate-100">
@@ -561,7 +668,7 @@
                         <!-- Gráfico & Métrica de CHASIDE -->
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start print-no-break">
                             <div class="md:col-span-7 border border-slate-200 rounded-xl p-4 bg-white shadow-sm flex flex-col justify-between">
-                                <h3 class="text-xs font-black text-brand-deepBlue mb-4 uppercase tracking-wider flex items-center gap-2">
+                                <h3 class="text-xs font-black text-brand-deepBlue mb-4 uppercase tracking-wider flex items-center gap-2 font-serif">
                                     <i class="fa-solid fa-chart-line text-brand-gold"></i> Gráfica de Afinidades Radar (%)
                                 </h3>
                                 <div class="relative h-250 w-full flex justify-center items-center">
@@ -571,7 +678,7 @@
 
                             <div class="md:col-span-5 border border-slate-200 rounded-xl p-4 bg-white shadow-sm flex flex-col justify-between">
                                 <div>
-                                    <h3 class="text-xs font-black text-brand-deepBlue mb-4 uppercase tracking-wider flex items-center gap-2">
+                                    <h3 class="text-xs font-black text-brand-deepBlue mb-4 uppercase tracking-wider flex items-center gap-2 font-serif">
                                         <i class="fa-solid fa-list-ol text-brand-gold"></i> Tabla de Métricas
                                     </h3>
                                     <div class="overflow-x-auto">
@@ -592,7 +699,7 @@
 
                         <!-- Descripciones de las Áreas -->
                         <div class="border border-slate-200 rounded-xl p-6 bg-slate-50 space-y-4 print-no-break">
-                            <h3 class="text-sm font-black text-brand-deepBlue uppercase tracking-wider border-b border-slate-200 pb-2">
+                            <h3 class="text-sm font-black text-brand-deepBlue uppercase tracking-wider border-b border-slate-200 pb-2 font-serif">
                                 <i class="fa-solid fa-circle-question text-brand-gold"></i> Significado de Áreas Recomendadas
                             </h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs" id="areas-detail-grid"></div>
@@ -600,7 +707,7 @@
                     </div>
 
                     <!-- RESULTADOS MMPI-2 -->
-                    <div id="results-container-mmpi2" class="space-y-8 hidden animate-fade-in">
+                    <div id="results-container-mmpi2" class="space-y-6 hidden animate-fade-in">
                         <!-- Alertas de Validez Clínica -->
                         <div id="mmpi-validez-alerta" class="hidden border-l-4 border-rose-500 bg-rose-50 p-4 rounded-r-xl">
                             <h4 class="text-xs font-black text-rose-800 uppercase flex items-center gap-2">
@@ -611,9 +718,9 @@
                             </p>
                         </div>
 
-                        <!-- Perfil MMPI-2 Gráfico de Barras / Líneas (Gabinete Profesional) -->
+                        <!-- Perfil MMPI-2 Gráfico de Barras / Líneas -->
                         <div class="border border-slate-200 rounded-xl p-4 bg-white shadow-sm print-no-break">
-                            <h3 class="text-xs font-black text-brand-deepBlue mb-4 uppercase tracking-wider flex items-center gap-2">
+                            <h3 class="text-xs font-black text-brand-deepBlue mb-4 uppercase tracking-wider flex items-center gap-2 font-serif">
                                 <i class="fa-solid fa-chart-bar text-brand-gold"></i> Perfil Clínico de Personalidad MMPI-2 (Puntuaciones T)
                             </h3>
                             <div class="relative h-350 w-full flex justify-center items-center">
@@ -646,7 +753,7 @@
 
                     <!-- Interpretación Psicopedagógica Común -->
                     <div class="border border-slate-200 rounded-xl p-6 bg-white space-y-3 print-no-break font-sans">
-                        <h3 class="text-sm font-black text-brand-deepBlue uppercase tracking-wider border-b border-slate-200 pb-2 flex items-center gap-2">
+                        <h3 class="text-sm font-black text-brand-deepBlue uppercase tracking-wider border-b border-slate-200 pb-2 flex items-center gap-2 font-serif">
                             <i class="fa-solid fa-user-doctor text-brand-blue"></i> Dictamen y Sugerencia del Gabinete Psicopedagógico
                         </h3>
                         <p id="res-psychological-opinion" class="text-xs text-slate-700 leading-relaxed font-medium">
@@ -654,20 +761,13 @@
                         </p>
                     </div>
 
-                    <!-- SECCIÓN DE FIRMAS DE GALA -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-12 text-center text-xs print-no-break">
-                        <div class="space-y-2">
-                            <div class="border-b border-slate-400 mx-auto w-4/5 h-12"></div>
-                            <span class="block font-black text-brand-deepBlue uppercase">Firma del Alumno Evaluado</span>
-                            <span id="signature-student-name" class="block text-xxs text-slate-400 uppercase font-semibold">Cargando...</span>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="border-b border-slate-400 mx-auto w-4/5 h-12 flex items-end justify-center">
-                                <span class="text-[9px] font-mono text-slate-300 italic">CEUT-GABINETE-VAL</span>
-                            </div>
-                            <span class="block font-black text-brand-deepBlue uppercase">Sello y Firma Psicopedagógica</span>
-                            <span class="block text-xxs text-slate-400 uppercase font-semibold">Servicio de Orientación CEUT</span>
-                        </div>
+                    <!-- SECCIÓN DE CONFIRMACIÓN DE REGISTRO DIGITAL (SIN FIRMAS MANUALES) -->
+                    <div class="border-t border-slate-200 pt-6 mt-8 text-center text-xs print-no-break">
+                        <p class="text-slate-500 font-semibold">Este informe es de carácter oficial, privado y estrictamente confidencial.</p>
+                        <p class="font-extrabold text-brand-deepBlue mt-1 uppercase text-sm tracking-wider">
+                            Evaluación Realizada por: <span id="signature-student-name" class="text-brand-blue">-</span>
+                        </p>
+                        <p class="text-[10px] text-slate-400 font-mono mt-1">Sello Digital CEUT-GABINETE • Conexión Segura Autenticada • Verificado Electrónicamente</p>
                     </div>
 
                 </div>
@@ -680,8 +780,7 @@
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-100 gap-4">
                     <div class="flex items-center space-x-3">
                         <div class="w-12 h-12 rounded-xl bg-slate-50 p-1 flex items-center justify-center border border-slate-200 shrink-0">
-                            <!-- Logo en panel administrativo -->
-                            <img src="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2" class="w-full h-full object-contain" alt="Logo" onerror="this.style.display='none';">
+                            <img src="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2" class="w-full h-full object-contain" alt="Logo">
                         </div>
                         <div>
                             <h2 class="text-xl font-black text-brand-deepBlue uppercase tracking-tight font-serif">Gabinete de Psicopedagogía</h2>
@@ -717,7 +816,7 @@
                         </select>
                     </div>
                     <div class="text-right text-xs font-black text-brand-blue flex items-center justify-end">
-                        <span id="admin-counter" class="bg-brand-blue/10 px-3 py-1.5 rounded-full border border-brand-blue/20">Registros: 0</span>
+                        <span id="admin-counter" class="bg-brand-blue/10 px-3 py-1.5 rounded-full border border-brand-blue/20 font-mono">Registros: 0</span>
                     </div>
                 </div>
 
@@ -729,9 +828,9 @@
                                 <th class="py-3.5 px-4">Folio</th>
                                 <th class="py-3.5 px-4">Estudiante</th>
                                 <th class="py-3.5 px-4">Especialidad/Carrera</th>
-                                <th class="py-3.5 px-4">Grado / Modalidad</th>
-                                <th class="py-3.5 px-4">Nivel</th>
-                                <th class="py-3.5 px-4">Top/Clínico</th>
+                                <th class="py-3.5 px-4">Grado / Turno</th>
+                                <th class="py-3.5 px-4">Nivel / Test</th>
+                                <th class="py-3.5 px-4">Preferencias Áreas (1ª, 2ª, 3ª)</th>
                                 <th class="py-3.5 px-4 text-center">Acciones</th>
                             </tr>
                         </thead>
@@ -744,7 +843,7 @@
     </main>
 
     <!-- MODAL DE CONTROL DE ACCESO (ADMIN LOGIN) -->
-    <div id="admin-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div id="admin-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
         <div class="bg-white rounded-2xl max-w-sm w-full border-t-8 border-brand-blue p-6 shadow-2xl relative">
             <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -753,7 +852,7 @@
                 <div class="w-12 h-12 bg-brand-blue/10 text-brand-blue rounded-full flex items-center justify-center mx-auto text-xl">
                     <i class="fa-solid fa-lock"></i>
                 </div>
-                <h3 class="text-md font-black text-brand-deepBlue uppercase tracking-tight">Acceso Privado</h3>
+                <h3 class="text-md font-black text-brand-deepBlue uppercase tracking-tight font-serif">Acceso Privado</h3>
                 <p class="text-xs text-slate-500 font-semibold">Exclusivo para el personal del Departamento Psicopedagógico.</p>
             </div>
             
@@ -805,9 +904,6 @@
         import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        /* ==========================================================================
-           CONEXIÓN INTEGRADA DIRECTA DE FIREBASE DE FORMA SEGURA
-           ========================================================================== */
         const firebaseConfig = {
             apiKey: "AIzaSyAIxkLoBVa6CLb91CFgWu2pSBQSmCMQqLI",
             authDomain: "ceut-portal-psicopedagogico.firebaseapp.com",
@@ -820,9 +916,8 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const appId = "ceut-prod"; // Identificador estable para tu plataforma
+        const appId = "ceut-prod"; 
 
-        // Bases de datos en tiempo real de Firebase
         let cloudRecords = [];
         let authenticatedUser = null;
 
@@ -833,7 +928,7 @@
                     try {
                         await signInWithCustomToken(auth, __initial_auth_token);
                     } catch (tokenErr) {
-                        console.warn("Fallo de token personalizado. Intentando sesión anónima como respaldo...", tokenErr);
+                        console.warn("Fallo de token personalizado. Intentando sesión anónima...", tokenErr);
                         await signInAnonymously(auth);
                     }
                 } else {
@@ -846,7 +941,7 @@
         };
         initAuth();
 
-        // Listener en tiempo real (onSnapshot) para sincronización de gabinete multiusuario
+        // Listener en tiempo real (onSnapshot) para sincronización de gabinete
         onAuthStateChanged(auth, (user) => {
             authenticatedUser = user;
             if (user) {
@@ -865,9 +960,10 @@
         });
 
         /* ==========================================================================
-           1. ARRAYS DE PREGUNTAS Y CONFIGURACIONES OFICIALES (MMPI-2 DE 370 ÍTEMS)
+           1. ARRAYS DE PREGUNTAS Y CONFIGURACIONES OFICIALES
            ========================================================================== */
         
+        // Cuestionario MMPI-2 de 370 Reactivos Completos
         const mmpi2Questions = [
             { id: 1, text: "Me gustan las revistas de mecánica." },
             { id: 2, text: "Tengo buen apetito." },
@@ -951,7 +1047,7 @@
             { id: 80, text: "A veces, cuando no me siento bien, estoy irritable." },
             { id: 81, text: "La mayor parte del tiempo me parece haber hecho algo malo." },
             { id: 82, text: "Soy feliz la mayor parte del tiempo." },
-            { id: 83, text: "Veo a mi alrededor cosas, animales o personas que otros no ven." },
+            { id: 83, text: "Veo a mi alrededor cosas, animals o personas que otros no ven." },
             { id: 84, text: "Parece como si tuviera la cabeza llena de ruidos." },
             { id: 85, text: "Alguien me la tiene jurada o me odia." },
             { id: 86, text: "Nunca he hecho algo peligroso sólo por el placer de hacerlo." },
@@ -1068,7 +1164,7 @@
             { id: 197, text: "Siento que el esfuerzo y el trabajo duro siempre rinden frutos al final." },
             { id: 198, text: "A veces me siento incomprendido por las personas más cercanas a mí." },
             { id: 199, text: "Creo que me gustaría el trabajo de coordinador de logística internacional." },
-            { id: 200, text: "Me gusta experimenter con nuevas recetas o ingredientes en la cocina." },
+            { id: 200, text: "Me gusta experimentar con nuevas recetas o ingredientes en la cocina." },
             { id: 201, text: "Siento que soy capaz de adaptarme a situaciones extremas de estrés." },
             { id: 202, text: "A veces me cuesta trabajo confiar en las intenciones de los extraños." },
             { id: 203, text: "Creo que me gustaría el trabajo de diseñador de interiores." },
@@ -1222,7 +1318,7 @@
             { id: 351, text: "Creo que me gustaría el trabajo de programador de bases de datos." },
             { id: 352, text: "Me gusta pintar con óleos o técnicas abstractas." },
             { id: 353, text: "Siento que mis opiniones son escuchadas con sumo respeto." },
-            { id: 354, text: "A veces me asaltan pensamientos trágicos de forma involuntaria." },
+            { id: 354, text: "A veces me asultan de forma recurrente ideas pesimistas involuntarias." },
             { id: 355, text: "Creo que me gustaría el trabajo de perito de terrenos rurales." },
             { id: 356, text: "Me gusta leer bitácoras o crónicas de exploradores lejanos." },
             { id: 357, text: "Siento que mi capacidad de adaptación me ha salvado de caer en tristeza extrema." },
@@ -1241,6 +1337,7 @@
             { id: 370, text: "A veces me asalta una profunda congoja sin una explicación racional aparente." }
         ];
 
+        // CHASIDE de 98 Ítems
         const chasideQuestions = [
             { id: 1, text: "¿Aceptarías trabajar escribiendo artículos en la sección económica de un diario?" },
             { id: 2, text: "¿Te ofrecerías para organizar la despedida de soltero/a de uno de tus amigos?" },
@@ -1336,7 +1433,7 @@
             { id: 92, text: "¿Ante un llamado solidario, te ofrecerías inmediatamente para cuidar a un enfermo convaleciente?" },
             { id: 93, text: "¿Te atrae investigar sobre los misterios de la astrofísica o del cosmos?" },
             { id: 94, text: "¿El trabajo analítico e individual te resulta más rápido y efectivo que el trabajo de debate grupal?" },
-            { id: 95, text: "¿Dedicarías parte de tu tiempo libre a ayudar de forma voluntaria a personas de comunidades vulnerables?" },
+            { id: 95, text: "Would you spend part of your free time volunteering in vulnerable communities?" },
             { id: 96, text: "¿Cuando eliges tu ropa, decoras tu habitación o creas algo, tienes en cuenta la perfecta armonía de estilos y colores?" },
             { id: 97, text: "¿Te gustaría trabajar como ingeniero profesional dirigiendo la planificación técnica de una central hidroeléctrica?" },
             { id: 98, text: "¿Puedes definir con claridad qué es el PIB (Producto Interno Bruto) y te interesan los debates económicos actuales?" }
@@ -1392,12 +1489,12 @@
                 { q: 1, val: true }, { q: 7, val: true }, { q: 14, val: true }, 
                 { q: 4, val: false }, { q: 25, val: false }, { q: 103, val: false },
                 { q: 123, val: false }, { q: 161, val: false }, { q: 216, val: false }
-            ], // Varones
+            ], 
             Mf_F: [
                 { q: 1, val: false }, { q: 7, val: false }, { q: 14, val: false }, 
                 { q: 4, val: true }, { q: 25, val: true }, { q: 103, val: true },
                 { q: 123, val: true }, { q: 161, val: true }, { q: 216, val: true }
-            ], // Mujeres
+            ], 
             Pa: [
                 { q: 22, val: true }, { q: 42, val: true }, { q: 85, val: true }, 
                 { q: 90, val: true }, { q: 102, val: true }, { q: 125, val: true },
@@ -1444,14 +1541,14 @@
         };
 
         const mmpi2Norms = {
-            M: { // Varones
+            M: { 
                 L: { mean: 3.8, sd: 1.9 }, F: { mean: 4.2, sd: 2.8 }, K: { mean: 13.5, sd: 4.1 },
                 Hs: { mean: 10.2, sd: 3.8 }, D: { mean: 16.5, sd: 4.5 }, Hy: { mean: 15.4, sd: 4.9 },
                 Pd: { mean: 14.1, sd: 3.9 }, Mf: { mean: 18.5, sd: 4.5 }, Pa: { mean: 9.2, sd: 2.8 },
                 Pt: { mean: 15.8, sd: 5.2 }, Sc: { mean: 14.5, sd: 5.5 }, Ma: { mean: 13.2, sd: 3.6 },
                 Si: { mean: 22.4, sd: 6.2 }
             },
-            F: { // Mujeres
+            F: { 
                 L: { mean: 4.1, sd: 2.0 }, F: { mean: 3.9, sd: 2.5 }, K: { mean: 13.0, sd: 4.0 },
                 Hs: { mean: 10.9, sd: 4.0 }, D: { mean: 17.8, sd: 4.8 }, Hy: { mean: 16.9, sd: 5.1 },
                 Pd: { mean: 13.6, sd: 3.8 }, Mf: { mean: 28.5, sd: 4.2 }, Pa: { mean: 9.8, sd: 3.0 },
@@ -1534,8 +1631,8 @@
         };
 
         /* VARIABLES DE ESTADO GLOBAL */
-        let activeTestType = ''; // 'CHASIDE' o 'MMPI-2'
-        let currentStudent = { name: '', level: 'UNIVERSIDAD', gender: 'M', career: '', period: '', group: '', mode: '', date: '', folio: '' };
+        let activeTestType = ''; 
+        let currentStudent = { name: '', level: 'UNIVERSIDAD', gender: 'M', career: '', period: '', group: '', mode: '', date: '', folio: '', opt1: '', opt2: '', opt3: '' };
         let activeQuestions = [];
         let answers = {};
         let currentQuestionsPage = 0;
@@ -1550,6 +1647,7 @@
             document.getElementById('view-student-welcome').classList.add('hidden');
             document.getElementById('view-student-register').classList.add('hidden');
             document.getElementById('view-test-wizard').classList.add('hidden');
+            document.getElementById('view-area-selection').classList.add('hidden');
             document.getElementById('view-results').classList.add('hidden');
             document.getElementById('view-admin-panel').classList.add('hidden');
 
@@ -1620,9 +1718,6 @@
             });
         }
 
-        /* ==========================================================================
-           3. ADAPTACIÓN FORMULARIO: UNIVERSIDAD VS PREPARATORIA
-           ========================================================================== */
         function adaptFormToEducationalLevel(level) {
             const lblCareer = document.getElementById('lbl-student-career');
             const txtCareer = document.getElementById('student-career');
@@ -1635,11 +1730,11 @@
 
             if (level === 'UNIVERSIDAD') {
                 lblCareer.innerHTML = 'Carrera / Licenciatura <span class="text-rose-500">*</span>';
-                txtCareer.placeholder = 'Ej. Ingeniería en Sistemas';
+                txtCareer.placeholder = 'EJ. INGENIERIA EN SISTEMAS';
                 txtCareer.required = true;
                 
                 lblPeriod.innerHTML = 'Cuatrimestre <span class="text-rose-500">*</span>';
-                txtPeriod.placeholder = 'Ej. 3er Cuatrimestre';
+                txtPeriod.placeholder = 'EJ. 3ER CUATRIMESTRE';
 
                 lblMode.innerHTML = 'Modalidad <span class="text-rose-500">*</span>';
                 
@@ -1654,11 +1749,11 @@
                 selMode.appendChild(optMix);
             } else {
                 lblCareer.innerHTML = 'Área de Especialidad <span class="text-slate-400">(Opcional)</span>';
-                txtCareer.placeholder = 'Ej. Físico-Matemático';
+                txtCareer.placeholder = 'EJ. FISICO-MATEMATICO';
                 txtCareer.required = false;
 
                 lblPeriod.innerHTML = 'Semestre <span class="text-rose-500">*</span>';
-                txtPeriod.placeholder = 'Ej. 6to Semestre';
+                txtPeriod.placeholder = 'EJ. 6TO SEMESTRE';
 
                 lblMode.innerHTML = 'Turno <span class="text-rose-500">*</span>';
                 
@@ -1690,7 +1785,7 @@
             }
 
             document.getElementById('student-form').reset();
-            adaptFormToEducationalLevel('UNIVERSIDAD'); // default
+            adaptFormToEducationalLevel('UNIVERSIDAD'); 
             switchView('student-register');
         }
 
@@ -1728,9 +1823,6 @@
             showToast("Registro correcto. Responde de forma sincera seleccionando SÍ/VERDADERO o NO/FALSO.");
         }
 
-        /* ==========================================================================
-           4. ASISTENTE WIZARD CON PAGINACIÓN Y SELECCIÓN DIRECTA
-           ========================================================================== */
         function buildQuickPageSelector() {
             const select = document.getElementById('wizard-page-select');
             select.innerHTML = '';
@@ -1894,10 +1986,8 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* ==========================================================================
-           5. PROCESAMIENTO Y CALIFICACIÓN DE RESULTADOS
-           ========================================================================== */
-        async function finishTest() {
+        /* VINCULACIÓN AL NUEVO PASO DE SELECCIÓN DE ÁREAS */
+        function goToAreaSelection() {
             let missingItems = [];
             activeQuestions.forEach(q => {
                 if (answers[q.id] === null) {
@@ -1916,6 +2006,42 @@
                 return;
             }
 
+            // Limpiar dropdowns anteriores de forma segura
+            const s1 = document.getElementById('sel-area-1');
+            const s2 = document.getElementById('sel-area-2');
+            const s3 = document.getElementById('sel-area-3');
+            if (s1) s1.value = "";
+            if (s2) s2.value = "";
+            if (s3) s3.value = "";
+
+            switchView('area-selection');
+        }
+
+        function submitAreaSelection(event) {
+            event.preventDefault();
+            
+            const opt1 = document.getElementById('sel-area-1') ? document.getElementById('sel-area-1').value : '';
+            const opt2 = document.getElementById('sel-area-2') ? document.getElementById('sel-area-2').value : '';
+            const opt3 = document.getElementById('sel-area-3') ? document.getElementById('sel-area-3').value : '';
+
+            if (!opt1 || !opt2 || !opt3) {
+                showToast("Debes seleccionar las tres opciones de áreas de formación requeridas.", true);
+                return;
+            }
+
+            if (opt1 === opt2 || opt1 === opt3 || opt2 === opt3) {
+                showToast("No puedes seleccionar la misma área de formación en diferentes prioridades. Deben ser tres opciones distintas.", true);
+                return;
+            }
+
+            currentStudent.opt1 = opt1;
+            currentStudent.opt2 = opt2;
+            currentStudent.opt3 = opt3;
+
+            finishTest();
+        }
+
+        async function finishTest() {
             let record = {
                 folio: currentStudent.folio,
                 level: currentStudent.level,
@@ -1927,7 +2053,10 @@
                 mode: currentStudent.mode,
                 date: currentStudent.date,
                 type: activeTestType,
-                answers: answers
+                answers: answers,
+                opt1: currentStudent.opt1,
+                opt2: currentStudent.opt2,
+                opt3: currentStudent.opt3
             };
 
             if (activeTestType === 'CHASIDE') {
@@ -1939,7 +2068,7 @@
                 record.mmpiResults = calculateMMPIResults();
             }
 
-            // GUARDADO SEGURO EN FIRESTORE EN RUTA ESTRICTA
+            // Guardado directo en Firestore (Ruta estricta)
             if (authenticatedUser) {
                 try {
                     const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'evaluaciones', record.folio);
@@ -1964,11 +2093,10 @@
             showToast("Prueba procesada exitosamente. Reporte membretado oficial generado.");
         }
 
-        /* MÉTODOS DE CÁLCULO CHASIDE */
         function calculateCHASIDEResults() {
             let results = {
                 intereses: { C: 0, H: 0, A: 0, S: 0, I: 0, D: 0, E: 0 },
-                aptitudes: { C: 0, h: 0, A: 0, S: 0, I: 0, D: 0, E: 0 }
+                aptitudes: { C: 0, H: 0, A: 0, S: 0, I: 0, D: 0, E: 0 }
             };
 
             for (const area in chasideKeys.intereses) {
@@ -2033,7 +2161,6 @@
             };
         }
 
-        /* MÉTODOS DE CÁLCULO MMPI-2 */
         function calculateMMPIResults() {
             let raw = { L: 0, F: 0, K: 0, Hs: 0, D: 0, Hy: 0, Pd: 0, Mf: 0, Pa: 0, Pt: 0, Sc: 0, Ma: 0, Si: 0 };
 
@@ -2079,59 +2206,86 @@
             return { raw: raw, kCorrected: kCorrected, tScores: tScores };
         }
 
-        /* ==========================================================================
-           6. GENERACIÓN Y RENDERIZADO DEL REPORTE MEMBRETADO
-           ========================================================================== */
-        function loadReportToView(record) {
-            document.getElementById('res-student-folio').innerText = record.folio;
-            document.getElementById('res-student-name').innerText = record.name;
-            document.getElementById('res-student-career').innerText = record.career;
-            document.getElementById('res-student-period').innerText = record.period;
-            document.getElementById('res-student-group').innerText = record.group;
-            document.getElementById('res-student-mode').innerText = record.mode;
-            document.getElementById('res-student-date').innerText = record.date;
-            document.getElementById('result-date').innerText = record.date;
-            document.getElementById('signature-student-name').innerText = record.name;
+        // Función de utilidad para asignación segura de texto
+        function safeSetText(id, value) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.innerText = value;
+            } else {
+                console.warn(`Elemento con ID "${id}" no encontrado en el DOM.`);
+            }
+        }
 
-            // Adaptar etiquetas de hoja membretada según nivel educativo
+        function loadReportToView(record) {
+            safeSetText('res-student-folio', record.folio);
+            safeSetText('res-student-name', record.name);
+            safeSetText('res-student-career', record.career);
+            safeSetText('res-student-period', record.period);
+            safeSetText('res-student-group', record.group);
+            safeSetText('res-student-mode', record.mode);
+            safeSetText('res-student-date', record.date);
+            safeSetText('result-date', record.date);
+            safeSetText('signature-student-name', record.name);
+
+            // Cargar prioridades de áreas seleccionadas de forma segura
+            safeSetText('res-area-opt1', record.opt1 || 'No seleccionado');
+            safeSetText('res-area-opt2', record.opt2 || 'No seleccionado');
+            safeSetText('res-area-opt3', record.opt3 || 'No seleccionado');
+
+            // Adaptar etiquetas
             const resLblCareer = document.getElementById('res-lbl-career');
             const resLblPeriod = document.getElementById('res-lbl-period');
             const resLblMode = document.getElementById('res-lbl-mode');
 
             if (record.level === 'PREPARATORIA') {
-                resLblCareer.innerText = 'Especialidad / Bachillerato';
-                resLblPeriod.innerText = 'Semestre / Grupo';
-                resLblMode.innerText = 'Turno';
+                if (resLblCareer) resLblCareer.innerText = 'Especialidad / Bachillerato';
+                if (resLblPeriod) resLblPeriod.innerText = 'Semestre / Grupo';
+                if (resLblMode) resLblMode.innerText = 'Turno';
             } else {
-                resLblCareer.innerText = 'Carrera / Licenciatura';
-                resLblPeriod.innerText = 'Cuatrimestre / Grupo';
-                resLblMode.innerText = 'Modalidad';
+                if (resLblCareer) resLblCareer.innerText = 'Carrera / Licenciatura';
+                if (resLblPeriod) resLblPeriod.innerText = 'Cuatrimestre / Grupo';
+                if (resLblMode) resLblMode.innerText = 'Modalidad';
             }
 
             if (record.type === 'CHASIDE') {
-                document.getElementById('res-test-subtitle').innerText = 'REPORTE OFICIAL DEL DIAGNÓSTICO PROFESIONAL "CHASIDE"';
-                document.getElementById('results-container-chaside').classList.remove('hidden');
-                document.getElementById('results-container-mmpi2').classList.add('hidden');
+                const subtitle = document.getElementById('res-test-subtitle');
+                if (subtitle) subtitle.innerText = 'REPORTE OFICIAL DEL DIAGNÓSTICO PROFESIONAL "CHASIDE"';
+                
+                const containerChaside = document.getElementById('results-container-chaside');
+                const containerMmpi = document.getElementById('results-container-mmpi2');
+                if (containerChaside) containerChaside.classList.remove('hidden');
+                if (containerMmpi) containerMmpi.classList.add('hidden');
 
                 const diagnostic = getVocationalDiagnostic(record.percentages);
-                document.getElementById('res-top-interest').innerHTML = `${diagnostic.topInterestName} (${record.percentages.intereses[diagnostic.maxIntArea]}%)`;
-                document.getElementById('res-top-aptitude').innerHTML = `${diagnostic.topAptitudeName} (${record.percentages.aptitudes[diagnostic.maxAptArea]}%)`;
-                document.getElementById('res-psychological-opinion').innerHTML = diagnostic.opinionText;
+                const interestEl = document.getElementById('res-top-interest');
+                if (interestEl) interestEl.innerHTML = `${diagnostic.topInterestName} (${record.percentages.intereses[diagnostic.maxIntArea]}%)`;
+                
+                const aptitudeEl = document.getElementById('res-top-aptitude');
+                if (aptitudeEl) aptitudeEl.innerHTML = `${diagnostic.topAptitudeName} (${record.percentages.aptitudes[diagnostic.maxAptArea]}%)`;
+                
+                const opinionEl = document.getElementById('res-psychological-opinion');
+                if (opinionEl) opinionEl.innerHTML = diagnostic.opinionText;
 
                 fillCHASIDEResultsTableAndDetail(record.percentages, diagnostic);
                 setTimeout(() => renderCHASIDERadarChart(record.percentages), 200);
 
             } else {
-                document.getElementById('res-test-subtitle').innerText = 'INVENTARIO MULTIFÁSICO DE PERSONALIDAD DE MINNESOTA (MMPI-2) COMPLETO';
-                document.getElementById('results-container-chaside').classList.add('hidden');
-                document.getElementById('results-container-mmpi2').classList.remove('hidden');
+                const subtitle = document.getElementById('res-test-subtitle');
+                if (subtitle) subtitle.innerText = 'INVENTARIO MULTIFÁSICO DE PERSONALIDAD DE MINNESOTA (MMPI-2) COMPLETO';
+                
+                const containerChaside = document.getElementById('results-container-chaside');
+                const containerMmpi = document.getElementById('results-container-mmpi2');
+                if (containerChaside) containerChaside.classList.add('hidden');
+                if (containerMmpi) containerMmpi.classList.remove('hidden');
 
                 const isInvalid = record.mmpiResults.tScores.L >= 70 || record.mmpiResults.tScores.F >= 80 || record.mmpiResults.tScores.K >= 70;
                 const alertaValidez = document.getElementById('mmpi-validez-alerta');
-                if (isInvalid) {
-                    alertaValidez.classList.remove('hidden');
-                } else {
-                    alertaValidez.classList.add('hidden');
+                if (alertaValidez) {
+                    if (isInvalid) {
+                        alertaValidez.classList.remove('hidden');
+                    } else {
+                        alertaValidez.classList.add('hidden');
+                    }
                 }
 
                 fillMMPITableAndOpinion(record.mmpiResults.tScores, record.mmpiResults.raw, record.mmpiResults.kCorrected);
@@ -2139,7 +2293,6 @@
             }
         }
 
-        /* GRÁFICO Y TABLA CHASIDE */
         function renderCHASIDERadarChart(percentages) {
             const ctx = document.getElementById('resultsRadarChart').getContext('2d');
             const labels = ['C (Admin)', 'H (Humanidades)', 'A (Artes)', 'S (Salud)', 'I (Tecnología)', 'D (Defensa)', 'E (Exactas)'];
@@ -2196,55 +2349,56 @@
 
         function fillCHASIDEResultsTableAndDetail(percentages, diagnostic) {
             const tbody = document.getElementById('metric-table-body');
-            tbody.innerHTML = '';
+            if (tbody) {
+                tbody.innerHTML = '';
+                const keys = ['C', 'H', 'A', 'S', 'I', 'D', 'E'];
+                keys.forEach(k => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'border-b border-slate-100 hover:bg-slate-50 transition-colors';
+                    
+                    const isTopInt = diagnostic.maxIntArea === k;
+                    const isTopApt = diagnostic.maxAptArea === k;
 
-            const keys = ['C', 'H', 'A', 'S', 'I', 'D', 'E'];
-            keys.forEach(k => {
-                const tr = document.createElement('tr');
-                tr.className = 'border-b border-slate-100 hover:bg-slate-50 transition-colors';
-                
-                const isTopInt = diagnostic.maxIntArea === k;
-                const isTopApt = diagnostic.maxAptArea === k;
-
-                tr.innerHTML = `
-                    <td class="py-2.5 font-bold text-slate-800 text-[11px] flex items-center gap-2 font-sans">
-                        <span class="inline-block w-2.5 h-2.5 rounded-full" style="background-color: ${chasideAreasMetadata[k].color}"></span>
-                        ${k} - ${chasideAreasMetadata[k].name}
-                    </td>
-                    <td class="py-2.5 text-center font-black ${isTopInt ? 'text-brand-blue scale-105' : 'text-slate-600'} text-[11px]">
-                        ${percentages.intereses[k]}%
-                    </td>
-                    <td class="py-2.5 text-center font-black ${isTopApt ? 'text-brand-gold scale-105' : 'text-slate-600'} text-[11px]">
-                        ${percentages.aptitudes[k]}%
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
+                    tr.innerHTML = `
+                        <td class="py-2.5 font-bold text-slate-800 text-[11px] flex items-center gap-2 font-sans">
+                            <span class="inline-block w-2.5 h-2.5 rounded-full" style="background-color: ${chasideAreasMetadata[k].color}"></span>
+                            ${k} - ${chasideAreasMetadata[k].name}
+                        </td>
+                        <td class="py-2.5 text-center font-black ${isTopInt ? 'text-brand-blue scale-105' : 'text-slate-600'} text-[11px]">
+                            ${percentages.intereses[k]}%
+                        </td>
+                        <td class="py-2.5 text-center font-black ${isTopApt ? 'text-brand-gold scale-105' : 'text-slate-600'} text-[11px]">
+                            ${percentages.aptitudes[k]}%
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
 
             const detailGrid = document.getElementById('areas-detail-grid');
-            detailGrid.innerHTML = '';
-
-            const selectedAreas = Array.from(new Set([diagnostic.maxIntArea, diagnostic.maxAptArea]));
-            selectedAreas.forEach(areaCode => {
-                const meta = chasideAreasMetadata[areaCode];
-                const card = document.createElement('div');
-                card.className = 'p-4 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2';
-                card.innerHTML = `
-                    <div class="flex items-center space-x-2 text-brand-deepBlue font-black uppercase text-[11px]">
-                        <i class="fa-solid ${meta.icon}" style="color: ${meta.color}"></i>
-                        <span>ÁREA ${areaCode} - ${meta.name}</span>
-                    </div>
-                    <p class="text-slate-600 text-[11px] leading-relaxed font-sans">${meta.desc}</p>
-                    <div class="pt-1.5 border-t border-slate-100">
-                        <span class="block text-[10px] font-black uppercase text-brand-gold tracking-widest mb-1">Carreras Recomendadas:</span>
-                        <p class="text-slate-800 text-xxs leading-relaxed font-sans font-bold">${meta.careers}</p>
-                    </div>
-                `;
-                detailGrid.appendChild(card);
-            });
+            if (detailGrid) {
+                detailGrid.innerHTML = '';
+                const selectedAreas = Array.from(new Set([diagnostic.maxIntArea, diagnostic.maxAptArea]));
+                selectedAreas.forEach(areaCode => {
+                    const meta = chasideAreasMetadata[areaCode];
+                    const card = document.createElement('div');
+                    card.className = 'p-4 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2';
+                    card.innerHTML = `
+                        <div class="flex items-center space-x-2 text-brand-deepBlue font-black uppercase text-[11px]">
+                            <i class="fa-solid ${meta.icon}" style="color: ${meta.color}"></i>
+                            <span>ÁREA ${areaCode} - ${meta.name}</span>
+                        </div>
+                        <p class="text-slate-600 text-[11px] leading-relaxed font-sans">${meta.desc}</p>
+                        <div class="pt-1.5 border-t border-slate-100">
+                            <span class="block text-[10px] font-black uppercase text-brand-gold tracking-widest mb-1">Carreras Recomendadas:</span>
+                            <p class="text-slate-800 text-xxs leading-relaxed font-sans font-bold">${meta.careers}</p>
+                        </div>
+                    `;
+                    detailGrid.appendChild(card);
+                });
+            }
         }
 
-        /* GRÁFICO Y TABLA MMPI-2 */
         function renderMMPIProfileChart(tScores) {
             const ctx = document.getElementById('resultsMMPIChart').getContext('2d');
             const labels = ['L', 'F', 'K', 'Hs', 'D', 'Hy', 'Pd', 'Mf', 'Pa', 'Pt', 'Sc', 'Ma', 'Si'];
@@ -2307,61 +2461,61 @@
 
         function fillMMPITableAndOpinion(tScores, raw, kCorrected) {
             const tbody = document.getElementById('mmpi-metrics-body');
-            tbody.innerHTML = '';
+            if (tbody) {
+                tbody.innerHTML = '';
+                let highScales = [];
 
-            let highScales = [];
+                for (const key in tScores) {
+                    const t = tScores[key];
+                    const rawVal = raw[key];
+                    const isK = ['Hs', 'Pd', 'Pt', 'Sc', 'Ma'].includes(key);
+                    const kText = isK ? `Sí (Directa: ${rawVal} | Corregida: ${kCorrected[key]})` : 'No';
 
-            for (const key in tScores) {
-                const t = tScores[key];
-                const rawVal = raw[key];
-                const isK = ['Hs', 'Pd', 'Pt', 'Sc', 'Ma'].includes(key);
-                const kText = isK ? `Sí (Directa: ${rawVal} | Corregida: ${kCorrected[key]})` : 'No';
+                    let clinicalRange = "Normal";
+                    let badgeClass = "bg-slate-100 text-slate-700";
 
-                let clinicalRange = "Normal";
-                let badgeClass = "bg-slate-100 text-slate-700";
-
-                if (t >= 65) {
-                    clinicalRange = "Significativo Clínico (Alto)";
-                    badgeClass = "bg-rose-100 text-rose-800";
-                    if (['Hs', 'D', 'Hy', 'Pd', 'Mf', 'Pa', 'Pt', 'Sc', 'Ma', 'Si'].includes(key)) {
-                        highScales.push(key);
+                    if (t >= 65) {
+                        clinicalRange = "Significativo Clínico (Alto)";
+                        badgeClass = "bg-rose-100 text-rose-800";
+                        if (['Hs', 'D', 'Hy', 'Pd', 'Mf', 'Pa', 'Pt', 'Sc', 'Ma', 'Si'].includes(key)) {
+                            highScales.push(key);
+                        }
+                    } else if (t >= 60) {
+                        clinicalRange = "Tendencia Moderada";
+                        badgeClass = "bg-yellow-100 text-yellow-800";
                     }
-                } else if (t >= 60) {
-                    clinicalRange = "Tendencia Moderada";
-                    badgeClass = "bg-yellow-100 text-yellow-800";
+
+                    const tr = document.createElement('tr');
+                    tr.className = 'border-b border-slate-100 hover:bg-slate-50 transition-colors';
+                    tr.innerHTML = `
+                        <td class="py-2.5 px-3">
+                            <div class="font-bold text-slate-900 text-xs">${mmpi2ScalesMetadata[key].name}</div>
+                            <div class="text-[10px] text-slate-400 font-medium">${mmpi2ScalesMetadata[key].desc}</div>
+                        </td>
+                        <td class="py-2.5 px-3 text-center text-slate-800 text-xs">${rawVal}</td>
+                        <td class="py-2.5 px-3 text-center text-slate-500 text-[10px]">${kText}</td>
+                        <td class="py-2.5 px-3 text-center">
+                            <span class="inline-block px-2 py-1 rounded font-black text-xs ${badgeClass}">
+                                T: ${t}
+                            </span>
+                        </td>
+                        <td class="py-2.5 px-3 font-semibold text-xs text-slate-700">${clinicalRange}</td>
+                    `;
+                    tbody.appendChild(tr);
                 }
 
-                const tr = document.createElement('tr');
-                tr.className = 'border-b border-slate-100 hover:bg-slate-50 transition-colors';
-                tr.innerHTML = `
-                    <td class="py-2.5 px-3">
-                        <div class="font-bold text-slate-900 text-xs">${mmpi2ScalesMetadata[key].name}</div>
-                        <div class="text-[10px] text-slate-400 font-medium">${mmpi2ScalesMetadata[key].desc}</div>
-                    </td>
-                    <td class="py-2.5 px-3 text-center text-slate-800 text-xs">${rawVal}</td>
-                    <td class="py-2.5 px-3 text-center text-slate-500 text-[10px]">${kText}</td>
-                    <td class="py-2.5 px-3 text-center">
-                        <span class="inline-block px-2 py-1 rounded font-black text-xs ${badgeClass}">
-                            T: ${t}
-                        </span>
-                    </td>
-                    <td class="py-2.5 px-3 font-semibold text-xs text-slate-700">${clinicalRange}</td>
-                `;
-                tbody.appendChild(tr);
-            }
-
-            const opinionEl = document.getElementById('res-psychological-opinion');
-            if (highScales.length === 0) {
-                opinionEl.innerHTML = `Se ha completado el análisis del inventario completo de <strong>MMPI-2</strong>. La gráfica no muestra elevaciones con significación clínica directa (T &ge; 65). Esto sugiere un perfil de adaptación psicológica equilibrado, integrado y funcional, libre de desequilibrios somáticos, afectivos o de control cognitivo-emocional graves.`;
-            } else {
-                const listText = highScales.map(s => `<strong>${mmpi2ScalesMetadata[s].name}</strong>`).join(', ');
-                opinionEl.innerHTML = `El reporte diagnóstico de personalidad revela indicadores de tensión con significación clínica (T &ge; 65) en las escalas de: ${listText}. Las puntuaciones sugieren desajustes o defensas activas en la dinámica de personalidad del estudiante evaluado. Se aconseja agendar una sesión privada presencial de retroalimentación en el <strong>Departamento Psicopedagógico</strong> para profundizar en la interpretación.`;
+                const opinionEl = document.getElementById('res-psychological-opinion');
+                if (opinionEl) {
+                    if (highScales.length === 0) {
+                        opinionEl.innerHTML = `Se ha completado el análisis del inventario completo de <strong>MMPI-2</strong>. La gráfica no muestra elevaciones con significación clínica directa (T &ge; 65). Esto sugiere un perfil de adaptación psicológica equilibrado, integrado y funcional, libre de desequilibrios somáticos, afectivos o de control cognitivo-emocional graves.`;
+                    } else {
+                        const listText = highScales.map(s => `<strong>${mmpi2ScalesMetadata[s].name}</strong>`).join(', ');
+                        opinionEl.innerHTML = `El reporte diagnóstico de personalidad revela indicadores de tensión con significación clínica (T &ge; 65) en las escalas de: ${listText}. Las puntuaciones sugieren desajustes o defensas activas en la dinámica de personalidad del estudiante evaluado. Se aconseja agendar una sesión privada presencial de retroalimentación en el <strong>Departamento Psicopedagógico</strong> para profundizar en la interpretación.`;
+                    }
+                }
             }
         }
 
-        /* ==========================================================================
-           7. GABINETE ADMINISTRATIVO
-           ========================================================================== */
         function openAdminModal() {
             document.getElementById('admin-modal').classList.remove('hidden');
             document.getElementById('admin-pass').value = '';
@@ -2388,69 +2542,79 @@
 
         function loadAdminDatabase() {
             const tbody = document.getElementById('admin-table-body');
-            tbody.innerHTML = '';
+            if (tbody) {
+                tbody.innerHTML = '';
+                document.getElementById('admin-counter').innerText = `Registros: ${cloudRecords.length}`;
 
-            document.getElementById('admin-counter').innerText = `Registros: ${cloudRecords.length}`;
-
-            if (cloudRecords.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="py-8 text-center text-slate-400 font-bold">
-                            <i class="fa-solid fa-folder-open text-3xl block mb-2 text-slate-300"></i>
-                            No hay diagnósticos registrados en el sistema.
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            const sortedRecords = [...cloudRecords].sort((a, b) => b.folio.localeCompare(a.folio));
-
-            sortedRecords.forEach(record => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50 transition-colors border-b border-slate-100 font-semibold';
-                
-                let badgeTest = record.type === 'CHASIDE' 
-                    ? '<span class="inline-block px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-extrabold text-[10px]">CHASIDE</span>'
-                    : '<span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-extrabold text-[10px]">MMPI-2</span>';
-
-                let levelBadge = record.level === 'UNIVERSIDAD' 
-                    ? '<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[9px]">UNIV</span>'
-                    : '<span class="inline-block px-2 py-0.5 rounded bg-violet-100 text-violet-800 font-bold text-[9px]">PREPA</span>';
-
-                let topIndicators = '';
-                if (record.type === 'CHASIDE') {
-                    topIndicators = `Int: <strong>${record.topInterest}</strong> | Apt: <strong>${record.topAptitude}</strong>`;
-                } else if (record.mmpiResults) {
-                    let high = [];
-                    for (const sc in record.mmpiResults.tScores) {
-                        if (record.mmpiResults.tScores[sc] >= 65 && !['L','F','K'].includes(sc)) high.push(sc);
-                    }
-                    topIndicators = high.length > 0 ? `Clínico: ${high.join(', ')}` : "Adaptativo";
+                if (cloudRecords.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" class="py-8 text-center text-slate-400 font-bold">
+                                <i class="fa-solid fa-folder-open text-3xl block mb-2 text-slate-300"></i>
+                                No hay diagnósticos registrados en el sistema.
+                            </td>
+                        </tr>
+                    `;
+                    return;
                 }
 
-                tr.innerHTML = `
-                    <td class="py-3.5 px-4 font-mono font-black text-brand-blue uppercase">${record.folio}</td>
-                    <td class="py-3.5 px-4 font-black text-slate-900">${record.name}</td>
-                    <td class="py-3.5 px-4 font-bold text-slate-600 text-xs">${record.career}</td>
-                    <td class="py-3.5 px-4 font-bold text-slate-500 text-xs">${record.period} • ${record.group} (${record.mode})</td>
-                    <td class="py-3.5 px-4">${badgeTest} ${levelBadge}</td>
-                    <td class="py-3.5 px-4 font-bold text-slate-700 text-xs">${topIndicators}</td>
-                    <td class="py-3.5 px-4 text-center space-x-1 whitespace-nowrap">
-                        <button class="btn-view px-2.5 py-1.5 bg-brand-deepBlue text-white font-bold text-xxs rounded-lg hover:bg-brand-blue transition-all font-sans">
-                            <i class="fa-solid fa-file-invoice"></i> Ver Reporte
-                        </button>
-                        <button class="btn-delete px-2.5 py-1.5 bg-rose-100 hover:bg-rose-600 text-rose-600 hover:text-white font-bold text-xxs rounded-lg transition-all font-sans">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </td>
-                `;
+                const sortedRecords = [...cloudRecords].sort((a, b) => b.folio.localeCompare(a.folio));
 
-                tr.querySelector('.btn-view').onclick = () => viewRecordFromAdmin(record.folio);
-                tr.querySelector('.btn-delete').onclick = () => deleteRecordFromAdmin(record.folio);
+                sortedRecords.forEach(record => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-slate-50 transition-colors border-b border-slate-100 font-semibold';
+                    
+                    let badgeTest = record.type === 'CHASIDE' 
+                        ? '<span class="inline-block px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-extrabold text-[10px]">CHASIDE</span>'
+                        : '<span class="inline-block px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-extrabold text-[10px]">MMPI-2</span>';
 
-                tbody.appendChild(tr);
-            });
+                    let levelBadge = record.level === 'UNIVERSIDAD' 
+                        ? '<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[9px]">UNIV</span>'
+                        : '<span class="inline-block px-2 py-0.5 rounded bg-violet-100 text-violet-800 font-bold text-[9px]">PREPA</span>';
+
+                    const opt1 = record.opt1 || '---';
+                    const opt2 = record.opt2 || '---';
+                    const opt3 = record.opt3 || '---';
+                    const areasListText = `<div class="text-[10px] text-slate-600 leading-tight font-sans">
+                        1ª: <strong class="text-brand-blue font-black">${opt1}</strong><br>
+                        2ª: <span class="font-medium text-slate-700">${opt2}</span><br>
+                        3ª: <span class="font-medium text-slate-700">${opt3}</span>
+                    </div>`;
+
+                    let topIndicators = '';
+                    if (record.type === 'CHASIDE') {
+                        topIndicators = `Int: <strong>${record.topInterest || '---'}</strong> | Apt: <strong>${record.topAptitude || '---'}</strong>`;
+                    } else if (record.mmpiResults) {
+                        let high = [];
+                        for (const sc in record.mmpiResults.tScores) {
+                            if (record.mmpiResults.tScores[sc] >= 65 && !['L','F','K'].includes(sc)) high.push(sc);
+                        }
+                        topIndicators = high.length > 0 ? `Clínico: ${high.join(', ')}` : "Adaptativo";
+                    }
+
+                    tr.innerHTML = `
+                        <td class="py-3.5 px-4 font-mono font-black text-brand-blue uppercase">${record.folio}</td>
+                        <td class="py-3.5 px-4 font-black text-slate-900">${record.name}</td>
+                        <td class="py-3.5 px-4 font-bold text-slate-600 text-xs">${record.career}</td>
+                        <td class="py-3.5 px-4 font-bold text-slate-500 text-xs">${record.period} • ${record.group} (${record.mode})</td>
+                        <td class="py-3.5 px-4">${badgeTest} ${levelBadge}</td>
+                        <td class="py-3.5 px-4">${areasListText}</td>
+                        <td class="py-3.5 px-4 text-center space-x-1 whitespace-nowrap">
+                            <button class="btn-view px-2.5 py-1.5 bg-brand-deepBlue text-white font-bold text-xxs rounded-lg hover:bg-brand-blue transition-all font-sans">
+                                <i class="fa-solid fa-file-invoice"></i> Ver
+                            </button>
+                            <button class="btn-delete px-2.5 py-1.5 bg-rose-100 hover:bg-rose-600 text-rose-600 hover:text-white font-bold text-xxs rounded-lg transition-all font-sans">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+
+                    tr.querySelector('.btn-view').onclick = () => viewRecordFromAdmin(record.folio);
+                    tr.querySelector('.btn-delete').onclick = () => deleteRecordFromAdmin(record.folio);
+
+                    tbody.appendChild(tr);
+                });
+            }
         }
 
         function filterAdminTable() {
@@ -2523,13 +2687,13 @@
                 return;
             }
 
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "Folio,Nivel,Alumno,Test,Especialidad_Carrera,Cuatrimestre_Semestre,Grupo,Modalidad_Turno,Fecha,Top Interes / Clinico\n";
+            let csvContent = "\uFEFF"; // BOM para acentos en Excel
+            csvContent += "Folio,Nivel,Alumno,Test,Especialidad_Carrera,Cuatrimestre_Semestre,Grupo,Modalidad_Turno,Fecha,Prioridad_1,Prioridad_2,Prioridad_3,Top Interes / Clinico\n";
 
             cloudRecords.forEach(r => {
                 let info = '';
                 if (r.type === 'CHASIDE') {
-                    info = `Int: ${r.topInterest} - Apt: ${r.topAptitude}`;
+                    info = `Int: ${r.topInterest || '---'} - Apt: ${r.topAptitude || '---'}`;
                 } else if (r.mmpiResults) {
                     let high = [];
                     for (const s in r.mmpiResults.tScores) {
@@ -2537,13 +2701,18 @@
                     }
                     info = high.length > 0 ? high.join(' ') : 'Perfil Adaptativo';
                 }
-                const row = `"${r.folio}","${r.level}","${r.name}","${r.type}","${r.career}","${r.period}","${r.group}","${r.mode}","${r.date}","${info}"`;
+                const opt1 = r.opt1 || 'No especificado';
+                const opt2 = r.opt2 || 'No especificado';
+                const opt3 = r.opt3 || 'No especificado';
+
+                const row = `"${r.folio}","${r.level}","${r.name}","${r.type}","${r.career}","${r.period}","${r.group}","${r.mode}","${r.date}","${opt1}","${opt2}","${opt3}","${info}"`;
                 csvContent += row + "\n";
             });
 
-            const encodedUri = encodeURI(csvContent);
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
             const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
+            link.setAttribute("href", url);
             link.setAttribute("download", "Historial_Gabinete_CEUT.csv");
             document.body.appendChild(link);
             link.click();
@@ -2578,7 +2747,7 @@
             window.print();
         }
 
-        /* Exponer funciones al scope global */
+        // Exponer funciones al scope global
         window.switchView = switchView;
         window.selectTestType = selectTestType;
         window.startTest = startTest;
@@ -2588,6 +2757,8 @@
         window.submitAdminLogin = submitAdminLogin;
         window.changePage = changePage;
         window.jumpToPage = jumpToPage;
+        window.goToAreaSelection = goToAreaSelection;
+        window.submitAreaSelection = submitAreaSelection;
         window.finishTest = finishTest;
         window.triggerFormalPrint = triggerFormalPrint;
         window.restartTestFlow = restartTestFlow;
@@ -2595,6 +2766,35 @@
         window.exportTestsToCSV = exportTestsToCSV;
         window.filterAdminTable = filterAdminTable;
         window.adaptFormToEducationalLevel = adaptFormToEducationalLevel;
+
+        function cleanAccentsAndUppercase(text) {
+            const map = { 'Á': 'A', 'É': 'E', 'Í': 'I', 'Ó': 'O', 'Ú': 'U', 'Ü': 'U' };
+            // Convierte a mayúsculas y reemplaza los acentos más comunes de vocales preservando de forma idónea la 'Ñ'
+            return text.toUpperCase().replace(/[ÁÉÍÓÚÜ]/g, m => map[m] || m);
+        }
+
+        function setupInputSanitizer(inputId) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            input.addEventListener('input', (e) => {
+                const start = e.target.selectionStart;
+                const end = e.target.selectionEnd;
+                const originalValue = e.target.value;
+                const cleanedValue = cleanAccentsAndUppercase(originalValue);
+                if (originalValue !== cleanedValue) {
+                    e.target.value = cleanedValue;
+                    // Restaura la posición del cursor de forma transparente para evitar saltos molestos al escribir
+                    e.target.setSelectionRange(start, end);
+                }
+            });
+        }
+
+        // Aplicamos la sanitización automática en tiempo de escritura
+        setupInputSanitizer('student-name');
+        setupInputSanitizer('student-career');
+        setupInputSanitizer('student-period');
+        setupInputSanitizer('student-group');
+        setupInputSanitizer('lookup-folio-input');
     </script>
 </body>
 </html>
