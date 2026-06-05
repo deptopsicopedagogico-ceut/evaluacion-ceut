@@ -546,6 +546,9 @@
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3">
+                    <button onclick="goBackFromResults()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-2 border border-slate-700 hover:scale-105 uppercase tracking-wider">
+                        <i class="fa-solid fa-arrow-left-long"></i> Regresar
+                    </button>
                     <button onclick="triggerFormalPrint()" class="px-5 py-2.5 bg-brand-gold hover:bg-yellow-500 active:scale-95 text-brand-deepBlue text-xs font-black rounded-xl transition-all shadow-md flex items-center gap-2 border-b-2 border-yellow-700 hover-shine-btn uppercase tracking-wider">
                         <i class="fa-solid fa-print"></i> Guardar PDF / Imprimir
                     </button>
@@ -678,13 +681,13 @@
                         </div>
                     </div>
 
-                    <!-- Pie de página y firma del estudiante -->
+                    <!-- Pie de página del estudiante sin firmas -->
                     <div class="border-t border-slate-200 pt-6 mt-8 text-center text-xs print-no-break">
-                        <p class="text-slate-500 font-semibold">Este documento contiene los resultados de tu evaluación psicométrica autónoma.</p>
-                        <p class="font-extrabold text-brand-deepBlue mt-1 uppercase text-sm tracking-wider">
-                            Evaluado: <span id="st-signature-name" class="text-brand-blue">-</span>
+                        <p class="text-slate-500 font-semibold mb-2">Este documento contiene los resultados de tu evaluación psicométrica autónoma.</p>
+                        <p class="font-extrabold text-brand-deepBlue uppercase text-base tracking-widest font-serif">
+                            CENTRO UNIVERSITARIO TEHUACÁN
                         </p>
-                        <p class="text-[10px] text-slate-400 font-mono mt-1">Gabinete de Psicopedagogía CEUT • Copia de Estudiante • Sello Digital de Autenticidad</p>
+                        <p class="text-[10px] text-slate-400 font-mono mt-1">Gabinete de Psicopedagogía • Copia de Estudiante • Sello de Autenticidad</p>
                     </div>
                 </div>
             </div>
@@ -892,13 +895,13 @@
                         </p>
                     </div>
 
-                    <!-- Firmas autorizadas -->
+                    <!-- Pie de página del administrador sin firmas -->
                     <div class="border-t border-slate-200 pt-6 mt-8 text-center text-xs print-no-break">
-                        <p class="text-slate-500 font-semibold">Este expediente es privado, confidencial y propiedad exclusiva del Gabinete del CEUT.</p>
-                        <p class="font-extrabold text-brand-deepBlue mt-1 uppercase text-sm tracking-wider">
-                            Evaluación Firmada por: <span id="ad-signature-name" class="text-brand-blue">-</span>
+                        <p class="text-slate-500 font-semibold mb-2">Este expediente es privado, confidencial y propiedad exclusiva del Gabinete del CEUT.</p>
+                        <p class="font-extrabold text-brand-deepBlue uppercase text-base tracking-widest font-serif">
+                            CENTRO UNIVERSITARIO TEHUACÁN
                         </p>
-                        <p class="text-[10px] text-slate-400 font-mono mt-1">Conexión Segura Firestore • Sello Gubernamental CEUT-GAB • Verificación Confirmada</p>
+                        <p class="text-[10px] text-slate-400 font-mono mt-1">Conexión Segura Firestore • Expediente Oficial • Sello de Autenticidad</p>
                     </div>
                 </div>
             </div>
@@ -1082,6 +1085,7 @@
 
         let cloudRecords = [];
         let authenticatedUser = null;
+        let cameFromAdmin = false; // Bandera de rastreo de navegación para el administrador
 
         const initAuth = async () => {
             try {
@@ -1881,6 +1885,7 @@
 
         /* FINALIZACIÓN DEL TEST Y ENTRADA DE ALGORITMO */
         async function finishTest() {
+            cameFromAdmin = false; // Viene del flujo regular de estudiante
             let record = {
                 folio: currentStudent.folio,
                 level: currentStudent.level,
@@ -2897,6 +2902,7 @@
         function viewRecordFromAdmin(folio) {
             const found = cloudRecords.find(r => r.folio === folio);
             if (found) {
+                cameFromAdmin = true; // Viene de la administración
                 loadReportToView(found);
                 switchView('results');
                 showToast(`Consultando el diagnóstico del folio ${folio}`);
@@ -3013,6 +3019,14 @@
             switchView('student-welcome');
         }
 
+        function goBackFromResults() {
+            if (cameFromAdmin) {
+                switchView('admin-panel');
+            } else {
+                restartTestFlow();
+            }
+        }
+
         function triggerFormalPrint() {
             window.print();
         }
@@ -3031,6 +3045,7 @@
         window.finishTest = finishTest;
         window.triggerFormalPrint = triggerFormalPrint;
         window.restartTestFlow = restartTestFlow;
+        window.goBackFromResults = goBackFromResults;
         window.clearAdminDatabase = clearAdminDatabase;
         window.exportTestsToCSV = exportTestsToCSV;
         window.filterAdminTable = filterAdminTable;
