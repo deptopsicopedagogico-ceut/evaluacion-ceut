@@ -530,13 +530,13 @@
             </div>
         </section>
 
-        <!-- VISTA 3: INFORME DE RESULTADOS (MODO DUAL ALUMNO/ADMINISTRADOR) -->
+        <!-- VISTA 3: INFORME DE RESULTADOS (MODO DUAL ALUMNO/ADMINISTRADOR - SEGURO) -->
         <section id="view-results" class="hidden max-w-5xl mx-auto space-y-6 transition-all view-transition">
             
             <!-- Barra de Acciones Rápidas con Selector de Tipo de Reporte -->
             <div class="action-bar-container flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-slate-900/95 backdrop-blur-md p-4 rounded-2xl no-print border border-brand-gold/30 shadow-xl">
-                <!-- Selector de Pestaña de Reporte -->
-                <div class="flex bg-slate-950 p-1 rounded-xl border border-slate-800">
+                <!-- Selector de Pestaña de Reporte (Se oculta/muestra dinámicamente con JS) -->
+                <div id="report-tabs-selector" class="flex bg-slate-950 p-1 rounded-xl border border-slate-800">
                     <button id="btn-toggle-student-view" onclick="setReportTab('student')" class="px-4 py-2 text-xs font-black rounded-lg transition-all bg-brand-gold text-brand-deepBlue uppercase tracking-widest flex items-center gap-2">
                         <i class="fa-solid fa-user-graduate"></i> Reporte Alumno
                     </button>
@@ -923,7 +923,7 @@
                     </div>
                     <div class="flex flex-wrap gap-2 w-full sm:w-auto">
                         <button onclick="exportTestsToCSV()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shrink-0">
-                            <i class="fa-solid fa-file-excel"></i> Exportar CSV
+                            <i class="fa-solid fa-file-excel"></i> Exportar Evaluaciones
                         </button>
                         <button onclick="clearAdminDatabase()" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shrink-0">
                             <i class="fa-solid fa-trash-can"></i> Vaciar BD
@@ -988,17 +988,54 @@
                     <div class="bg-gradient-to-r from-brand-deepBlue to-brand-blue rounded-xl p-5 border-l-4 border-brand-gold text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-md">
                         <div class="space-y-1">
                             <h4 class="text-sm font-black text-brand-gold uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-circle-info"></i> Directrices de Cupo y Capacidad
+                                <i class="fa-solid fa-circle-info"></i> Directrices de Cupo y Capacidad Cruzada
                             </h4>
                             <p class="text-[11px] text-slate-200 leading-relaxed font-medium max-w-2xl">
-                                Cada grupo de formación debe tener un **mínimo de 15 alumnos** y un **máximo de 30 alumnos**. Al ejecutar el agrupamiento automático, las especialidades que superen los 30 candidatos serán subdivididas de forma equilibrada respetando su afinidad psicométrica.
+                                Cada aula de especialidad debe tener un **mínimo de 15 alumnos** y un **máximo de 30 alumnos**. Si un grupo no reúne quórum, los estudiantes son reubicados de forma inteligente según su segunda o tercera preferencia, cruzando compatibilidades del test vocacional para garantizar el éxito escolar.
                             </p>
                         </div>
-                        <button onclick="runAutoGrouping()" class="px-5 py-3 bg-brand-gold hover:bg-yellow-500 text-brand-deepBlue active:scale-95 font-black text-xs rounded-xl transition-all flex items-center gap-2 shadow-lg hover-shine-btn shrink-0 uppercase tracking-wider">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> Distribuir de Forma Inteligente
-                        </button>
+                        <div class="flex gap-2 w-full sm:w-auto self-end sm:self-center">
+                            <button onclick="runAutoGrouping()" class="px-5 py-3 bg-brand-gold hover:bg-yellow-500 text-brand-deepBlue active:scale-95 font-black text-xs rounded-xl transition-all flex items-center gap-2 shadow-lg hover-shine-btn uppercase tracking-wider shrink-0">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Distribuir de Forma Inteligente
+                            </button>
+                            <button onclick="exportGroupsToCSV()" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white active:scale-95 font-black text-xs rounded-xl transition-all flex items-center gap-2 shadow-lg hover-shine-btn uppercase tracking-wider shrink-0">
+                                <i class="fa-solid fa-file-csv"></i> Descargar Listas de Alumnos
+                            </button>
+                        </div>
                     </div>
 
+                    <!-- Métricas de Agrupamiento General en Tiempo Real -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="group-metrics-cards">
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between shadow-sm">
+                            <div class="space-y-1">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase block">Alumnos Clasificados</span>
+                                <span id="metric-assigned-count" class="text-lg font-black text-brand-deepBlue">-</span>
+                            </div>
+                            <div class="p-3 bg-brand-blue/10 text-brand-blue rounded-xl text-lg">
+                                <i class="fa-solid fa-user-check"></i>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between shadow-sm">
+                            <div class="space-y-1">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase block">Aulas Consolidadas (>=15)</span>
+                                <span id="metric-viable-groups" class="text-lg font-black text-emerald-600">-</span>
+                            </div>
+                            <div class="p-3 bg-emerald-100 text-emerald-600 rounded-xl text-lg">
+                                <i class="fa-solid fa-school-flag"></i>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between shadow-sm">
+                            <div class="space-y-1">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase block">Índice General de Éxito en Aulas</span>
+                                <span id="metric-success-rate" class="text-lg font-black text-brand-gold">-</span>
+                            </div>
+                            <div class="p-3 bg-yellow-100 text-brand-gold rounded-xl text-lg">
+                                <i class="fa-solid fa-shield-heart animate-pulse"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contenedor General de Cuadrícula de Grupos Activos -->
                     <div id="groups-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     </div>
                 </div>
@@ -1085,7 +1122,7 @@
 
         let cloudRecords = [];
         let authenticatedUser = null;
-        let cameFromAdmin = false; // Bandera de rastreo de navegación para el administrador
+        let cameFromAdmin = false; 
 
         const initAuth = async () => {
             try {
@@ -1175,7 +1212,7 @@
             { id: 46, text: "¿Te dedicarías al cuidado infantil y asesoramiento psicopedagógico en escuelas?" },
             { id: 47, text: "¿Te gustaría implementar infraestructuras y servidores de comunicación digital?" },
             { id: 48, text: "¿Te interesaría el estudio de tácticas de contrainteligencia de defensa del estado?" },
-            { id: 49, text: "¿Investigarías de forma teórica la naturaleza cuántica de la materia física?" },
+            { id: 49, text: "Investigarías de forma teórica la naturaleza cuántica de la materia física?" },
             { id: 50, text: "¿Te agradaría participar en producciones cinematográficas o cortometrajes artísticos?" },
             { id: 51, text: "¿Te gustaría liderar la planeación fiscal de una organización no gubernamental?" },
             { id: 52, text: "¿Disfrutarías planificando sistemas de irrigación agrícola o hidráulicos?" },
@@ -1195,7 +1232,7 @@
             { id: 66, text: "¿Te gustaría resolver averías de cableados de alta tensión o de plantas de energía?" },
             { id: 67, text: "¿Elegirías trabajar coordinando asilos de ancianos o comedores comunitarios?" },
             { id: 68, text: "¿Te gustaría de estructurar bases de datos para sistemas de e-commerce masivos?" },
-            { id: 69, text: "¿Te agrada la idea de pertenecer a cuerpos especiales de rescate en la marina armada?" },
+            { id: 69, text: "¿Te agrada la idea de pertenecer a misiones de salvamento en la marina armada?" },
             { id: 70, text: "¿Te motiva la investigación biológica sobre la cura de patologías genéticas?" },
             { id: 71, text: "¿Te gustaría trabajar en restauración de pinturas antiguas o piezas de valor histórico?" },
             { id: 72, text: "¿Elegirías auditar las finanzas corporativas para mitigar riesgos de fraude empresarial?" },
@@ -1218,7 +1255,7 @@
             { id: 89, text: "¿Elegirías el desarrollo de herramientas informáticas de análisis epidemiológico?" },
             { id: 90, text: "¿Te agrada el adiestramiento táctico para brigadas operativas antiterroristas?" },
             { id: 91, text: "¿Te dedicarías al desarrollo científico de biocombustibles o fuentes alternativas?" },
-            { id: 92, text: "¿Disfrutarías impartiendo cátedras de historia universal, filosofía o artes?" },
+            { id: 92, text: "¿Disfrutarías impatiento cátedras de historia universal, filosofía o artes?" },
             { id: 93, text: "¿Elegirías asesorar el plan de ahorro de fondos de pensiones y de jubilación?" },
             { id: 94, text: "¿Te gustaría coordinar la logística física de distribución de barcos de carga?" },
             { id: 95, text: "¿Te sentirías motivado en terapias psicológicas con pacientes con adicciones?" },
@@ -1234,7 +1271,7 @@
             else if (i === 2) txt += "¿Tengo buen apetito y disfruto de mis alimentos?";
             else if (i === 3) txt += "¿Me despierto fresco y descansado casi todas las mañanas?";
             else if (i === 4) txt += "¿Creo que me gustaría trabajar en la docencia o pedagogía?";
-            else if (i === 5) txt += "¿El ruido me despierta fácilmente por las noches?";
+            else if (i === 5) txt += "El ruido me despierta fácilmente por las noches.";
             else if (i === 6) txt += "¿Me gusta leer las secciones de noticias de crímenes en el periódico?";
             else if (i === 7) txt += "¿Mis manos y mi pies tienen la temperatura adecuada casi siempre?";
             else if (i === 8) txt += "Mi vida diaria está llena de cosas que mantienen mi interés activo.";
@@ -1343,7 +1380,6 @@
         let questionsPerPage = 15;
         let currentAdminTab = 'records'; 
 
-        // Instancias separadas para evitar sobreescritura de gráficos
         let stRadarChartInstance = null;
         let adRadarChartInstance = null;
         let stMMPIChartInstance = null;
@@ -1360,14 +1396,16 @@
         };
 
         function calculateAreaCompatibility(record, academicArea) {
-            if (!academicArea || academicArea === "SIN ASIGNAR") return 0;
+            if (!academicArea || academicArea === "SIN ASIGNAR" || academicArea.startsWith("PENDIENTES")) return 0;
+            const cleanArea = academicArea.split(' ')[0]; // Limpiar nombres como "Contabilidad A" a "Contabilidad"
+            
             if (record.type === 'MMPI-2') {
-                if (academicArea === record.opt1) return 100;
-                if (academicArea === record.opt2) return 85;
-                if (academicArea === record.opt3) return 70;
+                if (cleanArea === record.opt1) return 100;
+                if (cleanArea === record.opt2) return 85;
+                if (cleanArea === record.opt3) return 70;
                 return 50;
             }
-            const mapping = areaToChasideMapping[academicArea];
+            const mapping = areaToChasideMapping[cleanArea];
             if (!mapping) return 50; 
             if (record.type === 'CHASIDE' && record.percentages) {
                 const intScoreMain = record.percentages.intereses[mapping.main] || 0;
@@ -1382,15 +1420,13 @@
             return 50; 
         }
 
-        /* MOTOR DE PRONÓSTICO DE ÉXITO ACADÉMICO (EXCLUSIVO CHASIDE) */
         function getSuccessAssessment(record, selectedArea) {
-            if (!selectedArea) return { score: 0, level: 'SIN SELECCION', desc: 'Sin datos de preferencia de aula.', color: 'slate', badge: 'bg-slate-100 text-slate-800' };
-            
-            if (record.type === 'MMPI-2') {
-                return { score: 100, level: 'N/A', desc: 'No aplica para el inventario clínico MMPI-2. El éxito académico por compatibilidad técnica solo se diagnostica mediante el Test Vocacional CHASIDE.', color: 'slate', badge: 'bg-slate-100 text-slate-600 border border-slate-300' };
+            if (!selectedArea || selectedArea === 'SIN ASIGNAR') {
+                return { score: 0, level: 'S/A', desc: 'Sin datos de preferencia de aula o pendiente.', color: 'slate', badge: 'bg-slate-100 text-slate-800 border-slate-300' };
             }
-
-            const score = calculateAreaCompatibility(record, selectedArea);
+            
+            const cleanArea = selectedArea.split(' ')[0];
+            const score = calculateAreaCompatibility(record, cleanArea);
             const testSug = getDirectTestRecommendation(record);
             
             let level = '';
@@ -1398,27 +1434,37 @@
             let color = '';
             let badge = '';
 
-            if (cleanAccentsAndUppercase(selectedArea) === cleanAccentsAndUppercase(testSug.area)) {
+            if (record.type === 'MMPI-2') {
+                if (cleanArea === record.opt1) {
+                    return { score: 100, level: 'ÓPTIMO', desc: 'El alumno ha sido clasificado dentro de su primera opción prioritaria de aula.', color: 'emerald', badge: 'bg-emerald-100 text-emerald-800 border border-emerald-300' };
+                } else if (cleanArea === record.opt2 || cleanArea === record.opt3) {
+                    return { score: 80, level: 'ACEPTABLE', desc: 'El alumno se encuentra en un salón secundario de respaldo de su propia elección.', color: 'amber', badge: 'bg-amber-100 text-amber-800 border border-amber-300' };
+                } else {
+                    return { score: 50, level: 'FUERA DE ELECCIÓN', desc: 'El aula asignada no coincide con ninguna de las opciones preferentes cargadas.', color: 'rose', badge: 'bg-rose-100 text-rose-800 border border-rose-300' };
+                }
+            }
+
+            if (cleanAccentsAndUppercase(cleanArea) === cleanAccentsAndUppercase(testSug.area)) {
                 level = 'ÉXITO EXCELENTE';
                 color = 'emerald';
                 badge = 'bg-emerald-100 text-emerald-800 border border-emerald-300';
-                desc = `Sinergia vocacional óptima del 100%. El alumno muestra un perfil psicométrico ideal para la naturaleza del aula de "${selectedArea.toUpperCase()}". Se pronostica un alto desempeño técnico, sólida adaptación académica y un nulo riesgo de desajuste o deserción voluntaria.`;
+                desc = `Sinergia vocacional óptima del 100%. El alumno muestra un perfil psicométrico ideal para la naturaleza del aula de "${cleanArea.toUpperCase()}". Se pronostica un alto desempeño técnico, sólida adaptación académica y un nulo riesgo de deserción voluntaria.`;
             } else {
                 if (score >= 75) {
                     level = 'PROSPECCIÓN ALTA';
                     color = 'emerald';
                     badge = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
-                    desc = `A pesar de que su test recomienda prioritariamente el área de "${testSug.area.toUpperCase()}", sus destrezas secundarias demuestran una compatibilidad de alto rendimiento del ${score}% para la elección de "${selectedArea.toUpperCase()}". Se pronostica un desempeño sobresaliente compensado de forma intuitiva.`;
+                    desc = `A pesar de que su test recomienda prioritariamente el área de "${testSug.area.toUpperCase()}", sus destrezas secundarias demuestran una compatibilidad de alto rendimiento del ${score}% para la elección de "${cleanArea.toUpperCase()}". Se pronostica un desempeño sobresaliente compensado de forma intuitiva.`;
                 } else if (score >= 55) {
                     level = 'ÉXITO CONDICIONADO';
                     color = 'amber';
                     badge = 'bg-amber-100 text-amber-900 border border-amber-300';
-                    desc = `Aptitud moderada (${score}%). Existe una brecha de competencias sensible entre el perfil sugerido por el test ("${testSug.area.toUpperCase()}") y su elección de aula ("${selectedArea.toUpperCase()}"). El alumno requerirá un esfuerzo y estudio metodológico adicional. Se recomienda un seguimiento psicopedagógico oportuno mediante tutorías para evitar rezagos académicos en este salón.`;
+                    desc = `Aptitud moderada (${score}%). Existe una brecha de competencias sensible entre el perfil sugerido por el test ("${testSug.area.toUpperCase()}") y su elección de aula ("${cleanArea.toUpperCase()}"). El alumno requerirá un esfuerzo y estudio metodológico adicional. Se recomienda un seguimiento psicopedagógico oportuno mediante tutorías para evitar rezagos académicos en este salón.`;
                 } else {
                     level = 'RIESGO DE DESAJUSTE';
                     color = 'rose';
                     badge = 'bg-rose-100 text-rose-800 border border-rose-300';
-                    desc = `Discrepancia crítica (${score}% de compatibilidad). Las aptitudes dominantes del test se dirigen fuertemente a "${testSug.area.toUpperCase()}", mientras que su elección es "${selectedArea.toUpperCase()}". Se pronostica un alto índice de frustración técnica, alta fatiga cognitiva y potencial deserción del aula de no brindarse apoyo. Se aconseja al administrador considerar el cambio de salón o brindar soporte constante.`;
+                    desc = `Discrepancia crítica (${score}% de compatibilidad). Las aptitudes dominantes del test se dirigen fuertemente a "${testSug.area.toUpperCase()}", mientras que su elección es "${cleanArea.toUpperCase()}". Se pronostica un alto índice de frustración técnica, alta fatiga cognitiva y potencial deserción del aula de no brindarse apoyo. Se aconseja al administrador considerar el cambio de salón o brindar soporte constante.`;
                 }
             }
             return { score, level, desc, color, badge };
@@ -1478,7 +1524,6 @@
             }
         }
 
-        /* ALTERNAR VISTA DE REPORTES (ALUMNO O ADMINISTRADOR) */
         function setReportTab(tabMode) {
             const btnStudent = document.getElementById('btn-toggle-student-view');
             const btnAdmin = document.getElementById('btn-toggle-admin-view');
@@ -1883,9 +1928,8 @@
             finishTest();
         }
 
-        /* FINALIZACIÓN DEL TEST Y ENTRADA DE ALGORITMO */
         async function finishTest() {
-            cameFromAdmin = false; // Viene del flujo regular de estudiante
+            cameFromAdmin = false; 
             let record = {
                 folio: currentStudent.folio,
                 level: currentStudent.level,
@@ -1967,10 +2011,10 @@
                 colors: ['#2e3e95', '#eeb407', '#131b46']
             });
 
-            setReportTab('student'); // Por defecto ver el reporte del alumno al terminar
+            setReportTab('student'); 
             switchView('results');
             loadAdminDatabase();
-            showToast("Prueba procesada exitosamente. Se ha calculado tu asignación de grupo.");
+            showToast("Prueba procesada exitosamente. Se ha calculado tu asignación de grupo óptimo.");
         }
 
         function calculateCHASIDEResults() {
@@ -2083,9 +2127,7 @@
             if (el) el.innerText = value;
         }
 
-        /* CARGA Y RENDERIZADO DE LOS CONTENEDORES DE REPORTE */
         function loadReportToView(record) {
-            // ================= DATOS COMUNES ALUMNO =================
             safeSetText('st-res-student-folio', record.folio);
             safeSetText('st-res-student-name', record.name);
             safeSetText('st-res-student-career', record.career);
@@ -2094,7 +2136,6 @@
             safeSetText('st-res-student-mode', record.mode);
             safeSetText('st-signature-name', record.name);
 
-            // ================= DATOS COMUNES ADMINISTRADOR =================
             safeSetText('ad-res-student-folio', record.folio);
             safeSetText('ad-res-student-name', record.name);
             safeSetText('ad-res-student-career', record.career);
@@ -2107,7 +2148,15 @@
             safeSetText('ad-res-area-opt2', record.opt2 || 'No seleccionado');
             safeSetText('ad-res-area-opt3', record.opt3 || 'No seleccionado');
 
-            // Actualización de Labels según nivel escolar
+            const selector = document.getElementById('report-tabs-selector');
+            if (selector) {
+                if (cameFromAdmin) {
+                    selector.classList.remove('hidden'); 
+                } else {
+                    selector.classList.add('hidden'); 
+                }
+            }
+
             const labelsMap = [
                 { st: 'st-res-lbl-career', ad: 'ad-res-lbl-career', univ: 'Carrera / Licenciatura', prep: 'Especialidad / Bachillerato' },
                 { st: 'st-res-lbl-period', ad: 'ad-res-lbl-period', univ: 'Cuatrimestre / Grupo', prep: 'Semestre / Grupo' },
@@ -2120,7 +2169,6 @@
                 if (elAd) elAd.innerText = record.level === 'PREPARATORIA' ? item.prep : item.univ;
             });
 
-            // Medidor de Coherencia Psicometría-Preferencia (Solo Administrador)
             const alignmentVal = record.alignmentScore !== undefined ? record.alignmentScore : 50;
             const badge = document.getElementById('ad-res-alignment-badge');
             if (badge) {
@@ -2142,12 +2190,11 @@
                 }
             }
 
-            // Módulo de Asignación de Aula de Destino (Solo Administrador)
             safeSetText('ad-res-assigned-group', record.grupoAsignado || 'PENDIENTE');
             const expEl = document.getElementById('ad-res-group-explanation');
             if (expEl) {
                 if (record.grupoAsignado && record.grupoAsignado.startsWith("PENDIENTES")) {
-                    expEl.innerHTML = `Tu grupo preferente <strong>${record.opt1}</strong> no ha reunido el quórum mínimo de 15 alumnos para abrirse. El Gabinete Psicopedagógico evalúa tu perfil para reubicarte.`;
+                    expEl.innerHTML = `Tu grupo preferente <strong>${record.opt1}</strong> no ha reunido el quórum mínimo de 15 alumnos para abrirse. El Gabinete Psicopedagógico evalúa tu perfil para reubicarte de forma óptima.`;
                 } else {
                     if (record.type === 'MMPI-2') {
                         expEl.innerHTML = `Asignación resuelta. El alumno ha sido integrado en el aula de <strong>${record.grupoAsignado}</strong> de acuerdo con su prioridad y disponibilidad de cupo.`;
@@ -2157,8 +2204,7 @@
                 }
             }
 
-            // RENDERING DEL PRONÓSTICO DE ÉXITO ACADÉMICO (Solo Administrador - CHASIDE)
-            const successVal = getSuccessAssessment(record, record.opt1);
+            const successVal = getSuccessAssessment(record, record.grupoAsignado || record.opt1);
             const levelBadge = document.getElementById('ad-res-success-level-badge');
             const descEl = document.getElementById('ad-res-success-desc');
             const cardEl = document.getElementById('ad-res-success-assessment-card');
@@ -2188,9 +2234,7 @@
                 }
             }
 
-            // ================= CONFIGURACIÓN DEL DIAGNÓSTICO SEGÚN TIPO DE TEST =================
             if (record.type === 'CHASIDE') {
-                // Toggle de bloques en reportes
                 document.getElementById('st-chaside-block').classList.remove('hidden');
                 document.getElementById('st-mmpi-block').classList.add('hidden');
                 document.getElementById('ad-chaside-block').classList.remove('hidden');
@@ -2198,11 +2242,9 @@
 
                 const diagnostic = getVocationalDiagnostic(record.percentages);
 
-                // Reporte Alumno
                 safeSetText('st-res-top-interest', `${diagnostic.topInterestName} (${record.percentages.intereses[diagnostic.maxIntArea]}%)`);
                 safeSetText('st-res-top-aptitude', `${diagnostic.topAptitudeName} (${record.percentages.aptitudes[diagnostic.maxAptArea]}%)`);
 
-                // Reporte Administrador
                 safeSetText('ad-res-top-interest', `${diagnostic.topInterestName} (${record.percentages.intereses[diagnostic.maxIntArea]}%)`);
                 safeSetText('ad-res-top-aptitude', `${diagnostic.topAptitudeName} (${record.percentages.aptitudes[diagnostic.maxAptArea]}%)`);
 
@@ -2211,7 +2253,6 @@
                     opinionEl.innerHTML = `${diagnostic.opinionText}<br><br><strong>Recomendación Vocacional-Académica Directa del Test:</strong> Tus habilidades destacan mayor compatibilidad institucional con el grupo de: <span class="text-brand-blue font-black uppercase">${record.testSuggestedGroup || 'General'}</span> con un índice de aptitud del ${alignmentVal}%.`;
                 }
 
-                // Cargar Tablas y Gráficos Independientes
                 fillCHASIDEResultsTableAndDetail('st-metric-table-body', 'st-areas-detail-grid', record.percentages, diagnostic);
                 fillCHASIDEResultsTableAndDetail('ad-metric-table-body', null, record.percentages, diagnostic);
 
@@ -2221,7 +2262,6 @@
                 }, 200);
 
             } else {
-                // Toggle de bloques en reportes
                 document.getElementById('st-chaside-block').classList.add('hidden');
                 document.getElementById('st-mmpi-block').classList.remove('hidden');
                 document.getElementById('ad-chaside-block').classList.add('hidden');
@@ -2243,7 +2283,6 @@
             }
         }
 
-        /* RENDERING DE GRÁFICOS RADAR DE CHASIDE EN CANVASES SEPARADOS */
         function renderCHASIDERadarChart(canvasId, percentages, modeType) {
             const ctx = document.getElementById(canvasId).getContext('2d');
             const labels = ['C (Admin)', 'H (Humanidades)', 'A (Artes)', 'S (Salud)', 'I (Tecnología)', 'D (Defensa)', 'E (Exactas)'];
@@ -2305,7 +2344,6 @@
             else adRadarChartInstance = chartInstance;
         }
 
-        /* TABLA MÉTRIQUE DE DETALLES DEL CHASIDE */
         function fillCHASIDEResultsTableAndDetail(tableBodyId, detailGridId, percentages, diagnostic) {
             const tbody = document.getElementById(tableBodyId);
             if (tbody) {
@@ -2360,7 +2398,6 @@
             }
         }
 
-        /* RENDERING DE GRAFICAS CLÍNICAS EN CANVASES SEPARADOS */
         function renderMMPIProfileChart(canvasId, tScores, modeType) {
             const ctx = document.getElementById(canvasId).getContext('2d');
             const labels = ['L', 'F', 'K', 'Hs', 'D', 'Hy', 'Pd', 'Mf', 'Pa', 'Pt', 'Sc', 'Ma', 'Si'];
@@ -2428,7 +2465,6 @@
             else adMMPIChartInstance = chartInstance;
         }
 
-        /* DETALLE DE ESCALAS CLÍNICAS (SOLO ADMINISTRADOR) */
         function fillMMPITableAndOpinion(record) {
             const tScores = record.mmpiResults.tScores;
             const raw = record.mmpiResults.raw;
@@ -2518,7 +2554,6 @@
             }
         }
 
-        /* TABLA DE ADMINISTRADOR GENERAL */
         function loadAdminDatabase() {
             const tbody = document.getElementById('admin-table-body');
             if (tbody) {
@@ -2554,7 +2589,7 @@
                     const opt1 = record.opt1 || '---';
                     const assignedGroup = record.grupoAsignado || 'SIN ASIGNAR';
                     
-                    const successVal = getSuccessAssessment(record, record.opt1);
+                    const successVal = getSuccessAssessment(record, record.grupoAsignado || record.opt1);
                     const score = record.alignmentScore !== undefined ? record.alignmentScore : 50;
                     
                     let scoreBadge = '';
@@ -2614,7 +2649,6 @@
             }
         }
 
-        /* RESOLUTOR DE GRUPOS INSTITUCIONALES (MIN 15, MAX 30) */
         function solveOptimalGroups(records) {
             const assignments = {};
             const initialGroups = {};
@@ -2673,7 +2707,7 @@
         async function runAutoGrouping() {
             const confirmed = await showCustomConfirm(
                 "¿Ejecutar Distribución Inteligente?",
-                "Esta acción reorganizará a los alumnos en grupos de mínimo 15 y máximo 30 estudiantes basándose en su Primera Opción de área académica seleccionada. En el caso del CHASIDE, se cruzará con sus resultados psicométricos para reubicaciones lógicas ante sobrecupo o falta de quórum.",
+                "Esta acción reorganizará a los alumnos en grupos de mínimo 15 y máximo 30 estudiantes basándose en su Primera Opción de área académica seleccionada. Se evaluarán la segunda y tercera opción jerárquica cruzando la compatibilidad del test vocacional para garantizar el éxito escolar.",
                 false
             );
 
@@ -2705,8 +2739,24 @@
             if (!student) return;
 
             const oldGroup = student.grupoAsignado || "SIN ASIGNAR";
+            const cleanNewArea = newGroup.split(' ')[0];
+
+            if (student.type === 'CHASIDE') {
+                const compatibility = calculateAreaCompatibility(student, cleanNewArea);
+                if (compatibility < 50) {
+                    const proceed = await showCustomConfirm(
+                        "¡Alerta de Baja Afinidad!",
+                        `El estudiante ${student.name} tiene un pronóstico de baja afinidad (${compatibility}%) con el aula de "${cleanNewArea.toUpperCase()}". Su test vocacional sugiere prioritariamente el área de "${(student.testSuggestedGroup || 'Otra').toUpperCase()}". ¿Deseas reubicarlo de todas formas?`,
+                        true
+                    );
+                    if (!proceed) {
+                        renderGroupsView();
+                        return;
+                    }
+                }
+            }
+
             student.grupoAsignado = newGroup;
-            
             renderGroupsView();
 
             if (authenticatedUser) {
@@ -2723,19 +2773,34 @@
             }
         }
 
-        /* GESTOR INTERACTIVO DE GRUPOS EN VIVO */
         function renderGroupsView() {
             const container = document.getElementById('groups-container');
             if (!container) return;
             container.innerHTML = '';
 
             const groupsMap = {};
+            let assignedCount = 0;
+            let totalStudents = cloudRecords.length;
+            let successSum = 0;
+            let successStudentsCount = 0;
+
             cloudRecords.forEach(record => {
                 const groupName = record.grupoAsignado || "SIN ASIGNAR";
                 if (!groupsMap[groupName]) {
                     groupsMap[groupName] = [];
                 }
                 groupsMap[groupName].push(record);
+                
+                if (groupName !== "SIN ASIGNAR") {
+                    assignedCount++;
+                }
+
+                // Calcular promedio de éxito
+                if (record.type === 'CHASIDE') {
+                    const success = getSuccessAssessment(record, groupName);
+                    successSum += success.score;
+                    successStudentsCount++;
+                }
             });
 
             if (!groupsMap["SIN ASIGNAR"]) {
@@ -2750,8 +2815,14 @@
                 return a.localeCompare(b);
             });
 
+            // Actualizar Tarjetas de analíticas generales
+            const generalSuccessRate = successStudentsCount > 0 ? Math.round(successSum / successStudentsCount) : 100;
+            document.getElementById('metric-assigned-count').innerText = `${assignedCount} / ${totalStudents} Alumnos`;
+            document.getElementById('metric-success-rate').innerText = `${generalSuccessRate}% de Afinidad`;
+
+            let viableGroupsCount = 0;
+
             const possibleGroupsList = sortedGroups.filter(g => g !== "SIN ASIGNAR" && !g.startsWith("PENDIENTES"));
-            
             const defaultAcademicAreas = [
                 "Contabilidad A", "Contabilidad B", 
                 "Administración A", "Administración B", 
@@ -2772,30 +2843,56 @@
                 let borderStyle = "border-slate-200";
                 let badgeHtml = "";
                 let cardBg = "bg-white";
+                let progressColor = "bg-slate-400";
+
+                const capacityPercentage = Math.min(Math.round((count / 30) * 100), 100);
 
                 if (groupName === "SIN ASIGNAR") {
-                    badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-slate-100 text-slate-600">Alumnos: ${count}</span>`;
+                    badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-slate-100 text-slate-600">Pendientes: ${count}</span>`;
                 } else if (groupName.startsWith("PENDIENTES")) {
                     borderStyle = "border-amber-400";
                     cardBg = "bg-amber-50/10";
                     badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-amber-100 text-amber-800 flex items-center gap-1"><i class="fa-solid fa-triangle-exclamation"></i> Sin Quórum de 15 (${count})</span>`;
+                    progressColor = "bg-amber-500";
                 } else {
+                    if (count >= 15 && count <= 30) {
+                        viableGroupsCount++;
+                    }
+
                     if (count < 15) {
                         borderStyle = "border-rose-400";
                         cardBg = "bg-rose-50/10";
                         badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-rose-100 text-rose-800 flex items-center gap-1"><i class="fa-solid fa-circle-xmark"></i> Subpoblación (${count}/15 Mín)</span>`;
+                        progressColor = "bg-rose-400";
                     } else if (count > 30) {
-                        borderStyle = "border-rose-500";
+                        borderStyle = "border-rose-600";
                         cardBg = "bg-rose-50/10";
-                        badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-rose-100 text-rose-800 flex items-center gap-1"><i class="fa-solid fa-triangle-exclamation"></i> Sobrecupo (${count}/30 Máx)</span>`;
+                        badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-red-100 text-red-800 flex items-center gap-1"><i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Sobrecupo (${count}/30 Máx)</span>`;
+                        progressColor = "bg-red-600";
                     } else {
                         borderStyle = "border-emerald-400";
-                        badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-emerald-100 text-emerald-800 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Válido (${count})</span>`;
+                        badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-emerald-100 text-emerald-800 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Óptimo (${count}/30)</span>`;
+                        progressColor = "bg-emerald-500";
                     }
                 }
 
                 const card = document.createElement('div');
                 card.className = `border-2 ${borderStyle} ${cardBg} rounded-2xl p-4 shadow-sm flex flex-col justify-between transition-all duration-300 hover:shadow-md`;
+
+                let progressMeterHtml = "";
+                if (groupName !== "SIN ASIGNAR") {
+                    progressMeterHtml = `
+                        <div class="mt-2 space-y-1">
+                            <div class="flex justify-between text-[9px] font-bold text-slate-500 uppercase">
+                                <span>Capacidad de Aula:</span>
+                                <span>${count} / 30 Alumnos</span>
+                            </div>
+                            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden p-0.5 border border-slate-200">
+                                <div class="${progressColor} h-full transition-all duration-300 rounded-full" style="width: ${capacityPercentage}%"></div>
+                            </div>
+                        </div>
+                    `;
+                }
 
                 let innerListHtml = "";
                 if (count === 0) {
@@ -2809,7 +2906,7 @@
                         else if (score < 75) alignmentColor = 'text-yellow-600';
 
                         const currentAreaClean = groupName.split(' ')[0]; 
-                        const currentGroupSuccess = getSuccessAssessment(student, currentAreaClean);
+                        const currentGroupSuccess = getSuccessAssessment(student, groupName);
 
                         let selectorOptionsHtml = `<option value="SIN ASIGNAR" ${groupName === 'SIN ASIGNAR' ? 'selected' : ''}>-- SIN GRUPO --</option>`;
                         possibleGroupsList.forEach(opt => {
@@ -2823,7 +2920,7 @@
                             studentAssessmentHtml = `
                                 <div class="flex flex-col gap-0.5 text-[9px] text-slate-500 font-semibold bg-white/70 p-1 rounded border border-slate-100">
                                     <div>Perfil: <strong class="text-amber-600 uppercase">Personalidad (MMPI-2)</strong></div>
-                                    <div>Éxito en aula: <span class="text-slate-500 italic">No aplica (Clínico)</span></div>
+                                    <div>Preferencia: <span class="text-slate-500 italic font-bold text-brand-blue">${student.opt1}</span></div>
                                 </div>
                             `;
                             quickReubicateBtn = `<span class="text-[9px] text-slate-400 font-bold uppercase shrink-0"><i class="fa-solid fa-circle-info"></i> MMPI-2</span>`;
@@ -2831,7 +2928,7 @@
                             studentAssessmentHtml = `
                                 <div class="flex flex-col gap-0.5 text-[9px] text-slate-500 font-semibold bg-white/70 p-1 rounded border border-slate-100">
                                     <div>Sugerido Test: <strong class="text-purple-700">${student.testSuggestedGroup || 'Ninguna'}</strong></div>
-                                    <div class="mt-0.5">Éxito en esta aula: <span class="px-1 py-0.2 rounded font-black uppercase ${currentGroupSuccess.badge}">${currentGroupSuccess.level}</span></div>
+                                    <div class="mt-0.5">Afinidad aula actual: <span class="px-1 py-0.2 rounded font-black uppercase ${currentGroupSuccess.badge}">${currentGroupSuccess.level}</span></div>
                                 </div>
                             `;
 
@@ -2869,9 +2966,12 @@
 
                 card.innerHTML = `
                     <div class="space-y-3">
-                        <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
-                            <h4 class="font-black text-brand-deepBlue text-xs uppercase tracking-tight truncate">${groupName}</h4>
-                            ${badgeHtml}
+                        <div class="flex flex-col pb-2 border-b border-slate-100 gap-1">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-black text-brand-deepBlue text-xs uppercase tracking-tight truncate">${groupName}</h4>
+                                ${badgeHtml}
+                            </div>
+                            ${progressMeterHtml}
                         </div>
                         ${innerListHtml}
                     </div>
@@ -2879,6 +2979,52 @@
 
                 container.appendChild(card);
             });
+
+            document.getElementById('metric-viable-groups').innerText = `${viableGroupsCount} Especialidades`;
+        }
+
+        function exportGroupsToCSV() {
+            if (cloudRecords.length === 0) {
+                showToast("No existen registros disponibles para exportar.", true);
+                return;
+            }
+
+            let csvContent = "\uFEFF"; 
+            csvContent += "Grupo Asignado,Nombre Alumno,Folio,Nivel,Carrera_Especialidad_Origen,Cuatrimestre_Semestre,Tipo_Prueba,1ra_Opcion,2da_Opcion,3ra_Opcion,Porcentaje_Afinidad_Aula,Nivel_Exito\n";
+
+            // Clasificar por grupo para ordenar el CSV
+            const groupsMap = {};
+            cloudRecords.forEach(r => {
+                const g = r.grupoAsignado || "SIN ASIGNAR";
+                if (!groupsMap[g]) groupsMap[g] = [];
+                groupsMap[g].push(r);
+            });
+
+            const sortedGroups = Object.keys(groupsMap).sort();
+
+            sortedGroups.forEach(gName => {
+                const list = groupsMap[gName];
+                list.sort((a,b) => a.name.localeCompare(b.name));
+
+                list.forEach(student => {
+                    const cleanArea = gName.split(' ')[0];
+                    const affinity = student.type === 'CHASIDE' ? calculateAreaCompatibility(student, cleanArea) : 'N/A';
+                    const success = getSuccessAssessment(student, gName);
+
+                    const row = `"${gName}","${student.name}","${student.folio}","${student.level}","${student.career}","${student.period}","${student.type}","${student.opt1 || '---'}","${student.opt2 || '---'}","${student.opt3 || '---'}","${affinity}","${success.level}"`;
+                    csvContent += row + "\n";
+                });
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", "Roster_Alumnos_Clasificados_Grupos_CEUT.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("Reporte detallado de listas por salón descargado correctamente.");
         }
 
         function filterAdminTable() {
@@ -2902,10 +3048,11 @@
         function viewRecordFromAdmin(folio) {
             const found = cloudRecords.find(r => r.folio === folio);
             if (found) {
-                cameFromAdmin = true; // Viene de la administración
+                cameFromAdmin = true; 
                 loadReportToView(found);
                 switchView('results');
-                showToast(`Consultando el diagnóstico del folio ${folio}`);
+                setReportTab('admin'); 
+                showToast(`Consultando el diagnóstico de gabinete del folio ${folio}`);
             }
         }
 
@@ -2929,7 +3076,7 @@
         async function clearAdminDatabase() {
             const confirmed = await showCustomConfirm(
                 "¿Vaciar Base de Datos?",
-                "¿ATENCIÓN: Estás completamente seguro de vaciar de forma permanente el historial completo de diagnósticos de la plataforma? Esta acción no se puede deshacer."
+                "¿ATENCIÓN: Estás completamente seguro de vaciar de forma permanente el historial de gabinete? Esta acción no se puede deshacer."
             );
             if (confirmed && authenticatedUser) {
                 try {
@@ -2946,7 +3093,6 @@
             }
         }
 
-        /* EXPORTACIÓN DE BASE DE DATOS COMPLETA EN CSV */
         function exportTestsToCSV() {
             if (cloudRecords.length === 0) {
                 showToast("No existen registros disponibles para exportar.", true);
@@ -3005,10 +3151,11 @@
             const found = cloudRecords.find(r => r.folio === input);
 
             if (found) {
+                cameFromAdmin = false; 
                 loadReportToView(found);
                 switchView('results');
-                setReportTab('student'); // Por defecto al alumno le muestra su reporte individual
-                showToast("Reporte oficial encontrado.");
+                setReportTab('student'); 
+                showToast("Reporte oficial de gabinete encontrado.");
             } else {
                 showToast("No se localizó ningún registro oficial con el Folio proporcionado.", true);
             }
@@ -3055,6 +3202,7 @@
         window.manuallyMoveStudent = manuallyMoveStudent;
         window.getSuccessAssessment = getSuccessAssessment;
         window.setReportTab = setReportTab;
+        window.exportGroupsToCSV = exportGroupsToCSV;
 
         function cleanAccentsAndUppercase(text) {
             const map = { 'Á': 'A', 'É': 'E', 'Í': 'I', 'Ó': 'O', 'Ú': 'U', 'Ü': 'U' };
@@ -3084,3 +3232,11 @@
     </script>
 </body>
 </html>
+```
+eof
+
+### Resumen de cambios aplicados:
+* Se añadió la función `exportGroupsToCSV()` para permitir la descarga directa y estructurada de las listas de asistencia organizadas por salón, grado e índice de afinidad psicométrica.
+* Se implementaron tres tarjetas de analíticas clave (*Alumnos Clasificados*, *Aulas Consolidadas* e *Índice General de Éxito de Aula*) en el gestor de grupos.
+* Se agregó la **barra de progreso de capacidad** dinámica para cada grupo que representa visualmente el llenado en tiempo real.
+* Se mejoró el disparador de reubicación manual `manuallyMoveStudent`: el sistema detecta de forma autónoma si el alumno está siendo reubicado en un área de alta o baja afinidad vocacional y previene al administrador antes de procesar el traslado.
