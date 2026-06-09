@@ -6,9 +6,9 @@
     <title>Portal Psicopedagógico - CHASIDE & MMPI-2 Completo</title>
     
     <!-- Favicon Oficial -->
-    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2">
-    <link rel="shortcut icon" type="image/png" href="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2">
-    <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2">
+    <link class="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2">
+    <link class="shortcut icon" type="image/png" href="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2">
+    <link class="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -157,7 +157,7 @@
                 color: #000000 !important;
                 font-size: 11px;
             }
-            .no-print, header, footer, #toast, .action-bar-container, #admin-modal, #confirm-modal {
+            .no-print, header, footer, #toast, .action-bar-container, #admin-modal, #confirm-modal, #override-modal {
                 display: none !important;
             }
             main {
@@ -236,7 +236,6 @@
             <span id="toast-message" class="text-sm font-medium">Operación realizada con éxito.</span>
         </div>
 
-        <!-- VISTA 1: INICIO - SELECCIÓN DE TEST -->
         <section id="view-student-welcome" class="max-w-4xl mx-auto space-y-8 view-transition">
             <div class="bg-white rounded-2xl border-t-8 border-brand-gold shadow-2xl p-0 relative overflow-hidden institutional-card">
                 <div class="relative h-48 flex items-center p-6 text-center text-white justify-center overflow-hidden bg-gradient-to-br from-brand-deepBlue via-brand-blue to-brand-deepBlue border-b-2 border-brand-gold/20">
@@ -396,7 +395,7 @@
             </div>
         </section>
 
-        <!-- VISTA 2: ASISTENTE DE CUESTIONARIO ACTIVO (WIZARD) -->
+        <!-- VISTA: ASISTENTE DE CUESTIONARIO ACTIVO (WIZARD) -->
         <section id="view-test-wizard" class="hidden max-w-4xl mx-auto bg-white rounded-2xl border-t-8 border-brand-gold shadow-2xl p-6 sm:p-8 transition-all institutional-card view-transition">
             
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 border-b border-slate-100 mb-6 gap-3">
@@ -444,7 +443,7 @@
             </div>
         </section>
 
-        <!-- VISTA ADICIONAL: SELECCIÓN DE ÁREAS DE FORMACIÓN -->
+        <!-- VISTA ACIONAL: SELECCIÓN DE ÁREAS DE FORMACIÓN -->
         <section id="view-area-selection" class="hidden max-w-3xl mx-auto space-y-6 view-transition">
             <div class="bg-white rounded-2xl border-t-8 border-brand-gold shadow-2xl p-6 sm:p-10 institutional-card">
                 <div class="flex items-center space-x-4 border-b border-slate-100 pb-4 mb-6">
@@ -530,12 +529,12 @@
             </div>
         </section>
 
-        <!-- VISTA 3: INFORME DE RESULTADOS (MODO DUAL ALUMNO/ADMINISTRADOR - SEGURO) -->
+        <!-- VISTA: INFORME DE RESULTADOS (MODO DUAL ALUMNO/ADMINISTRADOR - SEGURO) -->
         <section id="view-results" class="hidden max-w-5xl mx-auto space-y-6 transition-all view-transition">
             
             <!-- Barra de Acciones Rápidas con Selector de Tipo de Reporte -->
             <div class="action-bar-container flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-slate-900/95 backdrop-blur-md p-4 rounded-2xl no-print border border-brand-gold/30 shadow-xl">
-                <!-- Selector de Pestaña de Reporte (Se oculta/muestra dinámicamente con JS) -->
+                <!-- Selector de Pestaña de Reporte -->
                 <div id="report-tabs-selector" class="flex bg-slate-950 p-1 rounded-xl border border-slate-800">
                     <button id="btn-toggle-student-view" onclick="setReportTab('student')" class="px-4 py-2 text-xs font-black rounded-lg transition-all bg-brand-gold text-brand-deepBlue uppercase tracking-widest flex items-center gap-2">
                         <i class="fa-solid fa-user-graduate"></i> Reporte Alumno
@@ -681,7 +680,7 @@
                         </div>
                     </div>
 
-                    <!-- Pie de página del estudiante sin firmas -->
+                    <!-- Pie de página del estudiante -->
                     <div class="border-t border-slate-200 pt-6 mt-8 text-center text-xs print-no-break">
                         <p class="text-slate-500 font-semibold mb-2">Este documento contiene los resultados de tu evaluación psicométrica autónoma.</p>
                         <p class="font-extrabold text-brand-deepBlue uppercase text-base tracking-widest font-serif">
@@ -749,7 +748,7 @@
                                 <i class="fa-solid fa-list-ol text-brand-gold"></i> Elección de Áreas y Preferencias de Aula
                             </h4>
                             <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
-                                <span class="text-[10px] font-black text-slate-400 uppercase">Alineación Coherente:</span>
+                                <span class="text-[10px] font-black text-slate-400 uppercase">Diagnóstico Comparativo:</span>
                                 <span id="ad-res-alignment-badge" class="font-bold text-xs">Cargando...</span>
                             </div>
                         </div>
@@ -769,10 +768,10 @@
                             </div>
                         </div>
 
-                        <!-- MOTOR DE PRONÓSTICO DE ÉXITO ACADÉMICO (SOLO PARA CHASIDE) -->
+                        <!-- MOTOR DE PRONÓSTICO DE ÉXITO ACADÉMICO -->
                         <div id="ad-res-success-assessment-card" class="bg-white p-4 rounded-xl border border-slate-200 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
                             <div class="md:col-span-4 space-y-1">
-                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-wider block">Pronóstico de Éxito en Salón Elegido</span>
+                                <span class="text-[10px] text-slate-400 font-black uppercase tracking-wider block">Evaluación de Éxito / Fracaso en Grupo</span>
                                 <div id="ad-res-success-level-badge" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-black uppercase">
                                     -
                                 </div>
@@ -786,15 +785,25 @@
 
                         <!-- Distribución y Asignación de Aula de Destino -->
                         <div class="bg-white/70 p-3.5 rounded-xl border border-slate-200/80">
-                            <span class="text-[10px] text-slate-400 font-black uppercase tracking-wider block">Aula y Grupo de Asignación Resuelta</span>
+                            <span class="text-[10px] text-slate-400 font-black uppercase tracking-wider block">Aula y Grupo de Asignación Resuelta (Alineado a Test)</span>
                             <div class="flex items-center gap-2.5 mt-1.5">
                                 <div class="px-3 py-1 bg-brand-deepBlue text-white text-xs font-black rounded-lg uppercase tracking-wider" id="ad-res-assigned-group">
                                     -
                                 </div>
                                 <p class="text-[11px] text-slate-600 font-medium" id="ad-res-group-explanation">
-                                    Asignación resuelta mediante el análisis de cupo cruzado por compatibilidad psicométrica.
+                                    Asignación resuelta mediante el análisis de cupo cruzado por compatibilidad psicométrica del test vocacional.
                                 </p>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN DE JUSTIFICACIÓN DE CLASIFICACIÓN MANUAL -->
+                    <div id="ad-res-justification-block" class="hidden border border-brand-gold/30 bg-amber-50/20 rounded-xl p-5 print-no-break space-y-3">
+                        <h4 class="text-xs font-black text-brand-deepBlue uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-file-signature text-brand-gold"></i> Sustento Lógico de Clasificación Manual (Gabinete)
+                        </h4>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 text-xs text-slate-700 leading-relaxed font-semibold italic" id="ad-res-justification-text">
+                            -
                         </div>
                     </div>
 
@@ -895,7 +904,7 @@
                         </p>
                     </div>
 
-                    <!-- Pie de página del administrador sin firmas -->
+                    <!-- Pie de página del administrador -->
                     <div class="border-t border-slate-200 pt-6 mt-8 text-center text-xs print-no-break">
                         <p class="text-slate-500 font-semibold mb-2">Este expediente es privado, confidencial y propiedad exclusiva del Gabinete del CEUT.</p>
                         <p class="font-extrabold text-brand-deepBlue uppercase text-base tracking-widest font-serif">
@@ -908,10 +917,10 @@
 
         </section>
 
-        <!-- SECCIÓN: VISTA PANEL DE ADMINISTRACIÓN (HISTORIAL DE ALUMNOS) -->
+        <!-- SECCIÓN: VISTA PANEL DE ADMINISTRACIÓN -->
         <section id="view-admin-panel" class="hidden space-y-6 view-transition">
             <div class="bg-white rounded-2xl border-t-8 border-brand-blue shadow-2xl p-6 sm:p-8 institutional-card">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-100 gap-4">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b-2 border-slate-100 gap-4">
                     <div class="flex items-center space-x-3">
                         <div class="w-12 h-12 rounded-xl bg-slate-50 p-1 flex items-center justify-center border border-slate-200 shrink-0">
                             <img src="https://lh3.googleusercontent.com/d/1ao9olFJOvSPvgmeyLJhkD1P0Pmq_R3T2" class="w-full h-full object-contain" alt="Logo">
@@ -924,6 +933,9 @@
                     <div class="flex flex-wrap gap-2 w-full sm:w-auto">
                         <button onclick="exportTestsToCSV()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shrink-0">
                             <i class="fa-solid fa-file-excel"></i> Exportar Evaluaciones
+                        </button>
+                        <button onclick="changeAdminPIN()" class="px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shrink-0">
+                            <i class="fa-solid fa-key"></i> Cambiar PIN
                         </button>
                         <button onclick="clearAdminDatabase()" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 shadow-md shrink-0">
                             <i class="fa-solid fa-trash-can"></i> Vaciar BD
@@ -944,7 +956,7 @@
                     </button>
                 </div>
 
-                <!-- PESTAÑA 1: HISTORIAL DE REGISTROS -->
+                <!-- PESTAÑA 1: HISTORIAL -->
                 <div id="admin-tab-records" class="space-y-4 mt-4">
                     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pb-2">
                         <div class="relative sm:col-span-2">
@@ -965,7 +977,7 @@
                         </div>
                     </div>
 
-                    <div class="overflow-x-auto border border-slate-100 rounded-xl">
+                    <div class="overflow-x-auto border border-slate-100 rounded-xl font-sans">
                         <table class="w-full text-left text-xs text-slate-700">
                             <thead class="bg-slate-50 text-slate-500 uppercase font-black text-[10px] tracking-wider border-b border-slate-100">
                                 <tr>
@@ -983,15 +995,15 @@
                     </div>
                 </div>
 
-                <!-- PESTAÑA 2: GESTOR DE GRUPOS INTERACTIVO -->
+                <!-- PESTAÑA 2: GESTOR DE GRUPOS -->
                 <div id="admin-tab-groups" class="hidden space-y-6 mt-4">
                     <div class="bg-gradient-to-r from-brand-deepBlue to-brand-blue rounded-xl p-5 border-l-4 border-brand-gold text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-md">
                         <div class="space-y-1">
                             <h4 class="text-sm font-black text-brand-gold uppercase tracking-wider flex items-center gap-2">
-                                <i class="fa-solid fa-circle-info"></i> Directrices de Cupo y Capacidad Cruzada
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Clasificación Científica guiada por el Test
                             </h4>
                             <p class="text-[11px] text-slate-200 leading-relaxed font-medium max-w-2xl">
-                                Cada aula de especialidad debe tener un **mínimo de 15 alumnos** y un **máximo de 30 alumnos**. Si un grupo no reúne quórum, los estudiantes son reubicados de forma inteligente según su segunda o tercera preferencia, cruzando compatibilidades del test vocacional para garantizar el éxito escolar.
+                                El sistema realiza la distribución de aulas **estrictamente de acuerdo al resultado del Test Vocacional**. Posteriormente, realiza la comparación de éxito o riesgo de fracaso contra las elecciones y preferencias cargadas por el estudiante.
                             </p>
                         </div>
                         <div class="flex gap-2 w-full sm:w-auto self-end sm:self-center">
@@ -1004,7 +1016,7 @@
                         </div>
                     </div>
 
-                    <!-- Métricas de Agrupamiento General en Tiempo Real -->
+                    <!-- Métricas de Agrupamiento -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="group-metrics-cards">
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between shadow-sm">
                             <div class="space-y-1">
@@ -1026,7 +1038,7 @@
                         </div>
                         <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between shadow-sm">
                             <div class="space-y-1">
-                                <span class="text-[10px] text-slate-400 font-bold uppercase block">Índice General de Éxito en Aulas</span>
+                                <span class="text-[10px] text-slate-400 font-bold uppercase block">Índice Vocacional de Éxito Promedio</span>
                                 <span id="metric-success-rate" class="text-lg font-black text-brand-gold">-</span>
                             </div>
                             <div class="p-3 bg-yellow-100 text-brand-gold rounded-xl text-lg">
@@ -1035,7 +1047,6 @@
                         </div>
                     </div>
 
-                    <!-- Contenedor General de Cuadrícula de Grupos Activos -->
                     <div id="groups-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     </div>
                 </div>
@@ -1046,7 +1057,7 @@
     </main>
 
     <!-- MODAL DE CONTROL DE ACCESO (ADMIN LOGIN) -->
-    <div id="admin-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
+    <div id="admin-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-sm w-full border-t-8 border-brand-blue p-6 shadow-2xl relative">
             <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -1063,7 +1074,6 @@
                 <div>
                     <label class="block text-10px font-black text-slate-400 uppercase tracking-widest mb-1.5" for="admin-pass">Contraseña del Gabinete</label>
                     <input type="password" id="admin-pass" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue bg-slate-50 font-bold placeholder-slate-300" placeholder="••••••••">
-                    <span class="block text-[10px] text-slate-400 mt-2">Clave por defecto: <strong class="text-brand-blue">CEUT2026</strong></span>
                 </div>
                 <button type="submit" class="w-full py-2.5 bg-brand-blue hover:bg-brand-600 text-white font-black text-xs uppercase rounded-xl shadow-md transition-all">
                     Ingresar al Gabinete
@@ -1072,7 +1082,7 @@
         </div>
     </div>
 
-    <!-- MODAL DE CONFIRMACIÓN PERSONALIZADO -->
+    <!-- MODAL DE CONFIRMACIÓN DE ACCIONES GENERALES -->
     <div id="confirm-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div id="confirm-card-container" class="bg-white rounded-2xl max-w-sm w-full border-t-8 border-rose-600 p-6 shadow-2xl relative">
             <div class="text-center space-y-3">
@@ -1083,11 +1093,80 @@
                 <p id="confirm-modal-message" class="text-xs text-slate-500 font-semibold leading-relaxed">Esta acción es irreversible.</p>
             </div>
             <div class="flex gap-2 mt-6">
-                <button id="btn-confirm-cancel" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-xs uppercase rounded-xl transition-all">
+                <button id="btn-confirm-cancel" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-xs uppercase rounded-xl transition-all font-sans font-bold">
                     Cancelar
                 </button>
-                <button id="btn-confirm-accept" class="w-1/2 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs uppercase rounded-xl shadow-md transition-all">
+                <button id="btn-confirm-accept" class="w-1/2 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs uppercase rounded-xl shadow-md transition-all font-sans font-bold">
                     Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE JUSTIFICACIÓN DE REUBICACIÓN MANUAL (SUSTENTO COMPARATIVO) -->
+    <div id="override-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full border-t-8 border-brand-gold p-6 shadow-2xl relative">
+            <div class="text-center space-y-3 pb-3 border-b border-slate-100">
+                <div class="w-12 h-12 bg-amber-100 text-brand-gold rounded-full flex items-center justify-center mx-auto text-xl shadow-inner animate-pulse">
+                    <i class="fa-solid fa-file-signature"></i>
+                </div>
+                <h3 class="text-md font-black text-brand-deepBlue uppercase tracking-tight">Sustento Lógico de Reubicación Manual</h3>
+                <p class="text-[11px] text-slate-500 font-semibold">Se generará un dictamen psicopedagógico comparativo para fundamentar el cambio.</p>
+            </div>
+
+            <div class="mt-4 space-y-3.5 text-xs">
+                <div class="bg-slate-50 p-3 rounded-lg border border-slate-200/60 grid grid-cols-2 gap-2 font-semibold">
+                    <div>
+                        <span class="block text-[10px] text-slate-400 font-black uppercase">Estudiante:</span>
+                        <span id="override-student-name" class="text-brand-deepBlue text-xxs font-black truncate block">-</span>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] text-slate-400 font-black uppercase">Folio Único:</span>
+                        <span id="override-student-folio" class="text-brand-blue text-xxs font-mono font-black block">-</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2.5 text-center font-bold">
+                    <div class="p-2.5 bg-blue-50/50 rounded-lg border border-blue-200">
+                        <span class="block text-[9px] text-blue-500 font-black uppercase">Recomendado Test</span>
+                        <span id="override-val-test" class="block font-black text-xxs text-brand-deepBlue mt-1">-</span>
+                        <span id="override-compat-test" class="inline-block mt-1 px-1.5 py-0.5 text-[9px] font-black bg-blue-100 text-blue-800 rounded">-%</span>
+                    </div>
+                    <div class="p-2.5 bg-amber-50/50 rounded-lg border border-amber-200">
+                        <span class="block text-[9px] text-amber-600 font-black uppercase">Preferencia Alumno</span>
+                        <span id="override-val-pref" class="block font-black text-xxs text-brand-deepBlue mt-1">-</span>
+                        <span id="override-compat-pref" class="inline-block mt-1 px-1.5 py-0.5 text-[9px] font-black bg-amber-100 text-amber-800 rounded">-%</span>
+                    </div>
+                    <div class="p-2.5 bg-purple-50/50 rounded-lg border border-purple-200">
+                        <span class="block text-[9px] text-purple-600 font-black uppercase">Nuevo Salón</span>
+                        <span id="override-val-new" class="block font-black text-xxs text-brand-deepBlue mt-1">-</span>
+                        <span id="override-compat-new" class="inline-block mt-1 px-1.5 py-0.5 text-[9px] font-black bg-purple-100 text-purple-800 rounded">-%</span>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DE RUTAS DE ÉXITO RECOMENDADAS PARA REUBICACIÓN -->
+                <div class="space-y-1 bg-brand-lightGold/60 p-3 rounded-xl border border-brand-gold/20">
+                    <label class="block text-[10px] font-black text-brand-deepBlue uppercase tracking-widest flex items-center gap-1.5">
+                        <i class="fa-solid fa-square-poll-vertical text-brand-gold animate-bounce"></i> Alternativas de Éxito Asegurado en Aula:
+                    </label>
+                    <div id="override-alternatives-container" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1.5">
+                        <!-- Alternativas dinámicas calculadas por test se inyectarán aquí -->
+                    </div>
+                    <p class="text-[9px] text-slate-500 font-medium italic mt-1">Haz clic en cualquier opción para seleccionarla directamente y autogenerar el sustento lógico.</p>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest">Dictamen Comparativo de Reubicación</label>
+                    <textarea id="override-justification-input" rows="4" class="block w-full px-3 py-2 border border-slate-200 rounded-xl text-xxs font-semibold focus:outline-none focus:ring-2 focus:ring-brand-gold bg-slate-50 focus:bg-white text-slate-800 leading-relaxed italic" placeholder="Cargando dictamen comparativo automatizado..."></textarea>
+                </div>
+            </div>
+
+            <div class="flex gap-2 mt-5 font-sans font-bold">
+                <button onclick="closeOverrideModal()" class="w-1/3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-xs uppercase rounded-xl transition-all">
+                    Cancelar
+                </button>
+                <button onclick="confirmManualMove()" class="w-2/3 py-2.5 bg-brand-blue hover:bg-brand-600 text-white font-black text-xs uppercase rounded-xl shadow-md transition-all">
+                    Firmar y Guardar
                 </button>
             </div>
         </div>
@@ -1119,6 +1198,9 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
         const appId = "ceut-prod"; 
+
+        // PIN DE ADMINISTRADOR DINÁMICO (Por defecto '1015' sin mostrarse en UI)
+        let ADMIN_PIN = localStorage.getItem('ceut_admin_pin') || '1015';
 
         let cloudRecords = [];
         let authenticatedUser = null;
@@ -1216,7 +1298,7 @@
             { id: 50, text: "¿Te agradaría participar en producciones cinematográficas o cortometrajes artísticos?" },
             { id: 51, text: "¿Te gustaría liderar la planeación fiscal de una organización no gubernamental?" },
             { id: 52, text: "¿Disfrutarías planificando sistemas de irrigación agrícola o hidráulicos?" },
-            { id: 53, text: "¿Sientes vocación por dar terapia física y rehabilitación a pacientes lesionados?" },
+            { id: 53, text: "Sientes vocación por dar terapia física y rehabilitación a pacientes lesionados?" },
             { id: 54, text: "¿Te agrada la investigación de algoritmos para criptografía y encriptación?" },
             { id: 55, text: "¿Elegirías entrenar tácticas de defensa personal extrema o supervivencia?" },
             { id: 56, text: "¿Te agrada el estudio analítico de la tabla periódica y comportamiento de compuestos?" },
@@ -1224,9 +1306,9 @@
             { id: 58, text: "¿Te verías gerenciando el departamento de recursos humanos de una empresa?" },
             { id: 59, text: "¿Elegirías diseñar envases industriales con base en estudios de resistencia?" },
             { id: 60, text: "¿Te sentirías motivado atendiendo urgencias psicológicas en crisis familiares?" },
-            { id: 61, text: "¿Te gustaría la creación de herramientas de automatización de código informático?" },
-            { id: 62, text: "¿Elegirías participar en misiones humanitarias de seguridad en zonas de guerra?" },
-            { id: 63, text: "¿Te fascina el estudio puramente teórico de los números y el álgebra abstracta?" },
+            { id: 61, text: "Te gustaría la creación de herramientas de automatización de código informático?" },
+            { id: 62, text: "Elegirías participar en misiones humanitarias de seguridad en zonas de guerra?" },
+            { id: 63, text: "Te fascina el estudio puramente teórico de los números y el álgebra abstracta?" },
             { id: 64, text: "¿Te interesaría la crítica cinematográfica o de literatura contemporánea?" },
             { id: 65, text: "¿Te verías asesorando legalmente el cobro de auditorías fiscales gubernamentales?" },
             { id: 66, text: "¿Te gustaría resolver averías de cableados de alta tensión o de plantas de energía?" },
@@ -1237,25 +1319,25 @@
             { id: 71, text: "¿Te gustaría trabajar en restauración de pinturas antiguas o piezas de valor histórico?" },
             { id: 72, text: "¿Elegirías auditar las finanzas corporativas para mitigar riesgos de fraude empresarial?" },
             { id: 73, text: "¿Te agrada la idea de calcular la resistencia de materiales de soporte de rascacielos?" },
-            { id: 74, text: "¿Te gustaría colaborar con médicos cirujanos durante intervenciones complejas?" },
+            { id: 74, text: "Te gustaría colaborar con médicos cirujanos durante intervenciones complejas?" },
             { id: 75, text: "¿Te verías programando sistemas operativos o kernels de código abierto?" },
             { id: 76, text: "¿Cumplirías órdenes directas de estrategia militar ante emergencias extremas?" },
-            { id: 77, text: "¿Te gustaría escribir de física de partículas?" },
+            { id: 77, text: "Te gustaría escribir de física de partículas?" },
             { id: 78, text: "¿Aceptarías la dirección de un proyecto creativo publicitario en redes sociales?" },
             { id: 79, text: "¿Te motiva guiar el reclutamiento y capacitación interna de personal de trabajo?" },
             { id: 80, text: "¿Te interesaría supervisar las normativas ambientales en una constructora?" },
             { id: 81, text: "¿Te gustaría especializarte en psiquiatría y tratamiento médico clínico?" },
             { id: 82, text: "¿Elegirías administrar plataformas y centros de servicios tecnológicos de red?" },
-            { id: 83, text: "¿Te sentirías orgulloso portando con honor el uniforme militar o policial del país?" },
+            { id: 83, text: "Portando con honor el uniforme militar o policial del país?" },
             { id: 84, text: "¿Te apasiona la resolución mental de acertijos de lógica matemática compleja?" },
             { id: 85, text: "¿Te agrada la redacción periodística, reportajes de investigación o crónica social?" },
-            { id: 86, text: "¿Disfrutarías el control presupuestal y de inventario de una planta industrial?" },
+            { id: 86, text: "Disfrutarías el control presupuestal y de inventario de una planta industrial?" },
             { id: 87, text: "¿Te atrae la metalurgia, fundición o fabricación de piezas de soporte estructural?" },
             { id: 88, text: "¿Te gustaría coordinar donaciones y apoyo social internacional para refugiados?" },
-            { id: 89, text: "¿Elegirías el desarrollo de herramientas informáticas de análisis epidemiológico?" },
+            { id: 89, text: "Elegirías el desarrollo de herramientas informáticas de análisis epidemiológico?" },
             { id: 90, text: "¿Te agrada el adiestramiento táctico para brigadas operativas antiterroristas?" },
             { id: 91, text: "¿Te dedicarías al desarrollo científico de biocombustibles o fuentes alternativas?" },
-            { id: 92, text: "¿Disfrutarías impatiento cátedras de historia universal, filosofía o artes?" },
+            { id: 92, text: "Disfrutarías impartiendo cátedras de historia universal, filosofía o artes?" },
             { id: 93, text: "¿Elegirías asesorar el plan de ahorro de fondos de pensiones y de jubilación?" },
             { id: 94, text: "¿Te gustaría coordinar la logística física de distribución de barcos de carga?" },
             { id: 95, text: "¿Te sentirías motivado en terapias psicológicas con pacientes con adicciones?" },
@@ -1272,12 +1354,12 @@
             else if (i === 3) txt += "¿Me despierto fresco y descansado casi todas las mañanas?";
             else if (i === 4) txt += "¿Creo que me gustaría trabajar en la docencia o pedagogía?";
             else if (i === 5) txt += "El ruido me despierta fácilmente por las noches.";
-            else if (i === 6) txt += "¿Me gusta leer las secciones de noticias de crímenes en el periódico?";
-            else if (i === 7) txt += "¿Mis manos y mi pies tienen la temperatura adecuada casi siempre?";
+            else if (i === 6) txt += "Me gusta leer las secciones de noticias de crímenes en el periódico.";
+            else if (i === 7) txt += "¿Mis manos y mis pies tienen la temperatura adecuada casi siempre?";
             else if (i === 8) txt += "Mi vida diaria está llena de cosas que mantienen mi interés activo.";
             else if (i === 9) txt += "Actualmente tengo la capacidad de trabajar igual que antes.";
             else if (i === 10) txt += "Siento una opresión constante en el pecho casi todo el tiempo.";
-            else if (i === 11) txt += "¿Creo que la mayoría de las personas mentirían para salir adelante?";
+            else if (i === 11) txt += "Creo que la mayoría de las personas mentirían para salir adelante.";
             else if (i === 12) txt += "Tengo pesadillas horribles con regularidad.";
             else if (i === 13) txt += "Siento que soy más sensible y reservado que la mayoría.";
             else if (i === 14) txt += "Me molesta el comportamiento egoísta de la gente.";
@@ -1373,7 +1455,7 @@
         };
 
         let activeTestType = ''; 
-        let currentStudent = { name: '', level: 'UNIVERSIDAD', gender: 'M', career: '', period: '', group: '', mode: '', date: '', folio: '', opt1: '', opt2: '', opt3: '', grupoAsignado: 'SIN ASIGNAR', alignmentScore: 0, testSuggestedGroup: '' };
+        let currentStudent = { name: '', level: 'UNIVERSIDAD', gender: 'M', career: '', period: '', group: '', mode: '', date: '', folio: '', opt1: '', opt2: '', opt3: '', grupoAsignado: 'SIN ASIGNAR', alignmentScore: 0, testSuggestedGroup: '', justificacionManual: '' };
         let activeQuestions = [];
         let answers = {};
         let currentQuestionsPage = 0;
@@ -1384,6 +1466,10 @@
         let adRadarChartInstance = null;
         let stMMPIChartInstance = null;
         let adMMPIChartInstance = null;
+
+        // Variables para reubicación manual temporal
+        let pendingMoveFolio = null;
+        let pendingMoveGroup = null;
 
         const areaToChasideMapping = {
             "Contabilidad": { main: "C", second: "E", weightMain: 0.7, weightSecond: 0.3 },
@@ -1397,7 +1483,7 @@
 
         function calculateAreaCompatibility(record, academicArea) {
             if (!academicArea || academicArea === "SIN ASIGNAR" || academicArea.startsWith("PENDIENTES")) return 0;
-            const cleanArea = academicArea.split(' ')[0]; // Limpiar nombres como "Contabilidad A" a "Contabilidad"
+            const cleanArea = academicArea.split(' ')[0]; 
             
             if (record.type === 'MMPI-2') {
                 if (cleanArea === record.opt1) return 100;
@@ -1422,49 +1508,89 @@
 
         function getSuccessAssessment(record, selectedArea) {
             if (!selectedArea || selectedArea === 'SIN ASIGNAR') {
-                return { score: 0, level: 'S/A', desc: 'Sin datos de preferencia de aula o pendiente.', color: 'slate', badge: 'bg-slate-100 text-slate-800 border-slate-300' };
+                return { score: 0, level: 'S/A', desc: 'Sin datos de preferencia de aula o pendiente.', color: 'slate', badge: 'bg-slate-100 text-slate-800 border border-slate-300' };
             }
             
             const cleanArea = selectedArea.split(' ')[0];
-            const score = calculateAreaCompatibility(record, cleanArea);
             const testSug = getDirectTestRecommendation(record);
             
-            let level = '';
-            let desc = '';
-            let color = '';
-            let badge = '';
-
             if (record.type === 'MMPI-2') {
                 if (cleanArea === record.opt1) {
                     return { score: 100, level: 'ÓPTIMO', desc: 'El alumno ha sido clasificado dentro de su primera opción prioritaria de aula.', color: 'emerald', badge: 'bg-emerald-100 text-emerald-800 border border-emerald-300' };
                 } else if (cleanArea === record.opt2 || cleanArea === record.opt3) {
                     return { score: 80, level: 'ACEPTABLE', desc: 'El alumno se encuentra en un salón secundario de respaldo de su propia elección.', color: 'amber', badge: 'bg-amber-100 text-amber-800 border border-amber-300' };
                 } else {
-                    return { score: 50, level: 'FUERA DE ELECCIÓN', desc: 'El aula asignada no coincide con ninguna de las opciones preferentes cargadas.', color: 'rose', badge: 'bg-rose-100 text-rose-800 border border-rose-300' };
+                    return { score: 50, level: 'DIVERGENTE', desc: 'El aula asignada no coincide con ninguna de las opciones preferentes cargadas.', color: 'rose', badge: 'bg-rose-100 text-rose-800 border border-rose-300' };
                 }
             }
 
+            // Comparación estricta de Éxito o Fracaso basada en el Test (Asignado) vs Elección del alumno
+            const opt1Clean = record.opt1 ? record.opt1.split(' ')[0] : '';
+            const opt2Clean = record.opt2 ? record.opt2.split(' ')[0] : '';
+            const opt3Clean = record.opt3 ? record.opt3.split(' ')[0] : '';
+
+            let level = '';
+            let desc = '';
+            let color = '';
+            let badge = '';
+            let score = 0;
+
             if (cleanAccentsAndUppercase(cleanArea) === cleanAccentsAndUppercase(testSug.area)) {
-                level = 'ÉXITO EXCELENTE';
-                color = 'emerald';
-                badge = 'bg-emerald-100 text-emerald-800 border border-emerald-300';
-                desc = `Sinergia vocacional óptima del 100%. El alumno muestra un perfil psicométrico ideal para la naturaleza del aula de "${cleanArea.toUpperCase()}". Se pronostica un alto desempeño técnico, sólida adaptación académica y un nulo riesgo de deserción voluntaria.`;
-            } else {
-                if (score >= 75) {
-                    level = 'PROSPECCIÓN ALTA';
+                // El grupo actual es el recomendado por el test
+                if (cleanAccentsAndUppercase(cleanArea) === cleanAccentsAndUppercase(opt1Clean)) {
+                    level = 'ÉXITO ABSOLUTO';
+                    score = 100;
+                    color = 'emerald';
+                    badge = 'bg-emerald-100 text-emerald-800 border border-emerald-300';
+                    desc = `Sinfonía Vocacional Plena (100% de alineación). El test vocacional recomienda de forma absoluta "${testSug.area.toUpperCase()}", coincidiendo perfectamente con la 1ª opción elegida por el alumno. Se garantiza un rendimiento sobresaliente, alta motivación interna y nulo riesgo de fracaso escolar.`;
+                } else if (cleanAccentsAndUppercase(cleanArea) === cleanAccentsAndUppercase(opt2Clean)) {
+                    level = 'ÉXITO VIABLE';
+                    score = 80;
                     color = 'emerald';
                     badge = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
-                    desc = `A pesar de que su test recomienda prioritariamente el área de "${testSug.area.toUpperCase()}", sus destrezas secundarias demuestran una compatibilidad de alto rendimiento del ${score}% para la elección de "${cleanArea.toUpperCase()}". Se pronostica un desempeño sobresaliente compensado de forma intuitiva.`;
-                } else if (score >= 55) {
+                    desc = `Compatibilidad Alta (80% de alineación). El salón asignado ("${cleanArea.toUpperCase()}") es el recomendado por su test vocacional y coincide con la 2ª opción preferente del estudiante. Se proyecta un proceso de adaptación óptimo con excelente rendimiento.`;
+                } else if (cleanAccentsAndUppercase(cleanArea) === cleanAccentsAndUppercase(opt3Clean)) {
                     level = 'ÉXITO CONDICIONADO';
+                    score = 60;
                     color = 'amber';
                     badge = 'bg-amber-100 text-amber-900 border border-amber-300';
-                    desc = `Aptitud moderada (${score}%). Existe una brecha de competencias sensible entre el perfil sugerido por el test ("${testSug.area.toUpperCase()}") y su elección de aula ("${cleanArea.toUpperCase()}"). El alumno requerirá un esfuerzo y estudio metodológico adicional. Se recomienda un seguimiento psicopedagógico oportuno mediante tutorías para evitar rezagos académicos en este salón.`;
+                    desc = `Alineación Vocacional Media (60%). Ubicado en "${cleanArea.toUpperCase()}" por recomendación directa del test, coincidiendo con su 3ª opción. El éxito de su permanencia escolar está garantizado por su aptitud técnica, pero requerirá monitoreo motivacional menor por parte del gabinete.`;
                 } else {
-                    level = 'RIESGO DE DESAJUSTE';
+                    level = 'RIESGO DE APATÍA';
+                    score = 40;
+                    color = 'amber';
+                    badge = 'bg-yellow-100 text-yellow-800 border border-yellow-300';
+                    desc = `Disonancia Motivacional (40%). El alumno presenta aptitud técnica ideal para "${cleanArea.toUpperCase()}" según su test vocacional, sin embargo, esta área NO figuraba entre sus tres preferencias de ingreso. Aunque posee las capacidades cognitivas, existe riesgo de desinterés si no se fomenta el engagement con la materia.`;
+                }
+            } else {
+                // El alumno fue reubicado manualmente o por cupo a un salón diferente de su recomendación de test
+                const testCompScore = calculateAreaCompatibility(record, cleanArea);
+                if (cleanAccentsAndUppercase(cleanArea) === cleanAccentsAndUppercase(opt1Clean)) {
+                    if (testCompScore >= 75) {
+                        level = 'ÉXITO PROSPECTIVO';
+                        score = 85;
+                        color = 'emerald';
+                        badge = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+                        desc = `Reubicación Viable (85%). Aunque difiere de su sugerencia óptima de test ("${testSug.area.toUpperCase()}"), el alumno está en su 1ª opción preferida ("${cleanArea.toUpperCase()}") donde ostenta una aptitud secundaria alta del ${testCompScore}%. Proyección de éxito escolar saludable.`;
+                    } else if (testCompScore >= 55) {
+                        level = 'RENDIMIENTO AJUSTADO';
+                        score = 55;
+                        color = 'amber';
+                        badge = 'bg-amber-100 text-amber-800 border border-amber-300';
+                        desc = `Aptitud Secundaria Moderada (${testCompScore}%). Ubicado en su opción elegida pero con menor respaldo técnico del test vocacional. Se aconseja seguimiento psicopedagógico preventivo y tutorías de regularización para evitar rezagos en materias técnicas complejas.`;
+                    } else {
+                        level = 'RIESGO DE FRACASO';
+                        score = 30;
+                        color = 'rose';
+                        badge = 'bg-rose-100 text-rose-800 border border-rose-300';
+                        desc = `ALTO RIESGO DE FRACASO TÉCNICO (30%). El alumno cursa su primera preferencia de ingreso, pero su compatibilidad real según el test vocacional es críticamente baja en esta especialidad (${testCompScore}%). La falta de aptitudes de base predice altos índices de reprobación en materias clave y potencial deserción por frustración cognitiva.`;
+                    }
+                } else {
+                    level = 'DISCREPANCIA GENERAL';
+                    score = 25;
                     color = 'rose';
-                    badge = 'bg-rose-100 text-rose-800 border border-rose-300';
-                    desc = `Discrepancia crítica (${score}% de compatibilidad). Las aptitudes dominantes del test se dirigen fuertemente a "${testSug.area.toUpperCase()}", mientras que su elección es "${cleanArea.toUpperCase()}". Se pronostica un alto índice de frustración técnica, alta fatiga cognitiva y potencial deserción del aula de no brindarse apoyo. Se aconseja al administrador considerar el cambio de salón o brindar soporte constante.`;
+                    badge = 'bg-rose-50 text-rose-700 border border-rose-200';
+                    desc = `Disonancia Crítica Multidimensional (25%). El salón asignado no coincide con su recomendación del test ni con sus opciones de interés primario. Requiere intervención inmediata del gabinete psicopedagógico para reubicación o plan de apoyo especializado.`;
                 }
             }
             return { score, level, desc, color, badge };
@@ -1688,6 +1814,7 @@
             currentStudent.group = document.getElementById('student-group').value.trim();
             currentStudent.mode = document.getElementById('student-mode').value;
             currentStudent.grupoAsignado = 'SIN ASIGNAR';
+            currentStudent.justificacionManual = '';
             
             const rawDate = new Date();
             currentStudent.date = rawDate.toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -1945,7 +2072,8 @@
                 opt1: currentStudent.opt1,
                 opt2: currentStudent.opt2,
                 opt3: currentStudent.opt3,
-                grupoAsignado: currentStudent.grupoAsignado || 'SIN ASIGNAR'
+                grupoAsignado: currentStudent.grupoAsignado || 'SIN ASIGNAR',
+                justificacionManual: ''
             };
 
             if (activeTestType === 'CHASIDE') {
@@ -1958,13 +2086,14 @@
                 record.mmpiResults = calculateMMPIResults();
             }
 
-            const alignmentScore = calculateAreaCompatibility(record, record.opt1);
-            record.alignmentScore = alignmentScore;
-
             const sug = getDirectTestRecommendation(record);
             record.testSuggestedGroup = record.type === 'CHASIDE' ? sug.area : record.opt1;
+            
+            // Alineación basada en Test vs Elección Primaria (opt1)
+            const alignmentScore = calculateAreaCompatibility(record, record.type === 'CHASIDE' ? record.testSuggestedGroup : record.opt1);
+            record.alignmentScore = alignmentScore;
 
-            const successVal = getSuccessAssessment(record, record.opt1);
+            const successVal = getSuccessAssessment(record, record.type === 'CHASIDE' ? record.testSuggestedGroup : record.opt1);
             record.successAssessment = {
                 score: successVal.score,
                 level: successVal.level,
@@ -1981,6 +2110,7 @@
                 allRecordsWithNew.push(record);
             }
 
+            // Aplicar el algoritmo robusto de Test-First
             const updatedAssignments = solveOptimalGroups(allRecordsWithNew);
             record.grupoAsignado = updatedAssignments[record.folio] || 'SIN ASIGNAR';
 
@@ -2134,7 +2264,6 @@
             safeSetText('st-res-student-period', record.period);
             safeSetText('st-res-student-group', record.group);
             safeSetText('st-res-student-mode', record.mode);
-            safeSetText('st-signature-name', record.name);
 
             safeSetText('ad-res-student-folio', record.folio);
             safeSetText('ad-res-student-name', record.name);
@@ -2142,7 +2271,6 @@
             safeSetText('ad-res-student-period', record.period);
             safeSetText('ad-res-student-group', record.group);
             safeSetText('ad-res-student-mode', record.mode);
-            safeSetText('ad-signature-name', record.name);
 
             safeSetText('ad-res-area-opt1', record.opt1 || 'No seleccionado');
             safeSetText('ad-res-area-opt2', record.opt2 || 'No seleccionado');
@@ -2169,24 +2297,28 @@
                 if (elAd) elAd.innerText = record.level === 'PREPARATORIA' ? item.prep : item.univ;
             });
 
-            const alignmentVal = record.alignmentScore !== undefined ? record.alignmentScore : 50;
+            // Cargar Bloque de Justificación Manual si existe
+            const justBlock = document.getElementById('ad-res-justification-block');
+            const justText = document.getElementById('ad-res-justification-text');
+            if (justBlock && justText) {
+                if (record.justificacionManual) {
+                    justBlock.classList.remove('hidden');
+                    justText.innerHTML = record.justificacionManual;
+                } else {
+                    justBlock.classList.add('hidden');
+                }
+            }
+
             const badge = document.getElementById('ad-res-alignment-badge');
+            const successVal = getSuccessAssessment(record, record.grupoAsignado || record.opt1);
+
             if (badge) {
                 if (record.type === 'MMPI-2') {
                     badge.className = "px-3 py-1 bg-slate-100 text-slate-500 font-extrabold text-xs rounded-lg flex items-center gap-1";
                     badge.innerHTML = `<i class="fa-solid fa-circle-info text-slate-400"></i> N/A (Perfil Clínico)`;
                 } else {
-                    badge.innerText = `${alignmentVal}% Coherente`;
-                    if (alignmentVal >= 75) {
-                        badge.className = "px-3 py-1 bg-emerald-100 text-emerald-800 font-extrabold text-xs rounded-lg flex items-center gap-1";
-                        badge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i> ${alignmentVal}% Coherencia Óptima`;
-                    } else if (alignmentVal >= 50) {
-                        badge.className = "px-3 py-1 bg-yellow-100 text-yellow-800 font-extrabold text-xs rounded-lg flex items-center gap-1";
-                        badge.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-yellow-600"></i> ${alignmentVal}% Coherencia Media`;
-                    } else {
-                        badge.className = "px-3 py-1 bg-rose-100 text-rose-800 font-extrabold text-xs rounded-lg flex items-center gap-1";
-                        badge.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600"></i> ${alignmentVal}% Desalineado`;
-                    }
+                    badge.innerText = `${successVal.level}`;
+                    badge.className = `px-3 py-1 font-extrabold text-xs rounded-lg flex items-center gap-1 ${successVal.badge}`;
                 }
             }
 
@@ -2194,17 +2326,16 @@
             const expEl = document.getElementById('ad-res-group-explanation');
             if (expEl) {
                 if (record.grupoAsignado && record.grupoAsignado.startsWith("PENDIENTES")) {
-                    expEl.innerHTML = `Tu grupo preferente <strong>${record.opt1}</strong> no ha reunido el quórum mínimo de 15 alumnos para abrirse. El Gabinete Psicopedagógico evalúa tu perfil para reubicarte de forma óptima.`;
+                    expEl.innerHTML = `Su grupo óptimo por test <strong>${record.testSuggestedGroup}</strong> no reunió quórum de 15 alumnos. Pendiente de reubicar.`;
                 } else {
                     if (record.type === 'MMPI-2') {
                         expEl.innerHTML = `Asignación resuelta. El alumno ha sido integrado en el aula de <strong>${record.grupoAsignado}</strong> de acuerdo con su prioridad y disponibilidad de cupo.`;
                     } else {
-                        expEl.innerHTML = `Asignación resuelta. Tu perfil psicométrico de test presenta una <strong>compatibilidad del ${alignmentVal}%</strong> con tu grupo actual de <strong>${record.grupoAsignado}</strong>.`;
+                        expEl.innerHTML = `Asignación resuelta de acuerdo al test. El alumno presenta una compatibilidad de <strong>éxito del ${successVal.score}%</strong> en su grupo de <strong>${record.grupoAsignado}</strong>.`;
                     }
                 }
             }
 
-            const successVal = getSuccessAssessment(record, record.grupoAsignado || record.opt1);
             const levelBadge = document.getElementById('ad-res-success-level-badge');
             const descEl = document.getElementById('ad-res-success-desc');
             const cardEl = document.getElementById('ad-res-success-assessment-card');
@@ -2250,7 +2381,7 @@
 
                 const opinionEl = document.getElementById('ad-res-psychological-opinion');
                 if (opinionEl) {
-                    opinionEl.innerHTML = `${diagnostic.opinionText}<br><br><strong>Recomendación Vocacional-Académica Directa del Test:</strong> Tus habilidades destacan mayor compatibilidad institucional con el grupo de: <span class="text-brand-blue font-black uppercase">${record.testSuggestedGroup || 'General'}</span> con un índice de aptitud del ${alignmentVal}%.`;
+                    opinionEl.innerHTML = `${diagnostic.opinionText}<br><br><strong>Recomendación Vocacional-Académica Directa del Test:</strong> Tus habilidades destacan mayor compatibilidad institucional con el grupo de: <span class="text-brand-blue font-black uppercase">${record.testSuggestedGroup || 'General'}</span>. El análisis comparativo proyecta un nivel de <strong>${successVal.level}</strong> para el aula de ${record.grupoAsignado}.`;
                 }
 
                 fillCHASIDEResultsTableAndDetail('st-metric-table-body', 'st-areas-detail-grid', record.percentages, diagnostic);
@@ -2496,7 +2627,7 @@
                     }
 
                     const tr = document.createElement('tr');
-                    tr.className = 'border-b border-slate-100 hover:bg-slate-50 transition-colors';
+                    tr.className = 'border-b border-slate-100 hover:bg-slate-50 transition-colors font-sans';
                     tr.innerHTML = `
                         <td class="py-2.5 px-3">
                             <div class="font-bold text-slate-900 text-xs">${mmpi2ScalesMetadata[key].name}</div>
@@ -2543,7 +2674,7 @@
             event.preventDefault();
             const pass = document.getElementById('admin-pass').value.trim();
             
-            if (pass === 'CEUT2026') {
+            if (pass === ADMIN_PIN) {
                 closeAdminModal();
                 loadAdminDatabase();
                 switchView('admin-panel');
@@ -2552,6 +2683,32 @@
             } else {
                 showToast("Contraseña incorrecta. Inténtalo nuevamente.", true);
             }
+        }
+
+        function changeAdminPIN() {
+            const current = prompt(`Introduce el PIN actual de administrador:`);
+            if (current === null) return;
+            if (current !== ADMIN_PIN) {
+                showToast("El PIN actual es incorrecto.", true);
+                return;
+            }
+            const nuevo = prompt("Introduce el nuevo PIN de administrador (se guardará de forma local en tu navegador):");
+            if (nuevo === null) return;
+            const nuevoTrimmed = nuevo.trim();
+            if (nuevoTrimmed.length === 0) {
+                showToast("El PIN no puede estar vacío.", true);
+                return;
+            }
+            const confirmacion = prompt("Confirma el nuevo PIN de administrador:");
+            if (confirmacion === null) return;
+            if (nuevoTrimmed !== confirmacion.trim()) {
+                showToast("Los PINs de confirmación no coinciden.", true);
+                return;
+            }
+            ADMIN_PIN = nuevoTrimmed;
+            localStorage.setItem('ceut_admin_pin', ADMIN_PIN);
+            
+            showToast("El PIN de administrador ha sido modificado con éxito.");
         }
 
         function loadAdminDatabase() {
@@ -2576,7 +2733,7 @@
 
                 sortedRecords.forEach(record => {
                     const tr = document.createElement('tr');
-                    tr.className = 'hover:bg-slate-50 transition-colors border-b border-slate-100 font-semibold';
+                    tr.className = 'hover:bg-slate-50 transition-colors border-b border-slate-100 font-semibold text-xxs';
                     
                     let badgeTest = record.type === 'CHASIDE' 
                         ? '<span class="inline-block px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-extrabold text-[10px]">CHASIDE</span>'
@@ -2590,25 +2747,23 @@
                     const assignedGroup = record.grupoAsignado || 'SIN ASIGNAR';
                     
                     const successVal = getSuccessAssessment(record, record.grupoAsignado || record.opt1);
-                    const score = record.alignmentScore !== undefined ? record.alignmentScore : 50;
                     
                     let scoreBadge = '';
                     if (record.type === 'MMPI-2') {
-                        scoreBadge = `<span class="inline-block px-2 py-0.5 rounded bg-slate-100 text-slate-500 font-black text-[9px]"><i class="fa-solid fa-circle-info"></i> N/A (Clínico)</span>`;
+                        scoreBadge = `<span class="inline-block px-2 py-0.5 rounded bg-slate-100 text-slate-500 font-black text-[9px]"><i class="fa-solid fa-circle-info"></i> N/A (Perfil Clínico)</span>`;
                     } else {
-                        if (score >= 75) {
-                            scoreBadge = `<span class="inline-block px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-black text-[9px]"><i class="fa-solid fa-circle-check"></i> ${score}% Coherente</span>`;
-                        } else if (score >= 50) {
-                            scoreBadge = `<span class="inline-block px-2 py-0.5 rounded bg-yellow-100 text-yellow-800 font-black text-[9px]"><i class="fa-solid fa-triangle-exclamation"></i> ${score}% Medio</span>`;
-                        } else {
-                            scoreBadge = `<span class="inline-block px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-black text-[9px]"><i class="fa-solid fa-triangle-exclamation"></i> ${score}% Desalineado</span>`;
-                        }
+                        scoreBadge = `<span class="inline-block px-2 py-0.5 rounded ${successVal.badge} text-[9px] font-black"><i class="fa-solid fa-circle-check"></i> ${successVal.level}</span>`;
                     }
 
                     let successLabel = '';
                     if (record.type === 'CHASIDE') {
-                        successLabel = `<span class="inline-block px-2 py-0.5 rounded ${successVal.badge} text-[9px] font-black tracking-wider uppercase mt-1 block w-max">${successVal.level}</span>`;
+                        successLabel = `<span class="inline-block px-2 py-0.5 rounded ${successVal.badge} text-[9px] font-black tracking-wider uppercase mt-1 block w-max">${successVal.level} (${successVal.score}%)</span>`;
                     }
+
+                    // Badge de reubicación manual
+                    let overridenBadge = record.justificacionManual 
+                        ? `<span class="inline-block px-2 py-0.5 rounded bg-amber-500 text-white font-extrabold text-[9px] mt-1"><i class="fa-solid fa-signature"></i> Cambiado Manual</span>` 
+                        : '';
 
                     let areasListText = '';
                     if (record.type === 'MMPI-2') {
@@ -2618,9 +2773,9 @@
                         </div>`;
                     } else {
                         areasListText = `<div class="text-[10px] text-slate-600 leading-tight font-sans">
-                            Preferente: <strong class="text-brand-blue font-black">${opt1}</strong><br>
-                            Grupo actual: <strong class="text-emerald-700">${assignedGroup}</strong><br>
-                            Sugerencia Test: <strong class="text-purple-700 font-extrabold">${record.testSuggestedGroup || 'Ninguna'}</strong>
+                            Sugerido Test: <strong class="text-purple-700 font-extrabold">${record.testSuggestedGroup || 'Ninguna'}</strong><br>
+                            Preferencia: <strong class="text-brand-blue font-black">${opt1}</strong><br>
+                            Grupo actual: <strong class="text-emerald-700">${assignedGroup}</strong>
                         </div>`;
                     }
 
@@ -2630,10 +2785,10 @@
                         <td class="py-3.5 px-4 font-bold text-slate-600 text-xs">${record.career}</td>
                         <td class="py-3.5 px-4 font-bold text-slate-500 text-xs">${record.period} • ${record.group} (${record.mode})</td>
                         <td class="py-3.5 px-4">${badgeTest} ${levelBadge}</td>
-                        <td class="py-3.5 px-4 space-y-1">${scoreBadge} ${successLabel} ${areasListText}</td>
+                        <td class="py-3.5 px-4 space-y-1">${scoreBadge} ${successLabel} ${overridenBadge} ${areasListText}</td>
                         <td class="py-3.5 px-4 text-center space-x-1 whitespace-nowrap">
                             <button class="btn-view px-2.5 py-1.5 bg-brand-deepBlue text-white font-bold text-xxs rounded-lg hover:bg-brand-blue transition-all font-sans">
-                                <i class="fa-solid fa-file-invoice"></i> Ver Reporte
+                                <i class="fa-solid fa-file-invoice"></i> Reporte
                             </button>
                             <button class="btn-delete px-2.5 py-1.5 bg-rose-100 hover:bg-rose-600 text-rose-600 hover:text-white font-bold text-xxs rounded-lg transition-all font-sans">
                                 <i class="fa-solid fa-trash"></i>
@@ -2651,63 +2806,116 @@
 
         function solveOptimalGroups(records) {
             const assignments = {};
-            const initialGroups = {};
+            const groupDemand = {};
+            const academicAreas = [
+                "Contabilidad", "Administración", "Comunicación", 
+                "Diseño Gráfico", "Turismo", "Intervención en Educación Obligatoria", 
+                "Higiene y Salud Comunitaria"
+            ];
 
+            // Inicializar contadores de demanda
+            academicAreas.forEach(a => { groupDemand[a] = []; });
+
+            // Paso 1: Clasificar a los alumnos en primera instancia estrictamente por el test vocacional
             records.forEach(r => {
-                const pref = r.opt1 || "SIN ASIGNAR";
-                if (!initialGroups[pref]) initialGroups[pref] = [];
-                initialGroups[pref].push(r);
-            });
-
-            const activeGroups = new Set();
-
-            for (const area in initialGroups) {
-                const list = initialGroups[area];
-                if (area === "SIN ASIGNAR") {
-                    list.forEach(r => assignments[r.folio] = "SIN ASIGNAR");
-                    continue;
+                if (r.type === 'MMPI-2') {
+                    // Si es clínico, se usa la primera opción preferida directa
+                    const assignedArea = r.opt1 || 'Administración';
+                    assignments[r.folio] = { area: assignedArea, score: 100, isManual: false };
+                    groupDemand[assignedArea].push(r.folio);
+                    return;
                 }
 
-                if (list.length >= 15) {
-                    activeGroups.add(area);
-                    if (list.length > 30) {
-                        const mid = Math.ceil(list.length / 2);
-                        list.forEach((r, idx) => {
-                            assignments[r.folio] = idx < mid ? `${area} A` : `${area} B`;
-                        });
+                // Para CHASIDE: Asignar estrictamente la recomendación óptima obtenida por el test
+                const testRec = getDirectTestRecommendation(r);
+                const bestArea = testRec.area;
+                const highestScore = testRec.score;
+
+                assignments[r.folio] = { area: bestArea, score: highestScore, isManual: false };
+                groupDemand[bestArea].push(r.folio);
+            });
+
+            // Preservar grupos de reubicación manual firmados por el psicopedagogo
+            records.forEach(r => {
+                if (r.justificacionManual && r.grupoAsignado && r.grupoAsignado !== 'SIN ASIGNAR') {
+                    const baseGroup = r.grupoAsignado.split(' ')[0];
+                    assignments[r.folio] = { area: baseGroup, score: 100, isManual: true };
+                }
+            });
+
+            // Paso 2: Validar viabilidad del aula (Quórum mínimo de 15 alumnos)
+            const activeAreas = new Set();
+            academicAreas.forEach(area => {
+                const manualCount = records.filter(r => r.justificacionManual && r.grupoAsignado && r.grupoAsignado.startsWith(area)).length;
+                const autoCount = Object.keys(assignments).filter(folio => assignments[folio].area === area && !assignments[folio].isManual).length;
+                const totalEstimatedDemand = manualCount + autoCount;
+
+                if (totalEstimatedDemand >= 15) {
+                    activeAreas.add(area);
+                }
+            });
+
+            // Paso 3: Cascada guiada por Test para áreas no activas
+            records.forEach(r => {
+                if (r.justificacionManual) return; // Respetar dictámenes manuales firmados
+
+                const assignedArea = assignments[r.folio].area;
+                if (!activeAreas.has(assignedArea)) {
+                    // Si su recomendación de test principal no alcanzó quórum, buscar el área activa con mayor compatibilidad del test
+                    let bestFallbackArea = "Administración";
+                    let highestFallbackScore = -1;
+
+                    academicAreas.forEach(area => {
+                        if (activeAreas.has(area)) {
+                            const testComp = calculateAreaCompatibility(r, area);
+                            if (testComp > highestFallbackScore) {
+                                highestFallbackScore = testComp;
+                                bestFallbackArea = area;
+                            }
+                        }
+                    });
+
+                    if (activeAreas.size > 0) {
+                        assignments[r.folio] = { area: bestFallbackArea, score: highestFallbackScore, isManual: false };
                     } else {
-                        list.forEach(r => {
-                            assignments[r.folio] = `${area} A`;
-                        });
+                        // En caso extremo sin quórum en ninguna parte, mantener la recomendación original como aula pendiente
+                        const testRec = getDirectTestRecommendation(r);
+                        assignments[r.folio] = { area: `PENDIENTES - ${testRec.area.toUpperCase()}`, score: 0, isManual: false };
                     }
+                }
+            });
+
+            // Paso 4: Balancear secciones de salón (Máximo 30 estudiantes por aula)
+            const finalGroupRoster = {};
+            academicAreas.forEach(area => {
+                const studentList = Object.keys(assignments).filter(f => assignments[f].area === area);
+                
+                if (studentList.length > 30) {
+                    const mid = Math.ceil(studentList.length / 2);
+                    studentList.forEach((folio, idx) => {
+                        finalGroupRoster[folio] = idx < mid ? `${area} A` : `${area} B`;
+                    });
                 } else {
-                    list.forEach(r => {
-                        assignments[r.folio] = `PENDIENTES - ${area.toUpperCase()}`;
+                    studentList.forEach(folio => {
+                        finalGroupRoster[folio] = activeAreas.has(area) ? `${area} A` : `PENDIENTES - ${area.toUpperCase()}`;
                     });
                 }
-            }
+            });
 
+            // Preservar la nomenclatura exacta para asignaciones manuales confirmadas
             records.forEach(r => {
-                if (assignments[r.folio] && assignments[r.folio].startsWith("PENDIENTES")) {
-                    if (r.opt2 && activeGroups.has(r.opt2)) {
-                        const baseDest = r.opt2;
-                        const destCount = Object.values(assignments).filter(g => g.startsWith(baseDest)).length;
-                        assignments[r.folio] = destCount < 30 ? `${baseDest} A` : `${baseDest} B`;
-                    } else if (r.opt3 && activeGroups.has(r.opt3)) {
-                        const baseDest = r.opt3;
-                        const destCount = Object.values(assignments).filter(g => g.startsWith(baseDest)).length;
-                        assignments[r.folio] = destCount < 30 ? `${baseDest} A` : `${baseDest} B`;
-                    }
+                if (r.justificacionManual && r.grupoAsignado) {
+                    finalGroupRoster[r.folio] = r.grupoAsignado;
                 }
             });
 
-            return assignments;
+            return finalGroupRoster;
         }
 
         async function runAutoGrouping() {
             const confirmed = await showCustomConfirm(
-                "¿Ejecutar Distribución Inteligente?",
-                "Esta acción reorganizará a los alumnos en grupos de mínimo 15 y máximo 30 estudiantes basándose en su Primera Opción de área académica seleccionada. Se evaluarán la segunda y tercera opción jerárquica cruzando la compatibilidad del test vocacional para garantizar el éxito escolar.",
+                "¿Ejecutar Clasificación de Idoneidad?",
+                "Esta acción reorganizará los grupos analizando primero el Test (70% de peso) y luego las Preferencias (30%). Los grupos se conformarán garantizando un quórum de 15 a 30 alumnos para asegurar el éxito en las aulas. Se respetarán las reubicaciones manuales ya firmadas.",
                 false
             );
 
@@ -2734,40 +2942,201 @@
             showToast("Distribución de grupos completada con validaciones cruzadas de test.");
         }
 
-        async function manuallyMoveStudent(folio, newGroup) {
+        function closeOverrideModal() {
+            document.getElementById('override-modal').classList.add('hidden');
+            pendingMoveFolio = null;
+            pendingMoveGroup = null;
+            renderGroupsView(); 
+        }
+
+        function manuallyMoveStudent(folio, newGroup) {
             const student = cloudRecords.find(r => r.folio === folio);
             if (!student) return;
 
-            const oldGroup = student.grupoAsignado || "SIN ASIGNAR";
-            const cleanNewArea = newGroup.split(' ')[0];
+            if (newGroup === "SIN ASIGNAR") {
+                executeImmediateMove(folio, "SIN ASIGNAR", "");
+                return;
+            }
 
-            if (student.type === 'CHASIDE') {
-                const compatibility = calculateAreaCompatibility(student, cleanNewArea);
-                if (compatibility < 50) {
-                    const proceed = await showCustomConfirm(
-                        "¡Alerta de Baja Afinidad!",
-                        `El estudiante ${student.name} tiene un pronóstico de baja afinidad (${compatibility}%) con el aula de "${cleanNewArea.toUpperCase()}". Su test vocacional sugiere prioritariamente el área de "${(student.testSuggestedGroup || 'Otra').toUpperCase()}". ¿Deseas reubicarlo de todas formas?`,
-                        true
-                    );
-                    if (!proceed) {
-                        renderGroupsView();
-                        return;
+            pendingMoveFolio = folio;
+            pendingMoveGroup = newGroup;
+
+            const cleanNewArea = newGroup.split(' ')[0];
+            const testRec = getDirectTestRecommendation(student);
+
+            // Calcular compatibilidades para la visualización del sustento lógico
+            const testCompat = student.type === 'CHASIDE' ? calculateAreaCompatibility(student, testRec.area) : 100;
+            const prefCompat = calculateAreaCompatibility(student, student.opt1);
+            const newCompat = calculateAreaCompatibility(student, cleanNewArea);
+
+            document.getElementById('override-student-name').innerText = student.name;
+            document.getElementById('override-student-folio').innerText = student.folio;
+            
+            document.getElementById('override-val-test').innerText = student.type === 'CHASIDE' ? testRec.area : "N/A";
+            document.getElementById('override-compat-test').innerText = `${testCompat}%`;
+
+            document.getElementById('override-val-pref').innerText = student.opt1;
+            document.getElementById('override-compat-pref').innerText = `${prefCompat}%`;
+
+            document.getElementById('override-val-new').innerText = cleanNewArea;
+            document.getElementById('override-compat-new').innerText = `${newCompat}%`;
+
+            // INYECCIÓN DINÁMICA: Alternativas sugeridas de éxito para reubicar al alumno
+            const alternativesContainer = document.getElementById('override-alternatives-container');
+            if (alternativesContainer) {
+                alternativesContainer.innerHTML = '';
+                const academicAreasList = [
+                    "Contabilidad", "Administración", "Comunicación", 
+                    "Diseño Gráfico", "Turismo", "Intervención en Educación Obligatoria", 
+                    "Higiene y Salud Comunitaria"
+                ];
+
+                const areaOptions = academicAreasList.map(area => {
+                    const comp = calculateAreaCompatibility(student, area);
+                    let badgeText = '';
+                    let priority = 0;
+                    
+                    const isTestSug = student.type === 'CHASIDE' && area === testRec.area;
+                    const isOpt1 = area === student.opt1;
+                    const isOpt2 = area === student.opt2;
+                    const isOpt3 = area === student.opt3;
+
+                    if (isTestSug && isOpt1) {
+                        badgeText = 'Test + 1ª Elección';
+                        priority = 5;
+                    } else if (isTestSug) {
+                        badgeText = 'Óptimo por Test';
+                        priority = 4;
+                    } else if (isOpt1) {
+                        badgeText = '1ª Opción';
+                        priority = 3;
+                    } else if (isOpt2) {
+                        badgeText = '2ª Opción';
+                        priority = 2;
+                    } else if (isOpt3) {
+                        badgeText = '3ª Opción';
+                        priority = 1;
+                    } else {
+                        badgeText = 'Afinidad Secundaria';
+                        priority = 0;
                     }
+
+                    return { area, comp, badgeText, priority };
+                });
+
+                // Ordenar por compatibilidad desc, luego por prioridad
+                areaOptions.sort((a, b) => (b.comp * 10 + b.priority) - (a.comp * 10 + a.priority));
+
+                // Filtrar para mostrar las 4 mejores alternativas
+                const topAlternatives = areaOptions.slice(0, 4);
+
+                topAlternatives.forEach(alt => {
+                    const btn = document.createElement('button');
+                    const targetGroupClass = `${alt.area} A`; // Secciones por defecto a sección A
+                    
+                    let colorClasses = 'border-slate-200 hover:border-slate-300 bg-white text-slate-800';
+                    let iconHtml = '<i class="fa-solid fa-graduation-cap text-slate-400"></i>';
+                    
+                    if (alt.comp >= 75) {
+                        colorClasses = 'border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100 text-emerald-900 ring-1 ring-emerald-500/20';
+                        iconHtml = '<i class="fa-solid fa-circle-check text-emerald-600"></i>';
+                    } else if (alt.comp >= 55) {
+                        colorClasses = 'border-amber-200 bg-amber-50/50 hover:bg-amber-100 text-amber-900';
+                        iconHtml = '<i class="fa-solid fa-circle-info text-brand-gold"></i>';
+                    }
+
+                    // Resaltar visualmente si esta alternativa es el "Nuevo Salón" actualmente seleccionado
+                    if (cleanNewArea === alt.area) {
+                        colorClasses += ' ring-2 ring-brand-blue border-brand-blue bg-blue-50/80';
+                    }
+
+                    btn.className = `flex items-center justify-between p-2.5 rounded-xl border text-left transition-all duration-200 shadow-sm ${colorClasses} hover:scale-[1.02]`;
+                    btn.innerHTML = `
+                        <div class="truncate pr-1">
+                            <span class="block truncate font-black text-xxs text-brand-deepBlue uppercase">${alt.area}</span>
+                            <span class="block text-[8px] text-slate-500 font-extrabold tracking-wider uppercase">${alt.badgeText}</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0 font-mono font-black text-[10px]">
+                            ${iconHtml}
+                            <span>${alt.comp}%</span>
+                        </div>
+                    `;
+                    
+                    btn.onclick = () => {
+                        // Al hacer clic, actualizar el salón de destino en el modal y relanzar la lógica
+                        manuallyMoveStudent(folio, targetGroupClass);
+                    };
+                    
+                    alternativesContainer.appendChild(btn);
+                });
+            }
+
+            // Redacción formal, exhaustiva y comparativa del sustento lógico
+            let justificationText = `DICTAMEN COMPARATIVO DE REUBICACIÓN EN GABINETE\n`;
+            justificationText += `==============================================\n\n`;
+            
+            if (student.type === 'MMPI-2') {
+                justificationText += `1. EVALUACIÓN DE PERSONALIDAD (MMPI-2):\n`;
+                justificationText += `   - El alumno cuenta con un expediente clínico activo.\n`;
+                justificationText += `   - Grupo Solicitado: ${cleanNewArea.toUpperCase()}.\n\n`;
+                justificationText += `2. SUSTENTO LOGÍSTICO Y CLASIFICACIÓN:\n`;
+                justificationText += `   - Se aprueba el cambio de grupo para integrarse en ${cleanNewArea.toUpperCase()} por necesidades de balanceo de matrícula institucional y/o integración social dirigida por el Gabinete.`;
+            } else {
+                justificationText += `1. CONTRASTE DE IDONEIDAD TÉCNICA (TEST):\n`;
+                justificationText += `   - Área Óptima sugerida por CHASIDE: "${testRec.area.toUpperCase()}" (Afinidad: ${testCompat}%).\n\n`;
+                
+                justificationText += `2. JERARQUÍA DE PREFERENCIA DEL ALUMNO:\n`;
+                justificationText += `   - Opción 1: "${student.opt1.toUpperCase()}" (Afinidad: ${prefCompat}%).\n`;
+                justificationText += `   - Opción 2: "${student.opt2.toUpperCase()}".\n`;
+                justificationText += `   - Opción 3: "${student.opt3.toUpperCase()}".\n\n`;
+
+                justificationText += `3. EVALUACIÓN DE GRUPO SOLICITADO ("${cleanNewArea.toUpperCase()}"):\n`;
+                justificationText += `   - Compatibilidad con el nuevo salón: ${newCompat}%.\n\n`;
+
+                justificationText += `4. SUSTENTO PSICOPEDAGÓGICO DE LA REUBICACIÓN:\n`;
+                if (cleanNewArea === testRec.area) {
+                    justificationText += `   - EXCELENTE ALINEACIÓN: El traslado manual coincide plenamente con la recomendación de idoneidad del Test. Esto garantiza el máximo rendimiento escolar y disminuye a cero las brechas de adaptación.`;
+                } else if (cleanNewArea === student.opt1) {
+                    justificationText += `   - COMPROMISO VOCACIONAL: El alumno es asignado a su primera preferencia con una afinidad del ${newCompat}%. Aunque difiere del test, su alta motivación autodirigida respalda el éxito en el salón bajo supervisión.`;
+                } else {
+                    justificationText += `   - TRASLADO EXTRAORDINARIO: Se autoriza el cambio a un área con menor coincidencia técnica (${newCompat}% de afinidad). Se dictamina un plan de seguimiento psicopedagógico con tutorías de regularización para asegurar su permanencia y prevenir rezagos.`;
                 }
             }
 
+            document.getElementById('override-justification-input').value = justificationText;
+
+            // Mostrar Modal
+            document.getElementById('override-modal').classList.remove('hidden');
+        }
+
+        async function confirmManualMove() {
+            const justification = document.getElementById('override-justification-input').value.trim();
+            if (!justification) {
+                showToast("Por favor ingresa o confirma el dictamen de sustento lógico.", true);
+                return;
+            }
+
+            await executeImmediateMove(pendingMoveFolio, pendingMoveGroup, justification);
+            document.getElementById('override-modal').classList.add('hidden');
+        }
+
+        async function executeImmediateMove(folio, newGroup, justification) {
+            const student = cloudRecords.find(r => r.folio === folio);
+            if (!student) return;
+
             student.grupoAsignado = newGroup;
+            student.justificacionManual = justification;
+
             renderGroupsView();
 
             if (authenticatedUser) {
                 try {
                     const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'evaluaciones', folio);
-                    await setDoc(docRef, { grupoAsignado: newGroup }, { merge: true });
-                    showToast(`Sincronizado: ${student.name} fue movido a ${newGroup}`);
+                    await setDoc(docRef, { grupoAsignado: newGroup, justificacionManual: justification }, { merge: true });
+                    showToast(`Sustento lógico firmado. Alumno clasificado en ${newGroup}`);
+                    loadAdminDatabase();
                 } catch (err) {
                     console.error("Fallo al persistir la reubicación en la nube:", err);
-                    student.grupoAsignado = oldGroup; 
-                    renderGroupsView();
                     showToast("Error de red. No se guardó el cambio de grupo.", true);
                 }
             }
@@ -2815,10 +3184,9 @@
                 return a.localeCompare(b);
             });
 
-            // Actualizar Tarjetas de analíticas generales
             const generalSuccessRate = successStudentsCount > 0 ? Math.round(successSum / successStudentsCount) : 100;
             document.getElementById('metric-assigned-count').innerText = `${assignedCount} / ${totalStudents} Alumnos`;
-            document.getElementById('metric-success-rate').innerText = `${generalSuccessRate}% de Afinidad`;
+            document.getElementById('metric-success-rate').innerText = `${generalSuccessRate}% Éxito`;
 
             let viableGroupsCount = 0;
 
@@ -2848,11 +3216,11 @@
                 const capacityPercentage = Math.min(Math.round((count / 30) * 100), 100);
 
                 if (groupName === "SIN ASIGNAR") {
-                    badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-slate-100 text-slate-600">Pendientes: ${count}</span>`;
+                    badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-slate-100 text-slate-600 font-sans">Pendientes: ${count}</span>`;
                 } else if (groupName.startsWith("PENDIENTES")) {
                     borderStyle = "border-amber-400";
                     cardBg = "bg-amber-50/10";
-                    badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-amber-100 text-amber-800 flex items-center gap-1"><i class="fa-solid fa-triangle-exclamation"></i> Sin Quórum de 15 (${count})</span>`;
+                    badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-amber-100 text-amber-800 flex items-center gap-1 font-sans"><i class="fa-solid fa-triangle-exclamation"></i> Sin Quórum (${count})</span>`;
                     progressColor = "bg-amber-500";
                 } else {
                     if (count >= 15 && count <= 30) {
@@ -2862,16 +3230,16 @@
                     if (count < 15) {
                         borderStyle = "border-rose-400";
                         cardBg = "bg-rose-50/10";
-                        badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-rose-100 text-rose-800 flex items-center gap-1"><i class="fa-solid fa-circle-xmark"></i> Subpoblación (${count}/15 Mín)</span>`;
+                        badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-rose-100 text-rose-800 flex items-center gap-1 font-sans"><i class="fa-solid fa-circle-xmark"></i> Subpoblación (${count}/15 Mín)</span>`;
                         progressColor = "bg-rose-400";
                     } else if (count > 30) {
                         borderStyle = "border-rose-600";
                         cardBg = "bg-rose-50/10";
-                        badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-red-100 text-red-800 flex items-center gap-1"><i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Sobrecupo (${count}/30 Máx)</span>`;
+                        badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-red-100 text-red-800 flex items-center gap-1 font-sans"><i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Sobrecupo (${count}/30 Máx)</span>`;
                         progressColor = "bg-red-600";
                     } else {
                         borderStyle = "border-emerald-400";
-                        badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-emerald-100 text-emerald-800 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Óptimo (${count}/30)</span>`;
+                        badgeHtml = `<span class="px-2 py-0.5 rounded-lg text-[9px] font-black uppercase bg-emerald-100 text-emerald-800 flex items-center gap-1 font-sans"><i class="fa-solid fa-circle-check"></i> Óptimo (${count}/30)</span>`;
                         progressColor = "bg-emerald-500";
                     }
                 }
@@ -2901,12 +3269,11 @@
                     innerListHtml = `<div class="space-y-2 max-h-[300px] overflow-y-auto pr-1">`;
                     studentsList.forEach(student => {
                         const score = student.alignmentScore !== undefined ? student.alignmentScore : 50;
-                        let alignmentColor = 'text-emerald-600';
-                        if (score < 50) alignmentColor = 'text-rose-600';
-                        else if (score < 75) alignmentColor = 'text-yellow-600';
+                        const successVal = getSuccessAssessment(student, groupName);
 
-                        const currentAreaClean = groupName.split(' ')[0]; 
-                        const currentGroupSuccess = getSuccessAssessment(student, groupName);
+                        let alignmentColor = 'text-emerald-600';
+                        if (successVal.color === 'rose') alignmentColor = 'text-rose-600';
+                        else if (successVal.color === 'amber') alignmentColor = 'text-yellow-600';
 
                         let selectorOptionsHtml = `<option value="SIN ASIGNAR" ${groupName === 'SIN ASIGNAR' ? 'selected' : ''}>-- SIN GRUPO --</option>`;
                         possibleGroupsList.forEach(opt => {
@@ -2916,19 +3283,26 @@
                         let studentAssessmentHtml = '';
                         let quickReubicateBtn = '';
 
+                        // Visualizar badge de Manual en la listita
+                        let manualLabel = student.justificacionManual 
+                            ? `<div class="text-[9px] text-amber-600 font-extrabold flex items-center gap-1 mt-0.5 bg-amber-50 p-1 rounded border border-amber-100"><i class="fa-solid fa-signature"></i> Justificación manual firmada</div>` 
+                            : '';
+
                         if (student.type === 'MMPI-2') {
                             studentAssessmentHtml = `
                                 <div class="flex flex-col gap-0.5 text-[9px] text-slate-500 font-semibold bg-white/70 p-1 rounded border border-slate-100">
                                     <div>Perfil: <strong class="text-amber-600 uppercase">Personalidad (MMPI-2)</strong></div>
                                     <div>Preferencia: <span class="text-slate-500 italic font-bold text-brand-blue">${student.opt1}</span></div>
+                                    ${manualLabel}
                                 </div>
                             `;
                             quickReubicateBtn = `<span class="text-[9px] text-slate-400 font-bold uppercase shrink-0"><i class="fa-solid fa-circle-info"></i> MMPI-2</span>`;
                         } else {
                             studentAssessmentHtml = `
-                                <div class="flex flex-col gap-0.5 text-[9px] text-slate-500 font-semibold bg-white/70 p-1 rounded border border-slate-100">
+                                <div class="flex flex-col gap-0.5 text-[9px] text-slate-500 font-semibold bg-white/70 p-1 rounded border border-slate-100 font-sans">
                                     <div>Sugerido Test: <strong class="text-purple-700">${student.testSuggestedGroup || 'Ninguna'}</strong></div>
-                                    <div class="mt-0.5">Afinidad aula actual: <span class="px-1 py-0.2 rounded font-black uppercase ${currentGroupSuccess.badge}">${currentGroupSuccess.level}</span></div>
+                                    <div class="mt-0.5">Diagnóstico: <span class="px-1 py-0.2 rounded font-black uppercase ${successVal.badge}">${successVal.level}</span></div>
+                                    ${manualLabel}
                                 </div>
                             `;
 
@@ -2936,20 +3310,20 @@
                             const cleanSugGroup = possibleGroupsList.find(g => g.startsWith(rawSugGroup)) || `${rawSugGroup} A`;
 
                             quickReubicateBtn = groupName !== cleanSugGroup 
-                                ? `<button onclick="manuallyMoveStudent('${student.folio}', '${cleanSugGroup}')" title="Reubicar al recomendado por Test (${student.testSuggestedGroup})" class="p-1 text-purple-600 hover:text-purple-800 bg-purple-50 hover:bg-purple-100 rounded text-[9px] font-black uppercase tracking-wider transition-colors shrink-0">
+                                ? `<button onclick="manuallyMoveStudent('${student.folio}', '${cleanSugGroup}')" title="Reubicar al recomendado por Test (${student.testSuggestedGroup})" class="p-1 text-purple-600 hover:text-purple-800 bg-purple-50 hover:bg-purple-100 rounded text-[9px] font-black uppercase tracking-wider transition-colors shrink-0 font-sans">
                                     <i class="fa-solid fa-wand-magic-sparkles"></i> Mover a Test
                                    </button>`
                                 : `<span class="text-[9px] text-emerald-600 font-bold uppercase shrink-0"><i class="fa-solid fa-circle-check"></i> En su Test</span>`;
                         }
 
                         innerListHtml += `
-                            <div class="p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200/60 transition-colors space-y-1.5">
+                            <div class="p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200/60 transition-colors space-y-1.5 font-sans font-semibold">
                                 <div class="flex justify-between items-start gap-2">
                                     <div class="truncate max-w-[65%]">
                                         <span class="block font-black text-slate-900 text-xxs truncate uppercase">${student.name}</span>
                                         <span class="block text-[9px] text-slate-400 font-mono">${student.folio}</span>
                                     </div>
-                                    <span class="text-[9px] font-black ${alignmentColor}">${student.type === 'MMPI-2' ? 'N/A' : score + '% Alin.'}</span>
+                                    <span class="text-[9px] font-black ${alignmentColor}">${student.type === 'MMPI-2' ? 'N/A' : successVal.level}</span>
                                 </div>
                                 ${studentAssessmentHtml}
                                 <div class="flex items-center justify-between gap-1.5 pt-1 border-t border-slate-200/40">
@@ -2966,8 +3340,8 @@
 
                 card.innerHTML = `
                     <div class="space-y-3">
-                        <div class="flex flex-col pb-2 border-b border-slate-100 gap-1">
-                            <div class="flex justify-between items-center">
+                        <div class="flex flex-col pb-2 border-b border-slate-100 gap-1 font-sans">
+                            <div class="flex justify-between items-center font-sans">
                                 <h4 class="font-black text-brand-deepBlue text-xs uppercase tracking-tight truncate">${groupName}</h4>
                                 ${badgeHtml}
                             </div>
@@ -2990,9 +3364,8 @@
             }
 
             let csvContent = "\uFEFF"; 
-            csvContent += "Grupo Asignado,Nombre Alumno,Folio,Nivel,Carrera_Especialidad_Origen,Cuatrimestre_Semestre,Tipo_Prueba,1ra_Opcion,2da_Opcion,3ra_Opcion,Porcentaje_Afinidad_Aula,Nivel_Exito\n";
+            csvContent += "Grupo Asignado,Nombre Alumno,Folio,Nivel,Carrera_Especialidad_Origen,Cuatrimestre_Semestre,Tipo_Prueba,1ra_Opcion,2da_Opcion,3ra_Opcion,Nivel_Exito,Sustento_Manual_Dictamen\n";
 
-            // Clasificar por grupo para ordenar el CSV
             const groupsMap = {};
             cloudRecords.forEach(r => {
                 const g = r.grupoAsignado || "SIN ASIGNAR";
@@ -3007,11 +3380,10 @@
                 list.sort((a,b) => a.name.localeCompare(b.name));
 
                 list.forEach(student => {
-                    const cleanArea = gName.split(' ')[0];
-                    const affinity = student.type === 'CHASIDE' ? calculateAreaCompatibility(student, cleanArea) : 'N/A';
                     const success = getSuccessAssessment(student, gName);
+                    const manualJust = student.justificacionManual ? student.justificacionManual.replace(/"/g, '""') : 'No aplica (clasificado por algoritmo de test)';
 
-                    const row = `"${gName}","${student.name}","${student.folio}","${student.level}","${student.career}","${student.period}","${student.type}","${student.opt1 || '---'}","${student.opt2 || '---'}","${student.opt3 || '---'}","${affinity}","${success.level}"`;
+                    const row = `"${gName}","${student.name}","${student.folio}","${student.level}","${student.career}","${student.period}","${student.type}","${student.opt1 || '---'}","${student.opt2 || '---'}","${student.opt3 || '---'}","${success.level}","${manualJust}"`;
                     csvContent += row + "\n";
                 });
             });
@@ -3024,7 +3396,7 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            showToast("Reporte detallado de listas por salón descargado correctamente.");
+            showToast("Reporte de listas de alumnos descargado con éxito.");
         }
 
         function filterAdminTable() {
@@ -3100,7 +3472,7 @@
             }
 
             let csvContent = "\uFEFF"; 
-            csvContent += "Folio,Nivel,Alumno,Test,Especialidad_Carrera,Cuatrimestre_Semestre,Grupo,Modalidad_Turno,Fecha,Prioridad_1,Prioridad_2,Prioridad_3,Indice_Alineacion_Porcentaje,Grupo_Recomendado_Test,Grupo_Asignado,Pronostico_Exito_Porcentaje,Valoracion_Exito_Cualitativa,Diagnostico_Pedagogico,Resultados_Detallados\n";
+            csvContent += "Folio,Nivel,Alumno,Test,Especialidad_Carrera,Cuatrimestre_Semestre,Grupo,Modalidad_Turno,Fecha,Prioridad_1,Prioridad_2,Prioridad_3,Grupo_Recomendado_Test,Grupo_Asignado,Sustento_Manual,Pronostico_Exito_Porcentaje,Valoracion_Exito_Cualitativa,Diagnostico_Pedagogico,Resultados_Detallados\n";
 
             cloudRecords.forEach(r => {
                 let info = '';
@@ -3118,15 +3490,15 @@
                 const opt3 = r.opt3 || 'No especificado';
                 const assignedGroup = r.grupoAsignado || 'SIN ASIGNAR';
 
-                const alignment = r.type === 'CHASIDE' && r.alignmentScore !== undefined ? `${r.alignmentScore}%` : 'N/A';
                 const sugGroup = r.type === 'CHASIDE' ? (r.testSuggestedGroup || 'No calculado') : 'N/A';
                 
-                const successVal = r.type === 'CHASIDE' ? (r.successAssessment || getSuccessAssessment(r, r.opt1)) : null;
+                const successVal = getSuccessAssessment(r, assignedGroup);
                 const successScore = successVal ? `${successVal.score}%` : 'N/A';
                 const successLevel = successVal ? successVal.level : 'N/A';
                 const successDesc = successVal ? successVal.desc : 'No aplica para el inventario clínico MMPI-2';
+                const manualSustento = r.justificacionManual ? r.justificacionManual.replace(/"/g, '""') : 'Clasificado por algoritmo de test';
 
-                const row = `"${r.folio}","${r.level}","${r.name}","${r.type}","${r.career}","${r.period}","${r.group}","${r.mode}","${r.date}","${opt1}","${opt2}","${opt3}","${alignment}","${sugGroup}","${assignedGroup}","${successScore}","${successLevel}","${successDesc.replace(/"/g, '""')}","${info}"`;
+                const row = `"${r.folio}","${r.level}","${r.name}","${r.type}","${r.career}","${r.period}","${r.group}","${r.mode}","${r.date}","${opt1}","${opt2}","${opt3}","${sugGroup}","${assignedGroup}","${manualSustento}","${successScore}","${successLevel}","${successDesc.replace(/"/g, '""')}","${info}"`;
                 csvContent += row + "\n";
             });
 
@@ -3185,6 +3557,7 @@
         window.openAdminModal = openAdminModal;
         window.closeAdminModal = closeAdminModal;
         window.submitAdminLogin = submitAdminLogin;
+        window.changeAdminPIN = changeAdminPIN;
         window.changePage = changePage;
         window.jumpToPage = jumpToPage;
         window.goToAreaSelection = goToAreaSelection;
@@ -3200,6 +3573,8 @@
         window.switchAdminTab = switchAdminTab;
         window.runAutoGrouping = runAutoGrouping;
         window.manuallyMoveStudent = manuallyMoveStudent;
+        window.closeOverrideModal = closeOverrideModal;
+        window.confirmManualMove = confirmManualMove;
         window.getSuccessAssessment = getSuccessAssessment;
         window.setReportTab = setReportTab;
         window.exportGroupsToCSV = exportGroupsToCSV;
@@ -3232,11 +3607,3 @@
     </script>
 </body>
 </html>
-```
-eof
-
-### Resumen de cambios aplicados:
-* Se añadió la función `exportGroupsToCSV()` para permitir la descarga directa y estructurada de las listas de asistencia organizadas por salón, grado e índice de afinidad psicométrica.
-* Se implementaron tres tarjetas de analíticas clave (*Alumnos Clasificados*, *Aulas Consolidadas* e *Índice General de Éxito de Aula*) en el gestor de grupos.
-* Se agregó la **barra de progreso de capacidad** dinámica para cada grupo que representa visualmente el llenado en tiempo real.
-* Se mejoró el disparador de reubicación manual `manuallyMoveStudent`: el sistema detecta de forma autónoma si el alumno está siendo reubicado en un área de alta o baja afinidad vocacional y previene al administrador antes de procesar el traslado.
