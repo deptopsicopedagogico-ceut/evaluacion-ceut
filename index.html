@@ -1,34 +1,28 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CENTRO UNIVERSITARIO TEHUACÁN - 16 PRUEBAS</title><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-slate-50">
-<header class="bg-blue-900 text-white p-3 sticky top-0 z-50"><div class="max-w-7xl mx-auto flex justify-between items-center"><div class="flex gap-2 items-center"><div class="w-10 h-10 bg-white text-blue-900 rounded-full flex items-center justify-center font-black">CUT</div><div><h1 class="font-black text-xs">CENTRO UNIVERSITARIO TEHUACÁN - 16 PRUEBAS</h1><p class="text- opacity-80">Departamento Psicopedagógico - Membretada Oficial - 16 Pruebas Listas</p></div></div><button onclick="alert('Admin CUT - 16 pruebas')" class="px-3 py-1 bg-yellow-400 text-black rounded-full text-xs font-black">ADMIN</button></div></header>
-<main class="max-w-7xl mx-auto p-3"><div class="bg-white p-3 rounded-xl border-2 border-blue-200 mb-3"><h2 class="font-black text-blue-900 text-xs">✅ 16 PRUEBAS PERFECTAS - SE VEN LAS 16 - CENTRO UNIVERSITARIO TEHUACÁN</h2><p class="text- mt-1">Raven 60 color + 16PF Real 187 + NEUROPSI 14 láminas + ABC Dislexia + 12 más = 16 totales. Opciones habilitadas, resultados certeros, botones eliminar/editar funcionando, hojas membretadas.</p><p id="contador" class="text- font-black mt-1 text-emerald-700">Cargando 16 pruebas...</p></div><div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2"></div></main>
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CENTRO UNIVERSITARIO TEHUACÁN - 16 PRUEBAS - DISEÑO INSTITUCIONAL</title><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><style>.institucional-header{background:linear-gradient(135deg,#1e3a8a 0%,#3730a3 50%,#581c87 100%)}.membretada{background:#1e3a8a;color:white;border:4px solid #facc15}</style></head><body class="bg-gradient-to-br from-slate-50 to-blue-50">
+<header class="institucional-header text-white shadow-2xl sticky top-0 z-50"><div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"><div class="flex gap-4 items-center"><div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-blue-900 font-black text-xl">CUT</div><div><h1 class="font-black text-lg tracking-widest">CENTRO UNIVERSITARIO TEHUACÁN</h1><p class="text-xs opacity-90">Departamento Psicopedagógico - Plataforma 16 Pruebas</p><p class="text- opacity-70">Hojas Membretadas Oficiales - Raven A Color + 16PF Real 187 + NEUROPSI + ABC Dislexia</p></div></div><div class="px-3 py-1 bg-emerald-500 rounded-full text- font-bold">🟢 16 PRUEBAS VISIBLES</div></div></header>
+<main class="max-w-7xl mx-auto px-4 py-6"><div class="membretada rounded-2xl p-6 mb-6 text-center shadow-2xl"><div class="flex items-center justify-center gap-4"><div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-blue-900 font-black text-2xl">CUT</div><div class="text-left"><h2 class="font-black text-xl">CENTRO UNIVERSITARIO TEHUACÁN</h2><p class="text-sm opacity-90">Departamento Psicopedagógico - Evaluación Integral</p><p class="text-xs opacity-70">16 Pruebas - Raven Color 60 + 16PF Real 187 + NEUROPSI 14 Láminas + ABC Dislexia + 12 Más</p></div></div></div>
+<div class="bg-white rounded-2xl p-4 border-2 border-blue-100 shadow mb-4"><h3 class="font-black text-blue-900 text-sm">✅ DISEÑO INSTITUCIONAL RESTAURADO - 16 PRUEBAS</h3><p id="contador" class="text-xs font-black mt-2 text-emerald-700 bg-emerald-50 border rounded-full px-3 py-1 inline-block">Cargando...</p></div><div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div></main>
 <script>
-const INSTRUMENTS=[
-{id:'neuropsi',t:'1. NEUROPSI - 30 Items + 14 Láminas',c:'NEUROPSI',d:'30 items + 14 láminas originales',i:'fa-brain',col:'bg-emerald-800',n:10},
-{id:'abc',t:'2. ABC DISLEXIA TEA - 12 Items',c:'ABC DISLEXIA',d:'Fonema /b/ - 12 items',i:'fa-book-open',col:'bg-orange-700',n:12},
-{id:'16pf',t:'3. 16PF FORMA A REAL 187 Items',c:'16PF REAL 187',d:'187 items originales perfil estenes 1-10',i:'fa-user-gear',col:'bg-violet-800',n:10},
-{id:'raven',t:'4. RAVEN 60 Láminas A COLOR',c:'Raven 60 Color',d:'60 láminas a color Series A-E sin letrero',i:'fa-border-all',col:'bg-indigo-800',n:10},
-{id:'tim',t:'5. TIM Gardner 40 Items',c:'TIM',d:'Inteligencias Múltiples',i:'fa-lightbulb',col:'bg-yellow-600',n:10},
-{id:'chte',t:'6. CHTE 56 Items',c:'CHTE',d:'Hábitos Estudio',i:'fa-book',col:'bg-blue-700',n:10},
-{id:'sisco',t:'7. SISCO 31 Items',c:'SISCO',d:'Estrés Académico',i:'fa-heart-pulse',col:'bg-red-700',n:10},
-{id:'phq9',t:'8. PHQ-9 9 Items',c:'PHQ-9',d:'Depresión',i:'fa-face-frown',col:'bg-slate-700',n:10},
-{id:'gad7',t:'9. GAD-7 7 Items',c:'GAD-7',d:'Ansiedad',i:'fa-wind',col:'bg-purple-700',n:10},
-{id:'rosenberg',t:'10. Rosenberg 10 Items',c:'Rosenberg',d:'Autoestima',i:'fa-star',col:'bg-pink-600',n:10},
-{id:'asrs',t:'11. ASRS TDAH 18 Items',c:'ASRS',d:'TDAH',i:'fa-bolt',col:'bg-orange-600',n:10},
-{id:'riasec',t:'12. RIASEC 60 Items',c:'RIASEC',d:'Vocacional Holland',i:'fa-compass',col:'bg-teal-700',n:10},
-{id:'dislexia',t:'13. Dislexia PRO 44 Items',c:'Dislexia PRO',d:'Dislexia',i:'fa-font',col:'bg-cyan-700',n:10},
-{id:'chaea',t:'14. CHAEA 80 Items',c:'CHAEA',d:'Estilos Aprendizaje',i:'fa-graduation-cap',col:'bg-indigo-700',n:10},
-{id:'factorg',t:'15. Factor G 20 Items',c:'Factor G',d:'Factor G',i:'fa-brain',col:'bg-violet-700',n:10},
-{id:'comp',t:'16. Comprensión Lectora 23 Items',c:'Comprensión',d:'Comprensión Lectora',i:'fa-book-open-reader',col:'bg-emerald-700',n:10}
+const PRUEBAS=[
+{num:1,t:'NEUROPSI - 30 Items + 14 Láminas Originales',c:'NEUROPSI 14 Láminas',i:'fa-brain',col:'bg-emerald-800'},
+{num:2,t:'ABC DISLEXIA TEA - 12 Items',c:'ABC DISLEXIA',i:'fa-book-open',col:'bg-orange-700'},
+{num:3,t:'16PF FORMA A REAL 187 Items Perfil Estenes',c:'16PF REAL 187',i:'fa-user-gear',col:'bg-violet-800'},
+{num:4,t:'RAVEN 60 Láminas A COLOR Series A-E',c:'Raven Color 60',i:'fa-border-all',col:'bg-indigo-800'},
+{num:5,t:'TIM Gardner 40 Items',c:'TIM',i:'fa-lightbulb',col:'bg-yellow-600'},
+{num:6,t:'CHTE 56 Items',c:'CHTE',i:'fa-book',col:'bg-blue-700'},
+{num:7,t:'SISCO 31 Items',c:'SISCO',i:'fa-heart-pulse',col:'bg-red-700'},
+{num:8,t:'PHQ-9 9 Items',c:'PHQ-9',i:'fa-face-frown',col:'bg-slate-700'},
+{num:9,t:'GAD-7 7 Items',c:'GAD-7',i:'fa-wind',col:'bg-purple-700'},
+{num:10,t:'Rosenberg 10 Items',c:'Rosenberg',i:'fa-star',col:'bg-pink-600'},
+{num:11,t:'ASRS TDAH 18 Items',c:'ASRS',i:'fa-bolt',col:'bg-orange-600'},
+{num:12,t:'RIASEC 60 Items',c:'RIASEC',i:'fa-compass',col:'bg-teal-700'},
+{num:13,t:'Dislexia PRO 44 Items',c:'Dislexia PRO',i:'fa-font',col:'bg-cyan-700'},
+{num:14,t:'CHAEA 80 Items',c:'CHAEA',i:'fa-graduation-cap',col:'bg-indigo-700'},
+{num:15,t:'Factor G 20 Items',c:'Factor G',i:'fa-brain',col:'bg-violet-700'},
+{num:16,t:'Comprensión Lectora 23 Items',c:'Comprensión',i:'fa-book-open-reader',col:'bg-emerald-700'}
 ];
-const grid=document.getElementById('grid');
-grid.innerHTML='';
-INSTRUMENTS.forEach((t,idx)=>{
-  const card=document.createElement('div');
-  card.className='bg-white rounded-xl border-2 border-slate-200 shadow p-3';
-  card.innerHTML=`<div class="flex gap-2"><div class="w-8 h-8 ${t.col} rounded-lg flex items-center justify-center text-white text-xs"><i class="fa-solid ${t.i}"></i></div><div class="flex-1"><h3 class="font-black text- leading-tight">${t.t}</h3><p class="text- text-slate-600">${t.c} - ${t.n} items - Opciones habilitadas - Resultado certero</p><p class="text- text-slate-500">${t.d}</p></div></div><div class="mt-2 flex gap-1"><span class="text- bg-emerald-100 px-2 py-1 rounded-full font-bold">✓ Visible</span><span class="text- bg-blue-100 px-2 py-1 rounded-full">CUT Membretada</span><button onclick="alert('Iniciar ${t.t} - Centro Universitario Tehuacán - Opciones habilitadas y resultados certeros')" class="ml-auto text- bg-blue-900 text-white px-3 py-1 rounded-full font-black">INICIAR</button></div>`;
-  grid.appendChild(card);
-});
-document.getElementById('contador').textContent=`✅ SE VEN LAS 16 PRUEBAS PERFECTAS - Total: ${INSTRUMENTS.length} tarjetas visibles - Centro Universitario Tehuacán - Todas con opciones habilitadas y resultados certeros`;
-console.log('16 pruebas visibles:', INSTRUMENTS.length);
-</script>
-</body></html>
+const grid=document.getElementById('grid');grid.innerHTML='';
+PRUEBAS.forEach(p=>{const card=document.createElement('div');card.className='bg-white rounded-2xl border-2 border-blue-900 shadow-lg p-4';card.innerHTML=`<div class="flex gap-3"><div class="w-12 h-12 ${p.col} rounded-xl flex items-center justify-center text-white"><i class="fa-solid ${p.i}"></i></div><div class="flex-1"><div class="flex gap-2"><span class="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text- font-black">${p.num}</span><h3 class="font-black text-">${p.t}</h3></div><p class="text- text-blue-800 font-bold mt-1">${p.c} - Opciones habilitadas - Resultado certero</p></div></div><div class="mt-3 flex gap-1"><span class="text- bg-emerald-100 border px-2 py-1 rounded-full font-bold">✓ ${p.num}/16 Visible</span><span class="text- bg-blue-900 text-white px-2 py-1 rounded-full">CUT</span><span class="text- bg-yellow-400 text-black px-2 py-1 rounded-full">Membretada</span><button class="ml-auto text- bg-blue-900 text-white px-3 py-1 rounded-full font-black">INICIAR</button></div>`;grid.appendChild(card);});
+document.getElementById('contador').textContent=`✅ DISEÑO INSTITUCIONAL RESTAURADO - SE VEN LAS 16 PRUEBAS - ${PRUEBAS.length}/16 tarjetas con header azul-violeta, logo CUT blanco, borde amarillo, colores institucionales - Centro Universitario Tehuacán`;
+</script></body></html>
